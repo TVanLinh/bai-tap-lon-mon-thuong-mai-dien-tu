@@ -1,0 +1,34 @@
+.post-new {
+  margin-top:20px;
+}
+.post-new img{
+  max-width: 100px;
+}
+ul.post-new li{
+  border-bottom:1px dotted #aaa;
+}
+ul.post-new li:last-child{
+  border-bottom:none;
+}
+ul.post-new li a{
+  display: table;
+  padding-top:10px;
+  padding-bottom:10px;
+  color: #000;
+}
+
+ul.post-new li a:hover{
+  color:  #c91d67;
+  text-decoration: none;
+}
+ul.post-new li a *{
+  display: table-cell;
+  vertical-align: top;
+}
+.price{
+  text-decoration: line-through;
+  font-weight:bold;
+}
+.date-post{
+  color: #aaa;
+}

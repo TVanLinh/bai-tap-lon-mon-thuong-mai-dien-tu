@@ -1,0 +1,6 @@
+.slick-track{
+  width: auto;
+}
+.slick-prev:before, .slick-next:before{
+  color: #000000 !important;
+}

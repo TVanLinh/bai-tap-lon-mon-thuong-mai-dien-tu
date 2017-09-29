@@ -1,0 +1,116 @@
+.app-nav ,.nav-xs{
+  margin-top:20px;
+  background-color: #eeeeee;
+  border-top: 2px solid red;
+  font-size: 15px;
+
+}
+.app-nav a {
+  color: #000000;
+}
+.app-nav a:hover,.app-nav a:focus {
+  color: #c91d67;
+  text-decoration: none;
+}
+.nav-xs {
+  border-top: none;
+  background-color: red;
+  max-width: 100%;
+  text-align: right !important;
+  padding:5px 0px;
+  display: none;
+}
+
+.nav-xs span{
+  display: block;
+  width: 30px;
+  border-top: 2px #fff solid;
+  margin-bottom: 5px;
+  height:1px;
+}
+
+.nav-xs span:first-child{
+  margin-top:5px;
+}
+
+.open-nav-bar {
+  float: right;
+  cursor: pointer;
+  background: green;
+  transform: translateX(-30px);
+  text-align: center;
+  width: 40px;
+  padding: 5px;
+  border: 1px solid #eee;
+}
+/*.nav-xs span:before{*/
+  /*margin-top: 5px;*/
+/*}*/
+
+
+ul li{
+  list-style: none;
+}
+.app-nav ul{
+  margin: 0;
+  display: table;
+  padding: 10px 0;
+}
+
+.app-nav ul li {
+  display: table-cell;
+  width: 300px;
+  text-transform: uppercase;
+  color: #000 !important;
+  font-weight: bold !important;
+  text-align: center;
+  font-family:'Roboto', sans-serif;
+}
+
+@media (max-width: 1199px) {
+
+  .app-nav{
+    font-size: 13px !important;
+  }
+
+}
+
+@media (max-width: 991px) {
+
+  .app-nav{
+    font-size: 12px !important;
+  }
+
+}
+
+
+@media (max-width: 767px) {
+  .nav-xs{
+    display: block;
+  }
+  .app-nav {
+    margin-top: 0;
+    display: none;
+    font-size: 12px !important;
+  }
+  .app-nav ul{
+    display: block;
+    padding-left: 20px;
+  }
+  .app-nav ul li{
+    display: block;
+    text-align: left;
+  }
+  .app-nav ul li a{
+    display: block;
+    padding:8px 0px;
+  }
+  .form-search{
+    margin-bottom:20px !important;
+  }
+}
+
+/*.toggleNavbar{*/
+  /*font-size: 12px !important;*/
+  /*height: auto;*/
+/*}*/

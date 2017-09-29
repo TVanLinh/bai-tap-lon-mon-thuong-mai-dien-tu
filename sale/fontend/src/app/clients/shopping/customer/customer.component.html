@@ -1,0 +1,135 @@
+<div class="shop-title">
+  <div class="app-title">
+    Góp ý khác hàng
+  </div>
+</div>
+<div class="row mgt-30">
+  <form action="">
+    <!--<div class="col-xs-12 col-sm-6 col-md-3 mgt-20">-->
+    <!--<label>Họ tên</label><br>-->
+    <!--<input type="text" required>-->
+    <!--</div>-->
+    <!--<div class="col-xs-12 col-sm-6 col-md-3 mgt-20">-->
+    <!--<label> Số điện thoại</label><br>-->
+    <!--<input type="text" required>-->
+    <!--</div>-->
+    <!--<div class="col-xs-12 col-sm-6 col-md-3 mgt-20">-->
+    <!--<label>Email</label><br>-->
+    <!--<input type="email">-->
+    <!--</div>-->
+    <!--<div class="col-xs-12 col-sm-6 col-md-3 mgt-20">-->
+    <!--<label>Địa chỉ</label><br>-->
+    <!--<input type="text" required>-->
+    <!--</div>-->
+
+    <div class="col-xs-12 mgt-20">
+      <textarea name=""></textarea>
+    </div>
+
+    <div class="col-xs-12 mgt-20 text-right">
+      <button type="submit" [ngStyle]="isLogin == false?cssSubmit:''" (click)="onSend(loginModal)"
+              [disabled]="!isLogin">Gửi thông tin đặt hàng
+      </button>
+      <div *ngIf="isLogin == false">
+        Qúy khách chưa đăng nhập, vui lòng đăng nhập để gửi thông tin đặt hàng
+        <a (click)="loginModal.show()">Đăng nhập ?</a>
+        <a (click)="registerModal.show()">Đăng kí </a>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<!-- modal form register -->
+<div class="modal fade" bsModal #registerModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Đăng kí một tài khoản khách hàng </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="registerModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <form [formGroup]="formDataRegister" class="pdb-20">
+          <div class="mgb-10">
+            <label for="name">Họ tên <span class="star">*</span>: </label>
+            <input id="name" type="text" required class="form-control" #fullName formControlName="fullName">
+          </div>
+
+          <div class="mgb-10">
+            <label for="email">Email <span class="star">*</span> : (Sử dụng để làm username khi đăng nhập) </label>
+            <input id="email" type="email" required class="form-control" formControlName="email">
+          </div>
+          <div class="mgb-10">
+            <label for="passWord">Mật khẩu  <span class="star">*</span>: </label>
+            <input id="passWord" type="text" required class="form-control" formControlName="passWord">
+          </div>
+
+          <div class="mgb-10">
+            <label for="rePassWord">Nhập lại mật khẩu <span class="star">*</span>: </label>
+            <input id="rePassWord" type="text" required class="form-control" formControlName="rePassWord">
+          </div>
+
+          <div style="padding-bottom: 20px;">
+            <label for="phone">Số điện thoại <span class="star">*</span>: </label>
+            <input id="phone" type="text" required class="form-control" formControlName="phone">
+          </div>
+
+          <div class="mgb-10">
+            <label for="address">Địa chỉ <span class="star">*</span>: </label>
+            <input id="address" type="text" required class="form-control" formControlName="address">
+          </div>
+
+
+        </form>
+
+        <div class=" text-right">
+          <button class="btn btn-success" (click)="onRegister(registerModal)">Đăng kí</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal form login  -->
+
+<div class="modal fade" bsModal #loginModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"> Khách hàng đăng nhập </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="loginModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="formDataLogin" class="pdb-20">
+
+          <div class="mgb-10">
+            <label for="emails">Email: </label>
+            <input id="emails" type="email" required class="form-control" formControlName="email">
+          </div>
+          <div>
+            <label for="passWords">Mật khẩu : </label>
+            <input id="passWords" type="text" required class="form-control" formControlName="passWord">
+          </div>
+        </form>
+
+        <div class=" text-right">
+          <button class="btn btn-success" (click)="onRegister(loginModal)">Đăng nhập</button>
+        </div>
+
+        <a (click)="registerModal.show();loginModal.hide()">Chưa có tài khoản ? </a>
+        <a (click)="registerModal.show();loginModal.hide()">Quên mật khẩu ? </a>
+      </div>
+    </div>
+  </div>
+</div>

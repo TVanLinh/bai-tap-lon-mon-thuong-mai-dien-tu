@@ -1,0 +1,22 @@
+<div class="hidden-xs">
+  <div class="app-title mgt-30 capitalize">
+    SẢN PHẨM KHUYẾN MẠI
+  </div>
+  <ul class="product-sale">
+    <li *ngFor="let item of list">
+      <a (click)="onClick(item)" style="cursor: pointer"><img [src]="item.imagePath" alt=""><span>{{item.name}}</span></a>
+      <p class="text-center">
+        <span class="price pdr-10" >{{item.price}} đ</span>
+        <span style="color: red">{{item.price-item.price*item.discount}}</span>
+      </p>
+    </li>
+  </ul>
+
+  <div class="app-title mgt-30 capitalize">
+    HỖ TRỢ TRỰC TUYẾN
+  </div>
+  <div class="mgt-20">
+    <p><strong>Hỗ trợ bán hàng</strong></p>
+    <p>Hotline: <span style="color: red">01644952648/ 01644952648</span></p>
+  </div>
+</div>

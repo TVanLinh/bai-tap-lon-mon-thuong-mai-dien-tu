@@ -1,0 +1,18 @@
+.item{
+  margin-bottom:20px;
+}
+.foot-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000000;
+  padding-bottom:15px;
+}
+/*.title:after{*/
+  /*display: none;*/
+/*}*/
+.item ul li a {
+  color: #aaa;
+  padding:5px;
+  display: block;
+}

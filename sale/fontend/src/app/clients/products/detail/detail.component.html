@@ -1,0 +1,43 @@
+<div class="row" *ngIf="product != null">
+  <div class="col-xs-12 col-sm-6 col-md-6 mgb-20">
+    <img [src]="product.imagePath" alt="" class="img-responsive">
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 mgb-20">
+    <div class="title">
+      {{product.name}}
+    </div>
+    <p>Mã sản phẩm: <span class="color-pink">{{product.id}}</span></p>
+    <p>
+      Tình trạng: <span class="color-pink">{{product.amount>0?'Còn hàng':'Hết hàng'}}</span>
+    </p>
+    <p><span class="price-old">{{product.price}} đ</span></p>
+    <p><span class="price-new">{{product.price-product.price*product.discount}} đ</span></p>
+    <p class="mgb-20"><span class="price "></span></p>
+    <a class="add-cart" (click)="addCart(product)">Thêm vào giỏ hàng</a>
+  </div>
+  <div class="col-xs-12">
+    <div class="infor-product">
+      <div class="infor-title">
+        <div class="app-title">
+          THÔNG TIN SẢN PHẨM
+        </div>
+      </div>
+      <div class="description">
+        {{product.description}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 mgb-20 mgt-20">
+    <div class="app-title">
+      sản phẩm khác
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 mgt-30" *ngFor="let item of list">
+      <app-product-item [itemProduct]="item" [id]="item.id">
+      </app-product-item>
+    </div>
+  </div>
+</div>

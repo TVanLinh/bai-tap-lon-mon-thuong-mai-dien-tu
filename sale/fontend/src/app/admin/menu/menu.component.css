@@ -1,0 +1,36 @@
+.menu-wrapper{
+  height: 100vh;
+  background: #1C2B36;
+  padding-left: 0;
+  color: #FFFFFF;
+}
+ul{
+  padding-top: 0px;
+}
+.menu-wrapper>li a{
+  display: table;
+  padding: 10px;
+  width: 100%;
+  color: #FFFFFF;
+}
+.menu-wrapper>li a>* {
+  display: table-cell;
+}
+.menu-wrapper>li a>:first-child {
+  width: 25px;
+}
+
+a:hover {
+  background-color: #578EBE;
+}
+a:hover,a:focus{
+  text-decoration: none;
+}
+
+.menu-child{
+  margin-left: 25px;
+}
+
+.dp-none{
+  display: none;
+}

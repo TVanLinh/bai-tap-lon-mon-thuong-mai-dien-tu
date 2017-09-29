@@ -1,0 +1,71 @@
+<!--<ul class="pagination">-->
+<!--<li *ngIf="page.currentPage > 1 &&  totalList > 0">-->
+<!--<a style="cursor: pointer" (click)="onClick((page.url+'?page=')+(page.currentPage-1),url)">Trang truoc </a>-->
+<!--</li>-->
+
+<!--<li *ngFor="let i of initArray(page.totalPage,page.start,page.number)">-->
+<!--<a *ngIf="i >= page.start && i <= page.end && page.currentPage == i "-->
+<!--style="cursor: pointer;font-weight: 600;color:#fff;background-color: #2B4A91"-->
+<!--(click)="onClick(page.url+'?page='+i+'&param='+param,url)"-->
+<!--&gt; {{i}}-->
+<!--</a>-->
+<!--<a *ngIf="i >= page.start && i <= page.end && page.currentPage !=i "-->
+<!--style="cursor: pointer"-->
+<!--(click)="onClick(page.url+'?page='+i+'&param='+param,url)"-->
+<!--&gt; {{i}}-->
+<!--</a>-->
+<!--</li>-->
+<!--<li *ngIf="page.currentPage < page.totalPage  &&  page.totalPage > 1">-->
+<!--<a style="cursor: pointer" (click)="onClick((page.url+'?page=')+(page.currentPage+1),url)">Trang Sau </a>-->
+<!--</li>-->
+<!--</ul>-->
+
+
+<ul class="pagination" *ngIf="param!=''">
+  <li *ngIf="page.currentPage > 1 &&  totalList > 0">
+    <a style="cursor: pointer" (click)="nextPage((page.url+'?page=') + (page.currentPage-1) + '&param=' + param)">Trang
+      truoc </a>
+  </li>
+
+  <li *ngFor="let i of initArray(page.totalPage,page.start,page.number)">
+    <a *ngIf="i >= page.start && i <= page.end && page.currentPage == i "
+       style="cursor: pointer;font-weight: 600;color:#fff;background-color: #2B4A91"
+       (click)="nextPage(page.url +  '?page=' + i +'&param=' + param)"
+    > {{i}}
+    </a>
+    <a *ngIf="i >= page.start && i <= page.end && page.currentPage !=i "
+       style="cursor: pointer"
+       (click)="nextPage(page.url+'?page=' + i + '&param=' +param)"
+    > {{i}}
+    </a>
+  </li>
+  <li *ngIf="page.currentPage < page.totalPage  &&  page.totalPage > 1">
+    <a style="cursor: pointer" (click)="nextPage( (page.url + '?page=') + (page.currentPage+1) + '&param=' + param)">Trang
+      Sau </a>
+  </li>
+</ul>
+
+
+<ul class="pagination" *ngIf="param == ''||param == null">
+  <li *ngIf="page.currentPage > 1 &&  totalList > 0">
+    <a style="cursor: pointer" (click)="nextPage( (page.url+'?page=') + (page.currentPage-1) )">Trang
+      truoc </a>
+  </li>
+
+  <li *ngFor="let i of initArray(page.totalPage,page.start,page.number)">
+    <a *ngIf="i >= page.start && i <= page.end && page.currentPage == i "
+       style="cursor: pointer;font-weight: 600;color:#fff;background-color: #2B4A91"
+       (click)="nextPage(page.url + '?page=' + i)"
+    > {{i}}
+    </a>
+    <a *ngIf="i >= page.start && i <= page.end && page.currentPage != i "
+       style="cursor: pointer"
+       (click)="nextPage(page.url + '?page=' + i )"
+    > {{i}}
+    </a>
+  </li>
+  <li *ngIf="page.currentPage < page.totalPage  &&  page.totalPage > 1">
+    <a style="cursor: pointer" (click)="nextPage((page.url + '?page=') +(page.currentPage+1))">Trang
+      Sau </a>
+  </li>
+</ul>

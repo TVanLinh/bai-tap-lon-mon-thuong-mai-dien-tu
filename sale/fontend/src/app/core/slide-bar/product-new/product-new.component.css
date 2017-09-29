@@ -1,0 +1,35 @@
+.product-sale {
+  border: 1px solid #aaa;
+  margin-top:20px;
+  padding-left:10px;
+  padding-right:10px;
+}
+.product-sale img{
+  max-width: 100px;
+  margin-right: 20px;
+}
+ul.product-sale li{
+  border-bottom:1px solid #aaa;
+}
+ul.product-sale li:last-child{
+  border-bottom:none;
+}
+ul.product-sale li a{
+  display: table;
+  padding-top:10px;
+  padding-bottom:10px;
+  color: #000;
+}
+
+ul.product-sale li a:hover{
+  color:  #c91d67;
+  text-decoration: none;
+}
+ul.product-sale li a *{
+  display: table-cell;
+  vertical-align: top;
+}
+.price{
+  text-decoration: line-through;
+  font-weight:bold;
+}

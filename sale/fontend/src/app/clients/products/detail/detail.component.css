@@ -1,0 +1,47 @@
+.title{
+  color: #000000;
+  font-size: 20px;
+}
+.title:after{
+  display: none;
+}
+img{
+  margin-left:auto;
+  margin-right:auto;
+}
+/*.color-pink {*/
+  /*color: #c91d67;*/
+/*}*/
+p{
+  font-size: 18px;
+}
+.infor-product {
+  border:1px solid #eeeeee;
+}
+
+.infor-product .app-title {
+  padding: 5px ;
+  font-size:14px;
+  width: 180px;
+}
+.infor-title {
+  border-bottom: 1px solid #c91d67;
+  border-right: 2px solid #c91d67;
+  background-color: #eeeeee;
+}
+.description{
+  padding: 15px;
+  line-height: 1.8em;
+}
+.add-cart{
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #c91d67;
+  padding: 9px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+a:hover,a:focus{
+  text-decoration: none;
+}

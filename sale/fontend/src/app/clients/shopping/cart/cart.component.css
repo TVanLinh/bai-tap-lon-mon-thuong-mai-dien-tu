@@ -1,0 +1,20 @@
+thead{
+  background-color: #2B4A91;
+  color: #ffffff;
+}
+tr td{
+  vertical-align: middle;
+  text-align: center;
+}
+img{
+  max-width: 60px;
+}
+
+tbody {
+  max-height: 50px;
+  overflow-y: scroll;
+}
+.amount >input {
+  text-align: center;
+  width: 50px;
+}

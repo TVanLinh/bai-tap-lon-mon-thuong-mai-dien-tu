@@ -1,0 +1,59 @@
+<div class="head-above">
+  <div class="container">
+    <div class="row">
+      <div class="left">
+        Chào mừng bạn đến với girl.com<i class="pdl-5 fa fa-clock-o"></i> {{dateNow | date: 'dd/MM/yyyy' }}
+      </div>
+      <div class="right">
+       <a [routerLink]="['/shop']">   Giỏ hàng ( <span>{{amount}}</span> )<i class="fa fa-shopping-cart"></i></a>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="head-below">
+  <div class="container">
+     <div class="row">
+        <div class="col-md-3 col-sm-4">
+          <img src="../../../assets/images/logo/banner_blog.jpg-1.png" alt="" class="img-responsive">
+        </div>
+       <div class="col-md-2 hidden-xs hidden-sm">
+          <div class="dp-table">
+            <div class="icon">
+               <i class="fa fa-phone dp-table-cell" aria-hidden="true"></i>
+            </div>
+            <div class="text-header  dp-table-cell">
+              <p><small style="font-size: 15px">Hotline</small><br><span style="color:red">01644952648 <br>01644952648</span></p>
+            </div>
+          </div>
+
+       </div>
+       <div class="col-md-3 hidden-xs hidden-sm">
+         <div class="dp-table">
+           <div class="icon text-center " style="width: 35px">
+             <i class="fa fa-map-marker dp-table-cell " aria-hidden="true"></i>
+           </div>
+           <div class="text-header  dp-table-cell">
+             <p>Hà Nội<br>
+               Hậu Dưỡng,Kim Chung, <br> Đông Anh</p>
+           </div>
+         </div>
+
+       </div>
+       <div class="col-xs-12 col-sm-8 col-md-4   text-center">
+          <div class="row " >
+           <form action="" class="form-search" >
+               <div class="col-xs-8  col-sm-10  col-md-9">
+                   <input type="text" class="form-control">
+               </div>
+              <div class="col-xs-2  col-sm-1 col-md-3" style="text-align: right">
+                <button class="btn btn-primary" >Tim Kiem</button>
+              </div>
+              <div class="clearfix"></div>
+           </form>
+           </div>
+       </div>
+     </div>
+  </div>
+</div>

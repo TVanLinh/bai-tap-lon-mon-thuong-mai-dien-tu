@@ -1,0 +1,140 @@
+<div class="title-entity">
+  Danh sach user
+</div>
+<div>
+  <button class="btn btn-primary" (click)="userModal.show()">Tao mot user</button>
+  <input type="text" class="form-control search">
+</div>
+
+<div *ngIf="message.type">
+  <alert [type]="message.type" dismissible="true" [dismissOnTimeout]="message.timeout">{{message.content}}</alert>
+</div>
+
+<table class="table table-striped" [mfData]="listUser.toArray()" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+  <tr>
+    <th>
+      <mfDefaultSorter by="name" style="width: 10%">Họ tên</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="userName" style="width: 10%">Tên đăng nhập</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="enable" style="width: 5%">Kích hoạt</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="email" style="width: 10%">Email</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="phone" style="width: 10%">Số điện thoại</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="roles" style="width: 10%">Quyền</mfDefaultSorter>
+    </th>
+    <th style="width: 10%">
+      Action
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let item of mf.data;let idex = index">
+    <td>{{item.name}}</td>
+    <td>{{item.userName}}</td>
+    <td>{{item.enable}}</td>
+    <td>{{item.email}}</td>
+    <td>{{item.phone}}</td>
+    <td class="">{{item.roles}}</td>
+    <td class="">
+      <!--<span class="action action-edit" (click)="editItem(idex)"><i class="fa fa-shower"></i></span>-->
+      <span class="action action-edit" (click)="editItem(userModal,idex)"><i class="fa fa-edit"></i></span>
+      <span class="action action-remove" (click)="removeItem(idex)"><i class="fa fa-remove"></i></span>
+    </td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="4">
+      <mfBootstrapPaginator [rowsOnPageSet]="[10,20,30]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+  </tfoot>
+</table>
+
+
+<!--modal form -->
+<div class="modal fade" bsModal #userModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Thông tin user</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="userModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <div *ngIf="message.type">
+          <alert [type]="message.type" dismissible="true" [dismissOnTimeout]="message.timeout">{{message.content}}
+          </alert>
+        </div>
+
+        <form [formGroup]="formData">
+          <div>
+            <label for="name">Họ tên : </label>
+            <input id="name" type="text" class="form-control" formControlName="name">
+          </div>
+
+          <div>
+            <label for="userName">Tên đăng nhập : </label>
+            <input id="userName" type="text" class="form-control" formControlName="userName">
+          </div>
+
+          <div>
+            <label for="passWord">Mật khẩu : </label>
+            <input id="passWord" type="text" class="form-control" formControlName="passWord">
+          </div>
+
+          <div>
+            <label for="email">Email : </label>
+            <input id="email" type="email" class="form-control" formControlName="email">
+          </div>
+
+          <div style="padding-bottom: 20px;">
+            <label for="phone">Số điện thoại : </label>
+            <input id="phone" type="email" class="form-control" formControlName="phone">
+          </div>
+
+          <div>
+            <label for="enable">Kích hoạt : </label>
+            <select name="" id="enable" class="form-control" formControlName="enable">
+              <option value="true">Có</option>
+              <option value="false">Không</option>
+            </select>
+          </div>
+
+
+          <div>
+            <label for="Role">Quyền : </label>
+            <select name="" id="Role" class="form-control" formControlName="roles" multiple>
+              <option value="user">USER</option>
+              <option value="admin">ADMIN</option>
+            </select>
+          </div>
+
+
+        </form>
+
+        <div class=" text-right">
+          <button class="btn btn-success" (click)="onSave(userModal)">Lưu</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

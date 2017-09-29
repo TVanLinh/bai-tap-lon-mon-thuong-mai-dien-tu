@@ -1,0 +1,15 @@
+<div class="row pdt-15 pdb-15">
+  <div class="col-xs-12 col-xs-6 col-md-3" *ngFor = "let item of list">
+    <div class="item dp-table">
+        <div class="dp-table-cell left">
+          <i [class]="item.classItem"></i>
+        </div>
+        <div  class="dp-table-cell right">
+           <h5 class="upper-case">{{item.title}}</h5>
+            <p class="text">
+              {{item.infor}}
+            </p>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="hidden-xs">
+  <div class="app-title mgt-30 capitalize">
+    BÀI VIẾT MỚI
+  </div>
+  <ul class="post-new">
+    <li *ngFor="let item of list">
+      <a [routerLink]="['/detail',item.id]">
+        <img [src]="item.imagePath" alt="">
+        <span class="pdl-15">{{item.title}}</span>
+      </a>
+      <p class="text-center date-post">
+        Đăng ngày: <span class=" pdr-5" > {{item.datePost}}</span>
+      </p>
+    </li>
+  </ul>
+
+</div>
