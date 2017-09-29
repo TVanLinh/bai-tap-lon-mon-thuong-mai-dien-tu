@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="0" author="Tran Van Linh">
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_unicode_ci"/>
+        </modifySql>
+    </changeSet>
+
+    <include file="classpath:static/liquibase/create_catalog.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_product.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_comment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_customer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_employee.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_order.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_order_detail.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_user.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/create_role.xml" relativeToChangelogFile="false"/>
+
+    <include file="classpath:static/liquibase/add_contrainst_comment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/add_contrainst_order.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/add_contrainst_orderdetail.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/add_contrainst_product.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:static/liquibase/add_contrainst_role.xml" relativeToChangelogFile="false"/>
+</databaseChangeLog>
