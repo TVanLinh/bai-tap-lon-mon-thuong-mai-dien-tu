@@ -8,7 +8,7 @@
     -->
     <changeSet id="add_contrainst_product" author="tvinh">
 
-        <addForeignKeyConstraint baseColumnNames="id_customer"
+        <addForeignKeyConstraint baseColumnNames="customer_id"
                                  baseTableName="order"
                                  constraintName="fk_order_customer"
                                  referencedColumnNames="id"

@@ -22,8 +22,9 @@ export class ProductItemComponent implements OnInit {
   }
 
   onClick(product: Product) {
-    this.myCookieService.putObject(MyCookieService.PRODUCT_ITEM, product);
-    this.productService.subjectItem.next(product);
-    this.router.navigate(['/detail']);
+
+    console.log("product =--");
+    this.router.navigate(['/detail'], {queryParams: {param: product.id}});
+
   }
 }

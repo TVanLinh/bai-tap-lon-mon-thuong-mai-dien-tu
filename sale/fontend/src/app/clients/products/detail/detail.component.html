@@ -15,6 +15,7 @@
     <p class="mgb-20"><span class="price "></span></p>
     <a class="add-cart" (click)="addCart(product)">Thêm vào giỏ hàng</a>
   </div>
+
   <div class="col-xs-12">
     <div class="infor-product">
       <div class="infor-title">
@@ -36,8 +37,8 @@
       sản phẩm khác
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 mgt-30" *ngFor="let item of list">
-      <app-product-item [itemProduct]="item" [id]="item.id">
-      </app-product-item>
+        <app-product-item [itemProduct]="item">
+        </app-product-item>
     </div>
   </div>
 </div>

@@ -22,7 +22,7 @@
             </column>
             <column name="create_time" type="datetime"/>
             <column name="status" type="int"/>
-            <column name="id_customer" type="bigint"/>
+            <column name="customer_id" type="bigint"/>
             <column name="employee_id" type="bigint"/>
         </createTable>
 

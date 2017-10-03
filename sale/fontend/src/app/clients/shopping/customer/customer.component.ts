@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import {CustomerService} from "./customer.service";
 @Component({
   selector: 'app-customer',
@@ -8,8 +8,8 @@ import {CustomerService} from "./customer.service";
   providers: [CustomerService]
 })
 export class CustomerComponent implements OnInit {
-  formDataRegister: FormGroup;
   formDataLogin: FormGroup;
+  forgetPass: FormGroup;
 
   isLogin: boolean;
 
@@ -18,7 +18,8 @@ export class CustomerComponent implements OnInit {
     "background-color": "#ccc"
   };
 
-  constructor(private formBuildler: FormBuilder, private  customerService: CustomerService) {
+  constructor(private formBuildler: FormBuilder,
+              private  customerService: CustomerService) {
     this.isLogin = this.customerService.isAcount();
   }
 
@@ -32,21 +33,34 @@ export class CustomerComponent implements OnInit {
   }
 
   initForm() {
-    this.formDataRegister = this.formBuildler.group({
-      fullName: [''],
-      email: [''],
-      passWord: [''],
-      rePassWord: [''],
-      phone: [''],
-      address: ['']
-    });
+
     this.formDataLogin = this.formBuildler.group({
       email: [''],
       passWord: ['']
     });
+
+    this.forgetPass = this.formBuildler.group({
+      email: ['']
+    });
   }
 
-  onRegister() {
-    console.log(this.formDataRegister.value);
+  onRegister(form: NgForm, registerModal: any, loginModal: any) {
+    let valueForm = form.value;
+    console.log(form.value);
+
+
+
+    this.customerService.register(valueForm).subscribe((data: any) => {
+      let  a = data;
+    });
+
+    // alert("Đăng kí thành công ");
+    // registerModal.hide();
+    // loginModal.show();
+
+    // this.formDataLogin.setValue({
+    //   email: valueForm['email'],
+    //   passWord: ['password']
+    // });
   }
 }

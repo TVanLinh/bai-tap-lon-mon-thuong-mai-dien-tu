@@ -1,7 +1,12 @@
 import {Injectable} from "@angular/core";
+import {TaskService} from "../../../service/task.service";
+import {HOST_NAME} from "../../../config";
 @Injectable()
 export class CustomerService {
   private ACOUNT = "ACOUNT";
+
+  constructor(private  taskService: TaskService) {
+  }
 
   getAcount(): { email: string, passWord: string } {
     let str = sessionStorage.getItem(this.ACOUNT);
@@ -32,7 +37,7 @@ export class CustomerService {
   }
 
   public register(customerRegister: CustomerRegister) {
-
+    return this.taskService.postTask(HOST_NAME+"/customer");
   }
 
   public  changePassWord(customerLogin: CustomerLoginForm) {

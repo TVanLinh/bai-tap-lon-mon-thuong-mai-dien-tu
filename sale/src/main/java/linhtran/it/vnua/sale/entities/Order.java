@@ -25,11 +25,11 @@ public class Order extends AbstractEntity {
     private int status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_customer")
+    @JoinColumn(name = "customer_id")
     @JsonIgnore
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "employee_id",referencedColumnName = "id")
     private Employee employee;
 

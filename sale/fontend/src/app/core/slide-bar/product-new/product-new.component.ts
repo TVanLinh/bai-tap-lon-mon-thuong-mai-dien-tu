@@ -3,6 +3,7 @@ import {Product} from "../../../model/product.model";
 import {ProductService} from "../../../service/product.service";
 import {Router} from "@angular/router";
 import {MyCookieService} from "../../../service/my-cookie.service";
+import {TaskService} from "../../../service/task.service";
 
 @Component({
   selector: 'app-product-new',
@@ -13,26 +14,20 @@ export class ProductNewComponent implements OnInit {
   public list: Product[] = [];
 
   constructor(private productService: ProductService,
+              private taskService: TaskService,
               private mycookieService: MyCookieService<Product>,
               private router: Router) {
   }
 
   ngOnInit() {
-    const pro = new Product();
-    pro.price = 45000;
-    pro.imagePath = "../../../../assets/images/nuoc-hoa/nuoc-hoa-nu-dior-miss-dior-blooming-bouquet-a-1024x1024.jpg";
-    pro.name = "Nước hoa Chanel Bleu De Chanel EDT pour homme";
-    pro.description = "";
-    pro.discount = 0.5;
-    pro.id = 3;
-    this.list.push(pro);
-    this.list.push(pro);
-    this.list.push(pro);
-    this.list.push(pro);
+    this.taskService.getTask("http://localhost:8080/product/saleoff").subscribe((data: any) => {
+      this.list = data.productList;
+    });
+
   }
 
   onClick(item: Product) {
-    this.mycookieService.putObject(MyCookieService.PRODUCT_ITEM, item);
-    this.router.navigate(['/detail']);
+    console.log("product sliderbar");
+    this.router.navigate(['/detail'], {queryParams: {param: item.id}});
   }
 }

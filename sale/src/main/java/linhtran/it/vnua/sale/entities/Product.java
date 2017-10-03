@@ -1,10 +1,16 @@
 package linhtran.it.vnua.sale.entities;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "product")
+@EntityListeners(AuditingEntityListener.class)
 public class Product extends AbstractEntity implements Serializable{
 
     @Basic
@@ -31,7 +37,11 @@ public class Product extends AbstractEntity implements Serializable{
     @Column(name = "image_path")
     private String imagePath;
 
-    @ManyToOne()
+    @CreatedDate
+    @Column(name = "create_date")
+    private  Date dateCreate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catalog_code", referencedColumnName = "code")
     private Catalog catalog;
 
@@ -91,4 +101,11 @@ public class Product extends AbstractEntity implements Serializable{
         this.catalog = catalog;
     }
 
+    public Date getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(Date dateCreate) {
+        this.dateCreate = dateCreate;
+    }
 }

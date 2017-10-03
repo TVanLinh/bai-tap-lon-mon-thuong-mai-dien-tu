@@ -4,7 +4,7 @@
   </div>
   <ul class="product-sale">
     <li *ngFor="let item of list">
-      <a (click)="onClick(item)" style="cursor: pointer"><img [src]="item.imagePath" alt=""><span>{{item.name}}</span></a>
+      <a  (click)="onClick(item)" style="cursor: pointer"><img [src]="item.imagePath" alt=""><span>{{item.name}}</span></a>
       <p class="text-center">
         <span class="price pdr-10" >{{item.price}} đ</span>
         <span style="color: red">{{item.price-item.price*item.discount}}</span>

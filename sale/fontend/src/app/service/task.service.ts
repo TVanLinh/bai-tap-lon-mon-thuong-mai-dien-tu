@@ -9,7 +9,10 @@ export class TaskService {
 
   public getTask(url: string) {
     return this.http.get(url).map((data: Response) => {
-      return data.json();
+      if(data!=null) {
+        return data.json();
+      }
+      return data;
     });
   }
 

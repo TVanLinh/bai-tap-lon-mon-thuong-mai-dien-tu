@@ -4,9 +4,10 @@ import {Product} from "../../../model/product.model";
 import {Subscription} from "rxjs/Subscription";
 import {Ingredient} from "../../../model/ingrendient.model";
 import {ShoppingService} from "../../../service/shopping.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MyCookieService} from "../../../service/my-cookie.service";
 import {MystoreService} from "../../../service/my-storage.service";
+import {TaskService} from "../../../service/task.service";
 
 @Component({
   selector: 'app-detail',
@@ -23,24 +24,40 @@ export class DetailComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService,
               private  shopService: ShoppingService,
               private  router: Router,
+              private route: ActivatedRoute,
+              private  taskService: TaskService,
               private myCookieService: MyCookieService<any>,
               private mylocalStorage: MystoreService,) {
   }
 
 
   ngOnInit() {
-    this.getProduct();
+    this.getProducts();
   }
 
-  private  getProduct() {
-    this.list = this.productService.getProducts().splice(0, 4);
+  private  getProducts() {
 
-    this.product = this.myCookieService.getObject(MyCookieService.PRODUCT_ITEM);
+    this.route.queryParams.subscribe((param) => {
+      let id = param['param'];
+      console.log(Number.isInteger(+id));
+      if (Number.isInteger(+id)) {
+        this.taskService.getTask("http://localhost:8080/product/" + id).subscribe((data: Product) => {
+          this.product = data;
+          console.log(data);
+        });
+      }
+     setTimeout( ()=>{
+       window.scrollTo(0, 0)
+     },500);
+    });
 
-    if (this.product == null) {
-      this.router.navigate(["/product"]);
+    if (this.list != null && this.list.length == 0) {
+      this.taskService.getTask("http://localhost:8080/product/different").subscribe((data: any) => {
+        this.list = data.productList;
+      });
+
     }
-    // this.subcription = this.productService.subjectItem.subscribe((prod: Product) => this.product = prod);
+
   }
 
 

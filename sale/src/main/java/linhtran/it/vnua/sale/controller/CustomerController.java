@@ -28,11 +28,11 @@ public class CustomerController {
     @Autowired
     private MailService mailService;
 
+    @CrossOrigin(value = "*")
     @PostMapping("/customer")
     public ResponseEntity<String> createCustomer(@Valid @RequestBody CustomerRegisterForm customerRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<String>(Message.getError(bindingResult), HttpStatus.BAD_REQUEST);
-
         }
 
 
@@ -48,7 +48,7 @@ public class CustomerController {
 
     }
 
-
+    @CrossOrigin(value = "*")
     @PutMapping("/customer")
     public ResponseEntity<String> changePassWord(@RequestBody CustomerRegisterForm customerRegisterForm) {
         Customer customer;
@@ -62,7 +62,7 @@ public class CustomerController {
         return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
     }
 
-
+    @CrossOrigin(value = "*")
     @PostMapping(value = "/customer/login")
     public ResponseEntity<Customer> getCustomer(@RequestBody CustomerLoginForm customerLoginForm) {
 

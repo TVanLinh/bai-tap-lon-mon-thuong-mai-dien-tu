@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
  */
 public class CustomerRegisterForm {
 
-    @NotNull(message = "tên không được để trống ")
+    @NotNull(message = "Tên không được để trống ")
     private String fullName;
 
     @NotNull(message = "email không được  để trống ")

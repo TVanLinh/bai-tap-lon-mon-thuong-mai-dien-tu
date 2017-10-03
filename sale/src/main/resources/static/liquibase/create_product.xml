@@ -25,6 +25,7 @@
             <column name="discount" type="double"/>
             <column name="description" type="varchar(2000)"/>
             <column name="image_path" type="varchar(2000)"/>
+            <column name="create_date" type="datetime"/>
             <column name="amount" type="int"/>
             <column name="catalog_code" type="char(30)"/>
         </createTable>

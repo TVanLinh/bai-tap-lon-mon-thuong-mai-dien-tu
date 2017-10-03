@@ -79,7 +79,8 @@ import {ModalModule} from "ngx-bootstrap";
     FormsModule,
     HttpModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
 
   ],
   providers: [Product,
