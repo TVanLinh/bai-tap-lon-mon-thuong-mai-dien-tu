@@ -18,9 +18,8 @@ public class OrderDetail extends AbstractEntity {
     @JoinColumn(name = "id_product")
     private Product product;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_order")
-    private Order order;
+    @Column(name = "id_order")
+    private  Long  idOrder;
 
     public int getAmount() {
         return amount;
@@ -38,11 +37,11 @@ public class OrderDetail extends AbstractEntity {
         this.product = product;
     }
 
-    public Order getOrder() {
-        return order;
+    public Long getIdOrder() {
+        return idOrder;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setIdOrder(Long idOrder) {
+        this.idOrder = idOrder;
     }
 }

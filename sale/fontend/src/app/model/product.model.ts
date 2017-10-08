@@ -1,3 +1,4 @@
+import {Catalog} from "./catalog.model";
 export class Product {
   id: number;
   name: string;
@@ -6,5 +7,6 @@ export class Product {
   price: number;
   description: string;
   amount: number;
-  catalogCode: string;
+  catalog: Catalog;
+
 }

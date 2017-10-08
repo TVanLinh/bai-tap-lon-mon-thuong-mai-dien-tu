@@ -41,4 +41,11 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query(value = "select  * from product limit :offset,:limit ",nativeQuery = true)
     @OrderBy(value = "amount asc ")
     Set<Product> getProductSaleHight(@Param("offset") int offset, @Param(value = "limit") int limit);
+
+
+    @Query(value = "select  * from product, catalog WHERE product.name like %:query% OR catalog.name like %:query% limit :offset,:limit ",nativeQuery = true)
+    Set<Product>  findProduct(@Param("query")String query,@Param("offset") int offset, @Param(value = "limit") int limit);
+
+    @Query(value = "select  * from product, catalog WHERE product.name like %:query% OR catalog.name like %:query%",nativeQuery = true)
+    Set<Product>  findProduct(@Param("query")String query);
 }

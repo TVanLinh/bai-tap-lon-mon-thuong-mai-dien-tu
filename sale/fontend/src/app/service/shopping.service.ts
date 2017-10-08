@@ -3,7 +3,6 @@ import {Injectable} from "@angular/core";
 import {ProductService} from "./product.service";
 import {Product} from "../model/product.model";
 import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ShoppingService {
@@ -32,7 +31,7 @@ export class ShoppingService {
   }
 
   public getIngredients(): Ingredient[] {
-    return this.list;
+    return this.list != null ? this.list : [];
   }
 
   public getAllMoney(): number {
@@ -44,7 +43,7 @@ export class ShoppingService {
   }
 
   public isExistsProduct(product: Product): boolean {
-    if (this.list == null || this.list.length == 0) {
+    if (this.list == null) {
       return false;
     }
     for (let item of this.list) {
@@ -82,9 +81,12 @@ export class ShoppingService {
 
   public  getAmountAllIngredient(data: Ingredient[]) {
     let tt = 0;
-    for (let item of data) {
-      tt += item.amount;
+    if (data != null && data.length != 0) {
+      for (let item of data) {
+        tt += item.amount;
+      }
     }
+
     return tt;
   }
 

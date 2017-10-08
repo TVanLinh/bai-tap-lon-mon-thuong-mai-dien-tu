@@ -27,8 +27,8 @@ public class Customer extends AbstractEntity {
     @Column(name = "pass_word")
     private  String passWord;
 
-    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private Set<Order> orders;
+//    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    private Set<Order> orders;
 
     public String getFullName() {
         return fullName;
@@ -70,11 +70,11 @@ public class Customer extends AbstractEntity {
         this.passWord = passWord;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
+//    public Set<Order> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(Set<Order> orders) {
+//        this.orders = orders;
+//    }
 }

@@ -12,6 +12,9 @@ export class ProductService {
   private publishProduct = new Subject<Product>();
   productListener = this.publishProduct.asObservable();
 
+  searchListener =  new Subject<string>();
+
+
   publicProduct(product: Product) {
     this.publishProduct.next(product);
   }
@@ -40,4 +43,6 @@ export class ProductService {
   getMoney(product: Product):number{
     return product.price - product.price*product.discount;
   }
+
+
 }

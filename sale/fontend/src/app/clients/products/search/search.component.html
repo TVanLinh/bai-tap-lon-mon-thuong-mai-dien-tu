@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="capitalize">Danh sách sản phẩm</h1>
+    <hr>
+  </div>
+
+  <div class="col-xs-12" *ngIf="list.length == 0">
+    {{getCatalogTitle()}}
+  </div>
+
+  <div class="col-xs-6 col-sm-6 col-md-3 " *ngFor="let item of listProduct">
+    <app-product-item [itemProduct]="item">
+    </app-product-item>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="col-xs-12 text-center">
+    <app-pagination
+      [page]="page"
+      [totalList]="listProduct.length"
+      [param]="query"
+      (pageNextURL)="getUrl($event)"
+    >
+    </app-pagination>
+  </div>
+</div>

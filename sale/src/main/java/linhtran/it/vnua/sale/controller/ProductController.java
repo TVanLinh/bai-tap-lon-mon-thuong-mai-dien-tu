@@ -87,4 +87,23 @@ public class ProductController {
         return new ResponseEntity<ProductResponse>(new ProductResponse(new Page(), products), HttpStatus.OK);
     }
 
+
+    @CrossOrigin("*")
+    @GetMapping(value = "product/search")
+    public ResponseEntity<ProductResponse> search(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                                  @RequestParam(value = "param", required = false, defaultValue = "") String query) {
+
+        int offset = (page - 1) * 3;
+        int limit = 3;
+        int count;
+        Set<Product> products;
+
+        count = this.productService.findProduct(query).size();
+        Page pageResult = PageUtils.getPage(count, page, 5, 3);
+        pageResult.currentPage = page;
+        products = this.productService.findProduct(query, offset, limit);
+
+        return new ResponseEntity<ProductResponse>(new ProductResponse(pageResult, products), HttpStatus.OK);
+
+    }
 }

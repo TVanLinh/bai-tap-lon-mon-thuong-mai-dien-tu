@@ -7,6 +7,7 @@ import linhtran.it.vnua.sale.mail.MailService;
 import linhtran.it.vnua.sale.service.CustomerService;
 import linhtran.it.vnua.sale.util.Message;
 import linhtran.it.vnua.sale.util.StringUtils;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class CustomerController {
             return new ResponseEntity<String>(customerRegisterForm.getEmail() + " " + Message.EXIST_ALREADY, HttpStatus.ALREADY_REPORTED);
         }
 
-        if (customerRegisterForm.getPassWord().equals(customerRegisterForm.getRePassWord())) {
+        if (!customerRegisterForm.getPassWord().equals(customerRegisterForm.getRePassWord())) {
             return new ResponseEntity<String>(Message.PASS_WORD_NOT_OVERLAP, HttpStatus.BAD_REQUEST);
         }
         this.customerService.save(customerRegisterForm.toCustomer());
@@ -70,7 +71,12 @@ public class CustomerController {
         if ((customer = this.customerService.getCustomerByEmailAndPassWord(customerLoginForm.getEmail(), customerLoginForm.getPassWord())) == null) {
             return new ResponseEntity<Customer>(customer, HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+    }
 
+    @GetMapping(value = "/customer")
+    public ResponseEntity<Customer> getCustomerTest(@RequestParam(value = "email") String email) {
+        Customer customer = this.customerService.getCustomerByEmail(email);
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 }

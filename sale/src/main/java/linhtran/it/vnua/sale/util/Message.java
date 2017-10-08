@@ -13,6 +13,8 @@ public class Message {
     public static String PASS_NOT_RIGHT = "mật khẩu không đúng";
     public static String NOT_EXIST = "không tồn tại ";
     public static String PASS_WORD_NOT_OVERLAP = "mật khẩu không trùng nhau ";
+    public static String NOT_SUCCESS = "không thành công ";
+
 
     public static  String getError(BindingResult bindingResult) {
         StringBuilder stringBuilder = new StringBuilder();

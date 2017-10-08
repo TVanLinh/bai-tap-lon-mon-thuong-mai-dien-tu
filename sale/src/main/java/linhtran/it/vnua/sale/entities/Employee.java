@@ -26,9 +26,6 @@ public class Employee extends AbstractEntity {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
-    private Set<Order> orders;
-
     public String getFullName() {
         return fullName;
     }
@@ -61,11 +58,5 @@ public class Employee extends AbstractEntity {
         this.address = address;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
 }

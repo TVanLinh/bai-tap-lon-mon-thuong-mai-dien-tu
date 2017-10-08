@@ -49,6 +49,14 @@ public class ProductService {
     }
 
     public Set<Product> getProductSaleHight(int offset, int limit) {
-        return  this.productRepository.getProductSaleHight(offset,limit);
+        return this.productRepository.getProductSaleHight(offset, limit);
+    }
+
+    public Set<Product> findProduct(String query, int offset, int limit) {
+        return this.productRepository.findProduct(query, offset, limit);
+    }
+
+    public Set<Product> findProduct(String query) {
+        return this.productRepository.findProduct(query);
     }
 }

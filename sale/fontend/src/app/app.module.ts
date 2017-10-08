@@ -42,6 +42,7 @@ import {MystoreService} from "./service/my-storage.service";
 import { ClientsComponent } from './clients/clients.component';
 import {AdminModule} from "./admin/admin.module";
 import {ModalModule} from "ngx-bootstrap";
+import { SearchComponent } from './clients/products/search/search.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {ModalModule} from "ngx-bootstrap";
     HomeProductComponent,
     SlideBarDirective,
     HomeSliderComponent,
-    ClientsComponent
+    ClientsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@
         Chào mừng bạn đến với shop.com<i class="pdl-5 fa fa-clock-o"></i> {{dateNow | date: 'dd/MM/yyyy' }}
       </div>
       <div class="right">
-        <a href="">linhtran180895@gmail.com</a>
+        <a href="">{{email}}</a>
        <a [routerLink]="['/shop']">   Giỏ hàng ( <span>{{amount}}</span> )<i class="fa fa-shopping-cart"></i></a>
       </div>
     </div>
@@ -46,10 +46,12 @@
           <div class="row " >
            <form action="" class="form-search" >
                <div class="col-xs-8  col-sm-10  col-md-9">
-                   <input type="text" class="form-control">
+                 <!--<form action="" #forms="ngForm">-->
+                   <input name="search" type="text" class="form-control" [(ngModel)] ="search"  [ngModelOptions]="{standalone: true}">
+                 <!--</form>-->
                </div>
               <div class="col-xs-2  col-sm-1 col-md-3" style="text-align: right">
-                <button class="btn btn-primary" >Tìm kiếm </button>
+                <button class="btn btn-primary" (click)="onClick()">Tìm kiếm </button>
               </div>
               <div class="clearfix"></div>
            </form>
