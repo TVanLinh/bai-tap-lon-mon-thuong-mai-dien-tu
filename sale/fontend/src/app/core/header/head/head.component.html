@@ -5,8 +5,16 @@
         Chào mừng bạn đến với shop.com<i class="pdl-5 fa fa-clock-o"></i> {{dateNow | date: 'dd/MM/yyyy' }}
       </div>
       <div class="right">
-        <a href="">{{email}}</a>
-       <a [routerLink]="['/shop']">   Giỏ hàng ( <span>{{amount}}</span> )<i class="fa fa-shopping-cart"></i></a>
+        <div class="dropdown" style="display: inline-block" *ngIf="isLogin">
+          <a data-toggle="dropdown">{{email}}
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a [routerLink]="['/order']" routerLinkActive="active">Danh sách đơn hàng </a></li>
+            <li><a [routerLink]="['/order']" (click)="changPassModal.show()">Thay đổi mật khẩu </a></li>
+            <li><a (click)="onLogout()">Đăng xuất </a></li>
+          </ul>
+        </div>
+        <a [routerLink]="['/shop']"> Giỏ hàng ( <span>{{amount}}</span> )<i class="fa fa-shopping-cart"></i></a>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -15,48 +23,98 @@
 
 <div class="head-below">
   <div class="container">
-     <div class="row">
-        <div class="col-md-3 col-sm-4">
-          <img src="../../../assets/images/logo/banner_blog.jpg-1.png" alt="" class="img-responsive">
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <img src="../../../assets/images/logo/banner_blog.jpg-1.png" alt="" class="img-responsive">
+      </div>
+      <div class="col-md-2 hidden-xs hidden-sm">
+        <div class="dp-table">
+          <div class="icon">
+            <i class="fa fa-phone dp-table-cell" aria-hidden="true"></i>
+          </div>
+          <div class="text-header  dp-table-cell">
+            <p>
+              <small style="font-size: 15px">Hotline</small>
+              <br><span style="color:red">01644952648 <br>01644952648</span></p>
+          </div>
         </div>
-       <div class="col-md-2 hidden-xs hidden-sm">
-          <div class="dp-table">
-            <div class="icon">
-               <i class="fa fa-phone dp-table-cell" aria-hidden="true"></i>
+
+      </div>
+      <div class="col-md-3 hidden-xs hidden-sm">
+        <div class="dp-table">
+          <div class="icon text-center " style="width: 35px">
+            <i class="fa fa-map-marker dp-table-cell " aria-hidden="true"></i>
+          </div>
+          <div class="text-header  dp-table-cell">
+            <p>Trâu Quỳ <br>
+              Gia Lâm <br> Hà Nội </p>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-4   text-center">
+        <div class="row ">
+          <form action="" class="form-search">
+            <div class="col-xs-8  col-sm-10  col-md-9">
+              <!--<form action="" #forms="ngForm">-->
+              <input name="search" type="text" class="form-control" [(ngModel)]="search"
+                     [ngModelOptions]="{standalone: true}">
+              <!--</form>-->
             </div>
-            <div class="text-header  dp-table-cell">
-              <p><small style="font-size: 15px">Hotline</small><br><span style="color:red">01644952648 <br>01644952648</span></p>
+            <div class="col-xs-2  col-sm-1 col-md-3" style="text-align: right">
+              <button class="btn btn-primary" (click)="onClick()">Tìm kiếm</button>
+            </div>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" bsModal #changPassModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"> Thay đổi  mật khẩu </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="changPassModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form #changPassForm="ngForm">
+          <div class="mgb-10">
+            <label for="passWord">Mật khẩu cũ  <span class="star">*</span>: </label>
+            <input id="passWord" name="passWord" minlength="8" type="password" required class="form-control"
+                   #passWord="ngModel" ngModel>
+            <div class="star" *ngIf="passWord.touched && passWord.value.trim().length == 0">
+              Chưa điền mật khẩu
             </div>
           </div>
 
-       </div>
-       <div class="col-md-3 hidden-xs hidden-sm">
-         <div class="dp-table">
-           <div class="icon text-center " style="width: 35px">
-             <i class="fa fa-map-marker dp-table-cell " aria-hidden="true"></i>
-           </div>
-           <div class="text-header  dp-table-cell">
-             <p>Trâu Quỳ <br>
-              Gia Lâm <br> Hà Nội </p>
-           </div>
-         </div>
+          <div class="mgb-10">
+            <label for="rePassWord">Mật khẩu mới <span class="star">*</span>: </label>
+            <input id="rePassWord" name="rePassWord" type="password" required class="form-control" #rePassWord="ngModel"
+                   ngModel>
+            <div class="star" *ngIf="rePassWord.touched && rePassWord.value.trim().length < 8">
+              Mật khẩu tối thiểu 8 kí tự
+            </div>
+          </div>
 
-       </div>
-       <div class="col-xs-12 col-sm-8 col-md-4   text-center">
-          <div class="row " >
-           <form action="" class="form-search" >
-               <div class="col-xs-8  col-sm-10  col-md-9">
-                 <!--<form action="" #forms="ngForm">-->
-                   <input name="search" type="text" class="form-control" [(ngModel)] ="search"  [ngModelOptions]="{standalone: true}">
-                 <!--</form>-->
-               </div>
-              <div class="col-xs-2  col-sm-1 col-md-3" style="text-align: right">
-                <button class="btn btn-primary" (click)="onClick()">Tìm kiếm </button>
-              </div>
-              <div class="clearfix"></div>
-           </form>
-           </div>
-       </div>
-     </div>
+          <div class=" text-right">
+            <button [disabled]="changPassForm.invalid" class="btn btn-success"
+                    (click)="onChangePass(changPassForm,changPassModal)">Gửi
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
   </div>
 </div>
+

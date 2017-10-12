@@ -43,6 +43,7 @@ import { ClientsComponent } from './clients/clients.component';
 import {AdminModule} from "./admin/admin.module";
 import {ModalModule} from "ngx-bootstrap";
 import { SearchComponent } from './clients/products/search/search.component';
+import { OrdersComponent } from './clients/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { SearchComponent } from './clients/products/search/search.component';
     SlideBarDirective,
     HomeSliderComponent,
     ClientsComponent,
-    SearchComponent
+    SearchComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

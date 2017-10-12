@@ -11,15 +11,15 @@ import java.util.Set;
  */
 public class OrderForm {
 
-    private List<EngredientForm> engredients;
+    private Set<EngredientForm> engredients;
 
     private CustomerLoginForm customerLoginForm;
 
-    public List<EngredientForm> getEngredients() {
+    public Set<EngredientForm> getEngredients() {
         return engredients;
     }
 
-    public void setEngredients(List<EngredientForm> engredients) {
+    public void setEngredients(Set<EngredientForm> engredients) {
         this.engredients = engredients;
     }
 
@@ -38,4 +38,5 @@ public class OrderForm {
         }
         return orderDetails;
     }
+
 }

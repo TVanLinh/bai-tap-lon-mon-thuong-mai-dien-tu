@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+a:hover,a:focus{
+  text-decoration: none;
+}
+.star{
+  color: red;
+}
+.active{
+  color: #c91d67 !important;
+}

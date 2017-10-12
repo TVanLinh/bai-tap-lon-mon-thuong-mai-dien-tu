@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-xs-12 mgt-20 text-right">
-      <button type="submit" [ngStyle]="isLogin == false?cssSubmit:''" (click)="onSend(loginModal)"
+      <button type="submit" [ngStyle]="isLogin == false?cssSubmit:''" (click)="onOrder()"
               [disabled]="!isLogin">Gửi thông tin đặt hàng
       </button>
       <div *ngIf="isLogin == false">
@@ -144,32 +144,33 @@
 </div>
 
 
-<!--<div class="modal fade" bsModal #forgetPass="bs-modal" [config]="{backdrop: 'static'}"-->
-     <!--tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">-->
-  <!--<div class="modal-dialog modal-lg">-->
+<div class="modal fade" bsModal #forgetPass="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
 
-    <!--<div class="modal-content">-->
-      <!--<div class="modal-header">-->
-        <!--<h4 class="modal-title pull-left"> Quên mật khẩu </h4>-->
-        <!--<button type="button" class="close pull-right" aria-label="Close" (click)="forgetPass.hide()">-->
-          <!--<span aria-hidden="true">&times;</span>-->
-        <!--</button>-->
-      <!--</div>-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"> Quên mật khẩu </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="forgetPass.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-      <!--<div class="modal-body">-->
-        <!--<form [formGroup]="forgetPass" class="pdb-20">-->
+      <div class="modal-body">
+        <form>
 
-          <!--<div class="mgb-10">-->
-            <!--<label for="emailss">Nhập email của bạn : </label>-->
-            <!--<input id="emailss" type="email" required class="form-control" formControlName="emails">-->
-          <!--</div>-->
+          <div class="mgb-10">
+            <label for="emailss">Nhập email của bạn : </label>
+            <input id="emailss" type="email" name="emails" required class="form-control" #emails="ngModel"  [(ngModel)]="emailChange">
+          </div>
 
-          <!--<div class=" text-right">-->
-            <!--<button class="btn btn-success" (click)="onRegister(loginModal)">Gửi</button>-->
-          <!--</div>-->
-        <!--</form>-->
-      <!--</div>-->
+          <div class=" text-right">
+            <button class="btn btn-success" id="btn-forget-pass-clients" [disabled]="!emails.valid" (click)="onForgetPassWord(forgetPass)">Gửi
+            </button>
+          </div>
+        </form>
+      </div>
 
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+    </div>
+  </div>
+</div>

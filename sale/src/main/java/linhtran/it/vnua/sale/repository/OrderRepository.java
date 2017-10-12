@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Set;
 
 /**
  * Created by linhtran on 28/09/17.
@@ -12,4 +13,5 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface OrderRepository extends CrudRepository<Order,Long> {
+    Set<Order> findOrderByCustomerId(long customerId);
 }

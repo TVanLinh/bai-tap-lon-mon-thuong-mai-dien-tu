@@ -1,0 +1,66 @@
+<div class="container mgt-20 pdl-i-0 pdr-i-0" style="padding-right: 0">
+  <H3>{{orders.length !=0 ?'Danh sách đơn hàng':'Quý vị chưa có đơn hàng nào ' }} </H3>
+  <table class="table table-bordered" *ngIf="orders.length>0">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>Thời gian đặt hàng</th>
+      <th>Trạng thái</th>
+      <th>Chi phí (Đồng)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr (click)="viewOrder(orderModal,inx)" *ngFor="let item of orders;let inx = index">
+      <td>{{inx+1}}</td>
+      <td>{{item.createTime | date: 'HH:mm dd-MM-yyyy'}}</td>
+      <td>{{getStatus(item.status)}}</td>
+      <td>{{getTotalMoney(item.orderDetails)}} VND</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="modal fade" bsModal #orderModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Thông tin đơn hàng DH0000{{indexOrder+1}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="orderModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <button class="btn btn-successs" (click)="print()">In</button>
+        <button class="btn btn-successs" (click)="exportExcel()">Xuất ra excel</button>
+        <!---->
+        <div id="table-order-detail-client">
+          <table class="table table-borderModaled mgt-30">
+            <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên sản phẩm</th>
+              <th>Ảnh</th>
+              <th>Số lượng</th>
+              <th>Đơn giá/ 1 SP (Đồng)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of orderDetail;let inx = index;">
+              <td>{{inx+1}}</td>
+              <td>{{item.product.name}}</td>
+ 	      <td style="width: 50px;height: 50px"><img [src]="item.product.imagePath"></td>
+              <td class="amount">{{item.amount}}</td>
+              <td>{{getPrice(item.product)}} VND</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

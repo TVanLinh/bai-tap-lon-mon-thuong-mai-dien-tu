@@ -1,5 +1,7 @@
 package linhtran.it.vnua.sale.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -18,8 +20,11 @@ public class OrderDetail extends AbstractEntity {
     @JoinColumn(name = "id_product")
     private Product product;
 
-    @Column(name = "id_order")
-    private  Long  idOrder;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_order")
+    private Order order;
 
     public int getAmount() {
         return amount;
@@ -37,11 +42,11 @@ public class OrderDetail extends AbstractEntity {
         this.product = product;
     }
 
-    public Long getIdOrder() {
-        return idOrder;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setIdOrder(Long idOrder) {
-        this.idOrder = idOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

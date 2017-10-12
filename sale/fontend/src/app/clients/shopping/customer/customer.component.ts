@@ -1,8 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ElementRef, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import {CustomerLoginForm, CustomerRegister, CustomerService} from "./customer.service";
 import {Response} from "@angular/http";
 import {Subject} from "rxjs/Subject";
+import {MystoreService} from "../../../service/my-storage.service";
+import {OrderForm} from "../../../model/order.model";
+declare const jQuery: any;
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -12,15 +15,18 @@ import {Subject} from "rxjs/Subject";
 export class CustomerComponent implements OnInit {
   formDataLogin: FormGroup;
   forgetPass: FormGroup;
+  emailChange = "";
   isLogin: boolean;
   private acountLogin = new Subject<boolean>();
-
+  disablePass = true;
   cssSubmit = {
     "cursor": "not-allowed",
     "background-color": "#ccc"
   };
 
   constructor(private formBuildler: FormBuilder,
+              private eleRef: ElementRef,
+              private mystorageService: MystoreService,
               private  customerService: CustomerService) {
     this.isLogin = this.customerService.isAcount();
     this.acountLogin.subscribe((data: boolean) => this.isLogin = data);
@@ -31,8 +37,24 @@ export class CustomerComponent implements OnInit {
     this.initForm();
   }
 
-  onSend(registerModal: any) {
-    registerModal.show();
+  onOrder() {
+    let list = this.mystorageService.getItem(MystoreService.SHOP_LIST);
+    if (list == null || list.length === 0) {
+      alert("Giỏ hàng hiện tại chưa có sản phẩm nào");
+      return;
+    }
+    let orderForm: OrderForm = new OrderForm();
+    orderForm.customerLoginForm = this.customerService.getAcount();
+    orderForm.engredients = list;
+
+    this.customerService.createOrder(orderForm).subscribe((data: Response) => {
+      if (data.status === 200) {
+        alert("Đặt hàng thành công ");
+      } else {
+        alert("Đặt hàng không thành công ");
+      }
+    });
+
   }
 
   initForm() {
@@ -82,12 +104,26 @@ export class CustomerComponent implements OnInit {
         this.acountLogin.next(true);
 
         loginModal.hide();
+        this.customerService.publishAcount(true);
       }
     }, (error) => {
       alert("Đăng nhập không thành công, vui lòng kiểm tra lại email và  mật khẩu ");
     }, () => {
+      // this.customerService.publishAcount(true);
       this.customerService.publishAcount(true);
-      console.log( this.customerService.publishAcount(true));
+    });
+  }
+
+
+  public  onForgetPassWord(forgetPassModal: any) {
+    var btn = jQuery(this.eleRef.nativeElement).find('#btn-forget-pass-clients');
+    forgetPassModal.hide();
+    this.customerService.forgetPassWord(this.emailChange).subscribe((data: Response) => {
+      if (data.status === 200) {
+        window.alert("Quý khách vui lòng kiểm tra email để lấy mật khẩu, Hệ thống sẽ gửi mail trong giây lát ");
+      } else {
+        window.alert("Không thành công vui lòng kiểm tra lại email");
+      }
     });
   }
 }

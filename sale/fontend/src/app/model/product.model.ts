@@ -9,4 +9,9 @@ export class Product {
   amount: number;
   catalog: Catalog;
 
+
+  get getPrice(): number {
+    return this.price - (this.price * this.discount) / 100;
+  }
+
 }

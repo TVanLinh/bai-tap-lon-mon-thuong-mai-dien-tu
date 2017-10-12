@@ -54,7 +54,9 @@
 .text-header{
   vertical-align: top;
 }
-
+.dropdown a {
+  color: #000000 !important;
+}
 @media (max-width: 767px) {
   .head-above {
     padding:  5px 0;

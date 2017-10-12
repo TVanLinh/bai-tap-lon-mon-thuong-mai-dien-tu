@@ -7,7 +7,6 @@ import linhtran.it.vnua.sale.mail.MailService;
 import linhtran.it.vnua.sale.service.CustomerService;
 import linhtran.it.vnua.sale.util.Message;
 import linhtran.it.vnua.sale.util.StringUtils;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,12 +49,12 @@ public class CustomerController {
     }
 
     @CrossOrigin(value = "*")
-    @PutMapping("/customer")
-    public ResponseEntity<String> changePassWord(@RequestBody CustomerRegisterForm customerRegisterForm) {
+    @PutMapping("/customer/forget-pass")
+    public ResponseEntity<String> changePassWord(@RequestParam String email) {
         Customer customer;
-        if (customerRegisterForm.getEmail() == null
-                || (customer = this.customerService.getCustomerByEmail(customerRegisterForm.getEmail())) == null) {
-            return new ResponseEntity<String>(customerRegisterForm.getEmail() + " " + Message.NOT_EXIST, HttpStatus.BAD_REQUEST);
+        if (email == null
+                || (customer = this.customerService.getCustomerByEmail(email)) == null) {
+            return new ResponseEntity<String>(email + " " + Message.NOT_EXIST, HttpStatus.BAD_REQUEST);
         }
         customer.setPassWord(StringUtils.generateRandomPassword());
         this.customerService.save(customer);
@@ -74,9 +73,34 @@ public class CustomerController {
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 
+
+    @CrossOrigin(value = "*")
+    @PutMapping("/customer/change-pass")
+    public ResponseEntity<String> changePassWord(@RequestBody CustomerRegisterForm customerRegisterForm, BindingResult bindingResult) {
+
+        Customer customer;
+
+        if ((customer = this.customerService.getCustomerByEmailAndPassWord(customerRegisterForm.getEmail(), customerRegisterForm.getPassWord())) == null) {
+            return new ResponseEntity<String>("Acount " + Message.NOT_EXIST, HttpStatus.BAD_REQUEST);
+        }
+
+
+        if (customerRegisterForm.getRePassWord() == null) {
+            return new ResponseEntity<String>("not valid password", HttpStatus.BAD_REQUEST);
+        }
+
+
+        customer.setPassWord(customerRegisterForm.getRePassWord());
+        this.customerService.save(customer);
+        return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
+
+    }
+
     @GetMapping(value = "/customer")
     public ResponseEntity<Customer> getCustomerTest(@RequestParam(value = "email") String email) {
         Customer customer = this.customerService.getCustomerByEmail(email);
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
+
+
 }

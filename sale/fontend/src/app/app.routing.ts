@@ -9,6 +9,7 @@ import {ProductsComponent} from "./clients/products/products.component";
 import {AdminModule} from "./admin/admin.module";
 import {ClientsComponent} from "./clients/clients.component";
 import {SearchComponent} from "./clients/products/search/search.component";
+import {OrdersComponent} from "./clients/orders/orders.component";
 
 const routing: Routes = [
   {
@@ -19,10 +20,11 @@ const routing: Routes = [
       {path: "", component: HomeProductComponent},
       {path: "product", component: ProductListComponent},
       {path: "detail", component: DetailComponent},
-      {path:'search',component:SearchComponent}
+      {path: 'search', component: SearchComponent}
     ]
     },
     {path: "shop", component: ShoppingComponent},
+    {path: "order", component: OrdersComponent},
     {path: "404", component: PageNotFoundComponent},
   ]
   },
@@ -30,7 +32,7 @@ const routing: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routing),AdminModule],
+  imports: [RouterModule.forRoot(routing), AdminModule],
   exports: [RouterModule]
 })
 

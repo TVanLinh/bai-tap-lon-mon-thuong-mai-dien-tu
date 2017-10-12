@@ -1,0 +1,13 @@
+td {
+  text-align: left !important;
+}
+
+thead tr th, tr td {
+  vertical-align: middle;
+}
+
+tbody tr:hover {
+  cursor: pointer !important;
+  background: #d6dea4 !important;
+}
+
