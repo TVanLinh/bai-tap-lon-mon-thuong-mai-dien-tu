@@ -2,10 +2,12 @@ package linhtran.it.vnua.sale.service;
 
 import linhtran.it.vnua.sale.entities.Order;
 import linhtran.it.vnua.sale.repository.OrderRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -25,4 +27,17 @@ public class OrderService {
     public Set<Order> findOrderByCustomerId(long customerId) {
         return this.orderRepository.findOrderByCustomerId(customerId);
     }
+
+    public Set<Order> finAll() {
+        Set<Order> orders = new HashSet<>();
+        for (Order order : this.orderRepository.findAll()) {
+            orders.add(order);
+        }
+        return orders;
+    }
+
+    public Order findOne(long id) {
+        return  this.orderRepository.findOne(id);
+    }
+
 }

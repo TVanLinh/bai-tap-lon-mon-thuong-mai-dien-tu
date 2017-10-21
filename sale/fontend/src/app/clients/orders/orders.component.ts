@@ -3,11 +3,12 @@ import {Response} from "@angular/http";
 import {ShoppingService} from "../../service/shopping.service";
 import {Ingredient} from "../../model/ingrendient.model";
 import {TaskService} from "../../service/task.service";
-import {CustomerService} from "../shopping/customer/customer.service";
+import {CustomerRegister, CustomerService} from "../shopping/customer/customer.service";
 import {HOST_NAME} from "../../config";
 import {Product} from "../../model/product.model";
 import {Angular2Csv} from "angular2-csv/Angular2-csv";
 import * as Collections from "typescript-collections";
+import {UserEntityModel} from "../../admin/entities/user-entity/user.model";
 declare const jQuery: any;
 @Component({
   selector: 'app-orders',
@@ -19,6 +20,10 @@ export class OrdersComponent implements OnInit {
   orderDetail: Ingredient[] = [];
   orders: Orders[] = [];
   indexOrder = 1;
+  orderBy = "createTime";
+  orderTemp: Orders;
+  dateNow = Date.now();
+  ingredientGetPrice = new Ingredient();
 
   constructor(private shopService: ShoppingService,
               private customerService: CustomerService,
@@ -37,7 +42,6 @@ export class OrdersComponent implements OnInit {
         this.orders = data;
         if (this.orders != null && this.orders.length > 0) {
         }
-        console.log("order " + this.orders);
       });
     }
   }
@@ -45,7 +49,9 @@ export class OrdersComponent implements OnInit {
   viewOrder(modal: any, item: number) {
     modal.show();
     this.indexOrder = item;
+
     this.orderDetail = this.orders[item].orderDetails;
+    this.orderTemp = this.orders[item];
   }
 
 
@@ -73,39 +79,25 @@ export class OrdersComponent implements OnInit {
 
   }
 
-  getPrice(product: Product) {
-    return product.price - ((product.price * product.discount) / 100)
-  }
-
   print() {
-    // jQuery(this.eleRef.nativeElement).find(".modal.fade.in").css({
-    //   "background-color": "#fff"
-    // });
-    // setTimeout(()=>{
-    //   window.print();
-    // },1000);'background-color': ''
 
-
-    let mywindow = window.open('', 'Chi tiết đơn hàng ', 'height=1000px,width=1000px');
+    let mywindow = window.open('', 'Chi tiết đơn hàng ', 'height=100%,width=auto');
 
     mywindow.document.write('<html><head><title>' + document.title + '</title>');
-    mywindow.document.write("<style> img{height: 50px;width: 50px}" +
-      " td,th{min-width: 100px;text-align: left}," +
-      "thead{background-color:#2B4A91 } " +
-      "thead tr th:first-child,tbody tr td:first-child {min-width:0 !important;width:50px !important;}</style>");
-    mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + "Thông tin đơn hàng DH0000" + this.indexOrder + '</h1>');
-    mywindow.document.write(jQuery(this.eleRef.nativeElement).find("#table-order-detail-client").html());
-    mywindow.document.write('</body></html>');
 
-    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.document.write("<link href='/assets/css/print/order-print.css' media='all'rel='stylesheet' type='text/css'>");
+    mywindow.document.write('</head><body > <div class="container">');
+    mywindow.document.write(jQuery(this.eleRef.nativeElement).find("#print1").html());
+    mywindow.document.write('</div></body></html>');
+
     mywindow.focus(); // necessary for IE >= 10*/
 
-    mywindow.print();
-    mywindow.close();
-    console.log("inner: " + jQuery(this.eleRef.nativeElement).find(".modal.fade.in").html());
+    setTimeout(() => {
+      mywindow.print();
+      mywindow.close();
+    }, 1000);
 
-    // return true;
+
   }
 
   exportExcel() {
@@ -113,18 +105,17 @@ export class OrdersComponent implements OnInit {
     new Angular2Csv(data, 'order');
   }
 
-
 }
 
 interface Orders {
   createTime: number;
-
-  customerId: number;
-
-  employeeId: number;
+  status: number;
+  customer: CustomerRegister;
+  user: UserEntityModel;
   orderDetails: Ingredient[];
 }
-class OrderExport {
+
+ export class OrderExport {
   name: string;
   amount: string;
   price: string;
@@ -134,7 +125,7 @@ class OrderExport {
     let title = new OrderExport();
     title.name = "Tên sản phẩm";
     title.amount = "Số lượng";
-    title.price = "Đơn giá / 1 sản phẩm (VND";
+    title.price = "Đơn giá / sản phẩm (VND)";
     list.add(title);
     let temp;
     for (let item of ings) {
@@ -144,6 +135,13 @@ class OrderExport {
       temp.price = item.product.price - (item.product.price * item.product.discount) / 100 + "";
       list.add(temp);
     }
+
+
+    let footer = new OrderExport();
+    footer.name = "";
+    footer.amount = "Tổng tiền ";
+    footer.price = (new Ingredient).getPrice(ings)+"";
+    list.add(footer);
     return list.toArray();
   }
 }

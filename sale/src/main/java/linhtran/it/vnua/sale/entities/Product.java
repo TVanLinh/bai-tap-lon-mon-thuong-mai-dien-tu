@@ -4,14 +4,13 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "product")
 @EntityListeners(AuditingEntityListener.class)
-public class Product extends AbstractEntity implements Serializable{
+public class Product extends AbstractEntity implements Serializable {
 
     @Basic
     @Column(name = "name")
@@ -39,7 +38,7 @@ public class Product extends AbstractEntity implements Serializable{
 
     @CreatedDate
     @Column(name = "create_date")
-    private  Date dateCreate;
+    private Date dateCreate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catalog_code", referencedColumnName = "code")
@@ -107,5 +106,27 @@ public class Product extends AbstractEntity implements Serializable{
 
     public void setDateCreate(Date dateCreate) {
         this.dateCreate = dateCreate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (amount != product.amount) return false;
+        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+        if (price != null ? !price.equals(product.price) : product.price != null) return false;
+        if (discount != null ? !discount.equals(product.discount) : product.discount != null) return false;
+        if (description != null ? !description.equals(product.description) : product.description != null) return false;
+        if (imagePath != null ? !imagePath.equals(product.imagePath) : product.imagePath != null) return false;
+        if (dateCreate != null ? !dateCreate.equals(product.dateCreate) : product.dateCreate != null) return false;
+        return catalog != null ? catalog.equals(product.catalog) : product.catalog == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) this.getId();
     }
 }

@@ -10,6 +10,9 @@ import {AdminModule} from "./admin/admin.module";
 import {ClientsComponent} from "./clients/clients.component";
 import {SearchComponent} from "./clients/products/search/search.component";
 import {OrdersComponent} from "./clients/orders/orders.component";
+import {CustomerCanActivateService} from "./service/CustomerCanActivate.service";
+import {IntroComponent} from "./clients/intro/intro.component";
+import {PolicyComponent} from "./clients/policy/policy.component";
 
 const routing: Routes = [
   {
@@ -20,11 +23,15 @@ const routing: Routes = [
       {path: "", component: HomeProductComponent},
       {path: "product", component: ProductListComponent},
       {path: "detail", component: DetailComponent},
+      {path: "intro", component: IntroComponent},
+      {path: "policy", component: PolicyComponent},
       {path: 'search', component: SearchComponent}
     ]
     },
     {path: "shop", component: ShoppingComponent},
-    {path: "order", component: OrdersComponent},
+    {path: "order", component: OrdersComponent, canActivate: [CustomerCanActivateService]},
+
+
     {path: "404", component: PageNotFoundComponent},
   ]
   },

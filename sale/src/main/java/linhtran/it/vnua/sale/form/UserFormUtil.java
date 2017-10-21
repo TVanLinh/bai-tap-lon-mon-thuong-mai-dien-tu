@@ -39,4 +39,12 @@ public class UserFormUtil {
         return userForms;
     }
 
+    public static Set<UserForm> getUserFormsFromUsers(Set<User> users) {
+        Set<UserForm> userForms = new HashSet<>();
+        for (User user : users) {
+            userForms.add(UserFormUtil.getUserFormFromUser(user));
+        }
+        return userForms;
+    }
+
 }

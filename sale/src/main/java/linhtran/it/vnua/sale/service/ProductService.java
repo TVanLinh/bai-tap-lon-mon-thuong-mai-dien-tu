@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -58,5 +60,21 @@ public class ProductService {
 
     public Set<Product> findProduct(String query) {
         return this.productRepository.findProduct(query);
+    }
+
+    public List<Product> find(String query, int offset, int limit) {
+        return this.productRepository.find(query, offset, limit);
+    }
+
+    public Set<Product> findAll() {
+        Set<Product> products = new HashSet<>();
+        for (Product product : this.productRepository.findAll()) {
+            products.add(product);
+        }
+        return products;
+    }
+
+    public void save(Product product) {
+        this.productRepository.save(product);
     }
 }

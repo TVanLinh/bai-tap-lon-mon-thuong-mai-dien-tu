@@ -1,0 +1,11 @@
+#btn-top{
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  z-index: 9999;
+  display: block;
+  border-color: #fff;
+}
+#btn-top:hover{
+  background-color: #8a501c;
+}

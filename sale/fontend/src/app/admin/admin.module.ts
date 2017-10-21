@@ -14,19 +14,31 @@ import {CommentEntityComponent} from "./entities/comment-entity/comment-entity.c
 import {DataTableModule} from "angular2-datatable";
 import {BrowserModule} from "@angular/platform-browser";
 import {AlertModule, ModalModule} from "ngx-bootstrap";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TaskService} from "../service/task.service";
 import {HttpModule} from "@angular/http";
 import {ToastrModule} from "toastr-ng2";
 import {CommonModule} from "@angular/common";
+import {CatalogEntityService} from "./entities/catalog-entity/catalog-entity.service";
+import {ProductEntityService} from "./entities/product-entity/product-entity.service";
+import {OrderEntityService} from "./entities/order-entity/order-entity.service";
+import {UserEntityService} from "./entities/user-entity/user-entity.service";
 
 
 const routes: Routes = [{
   component: AdminComponent,
   path: "manager", children: [
     {
+      path: '',
+      component: EntitiesComponent
+    },
+    {
       path: 'entity',
       component: EntitiesComponent, children: [
+      {
+        path: 'user',
+        component: UserEntityComponent
+      },
       {
         path: 'catalog',
         component: CatalogEntityComponent
@@ -77,11 +89,16 @@ const routes: Routes = [{
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
+    FormsModule,
     CommonModule,
-    ToastrModule.forRoot(), AlertModule.forRoot()
+    ToastrModule.forRoot()
   ],
   exports: [RouterModule],
-  providers: [TaskService]
+  providers: [TaskService,
+    CatalogEntityService,
+    OrderEntityService,
+    UserEntityService,
+    ProductEntityService]
 })
 
 export class AdminModule {

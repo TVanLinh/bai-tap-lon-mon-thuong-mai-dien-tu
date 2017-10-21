@@ -1,6 +1,6 @@
 export class MessageAlert {
   content: string;
   type: string;
-  dismiss: boolean = true;
-  timeout: number = 5000
-};
+  condition: boolean;
+  timout: number = 2000
+}

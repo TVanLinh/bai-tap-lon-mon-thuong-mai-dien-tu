@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.OrderBy;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,9 +44,12 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     Set<Product> getProductSaleHight(@Param("offset") int offset, @Param(value = "limit") int limit);
 
 
-    @Query(value = "select  * from product, catalog WHERE product.name like %:query% OR catalog.name like %:query% limit :offset,:limit ",nativeQuery = true)
+    @Query(value = "select  * from product, catalog WHERE ( product.name like %:query% OR catalog.name like %:query% OR catalog.code like %:query% ) limit :offset,:limit ",nativeQuery = true)
     Set<Product>  findProduct(@Param("query")String query,@Param("offset") int offset, @Param(value = "limit") int limit);
 
-    @Query(value = "select  * from product, catalog WHERE product.name like %:query% OR catalog.name like %:query%",nativeQuery = true)
+    @Query(value = "select  * from product, catalog WHERE product.name like %:query% OR catalog.name like %:query% OR catalog.code like %:query%",nativeQuery = true)
     Set<Product>  findProduct(@Param("query")String query);
+
+    @Query(value = "select  * from product, catalog WHERE ( product.name like %:query% OR catalog.name like %:query% OR catalog.code like %:query% ) limit :offset,:limit ",nativeQuery = true)
+    List<Product> find(@Param("query")String query,@Param("offset") int offset, @Param(value = "limit") int limit);
 }

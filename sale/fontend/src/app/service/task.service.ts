@@ -9,6 +9,7 @@ export class TaskService {
 
   public getTask(url: string) {
     return this.http.get(url).map((data: Response) => {
+      // console.log(JSON.stringify("url: "+url+" : "+JSON.stringify(data)));
       if(data!=null) {
         return data.json();
       }

@@ -1,3 +1,214 @@
-<p>
-  product-entity works!
-</p>
+<div class="title-entity">
+  Danh sách sản phẩm
+</div>
+<div>
+  <button class="btn btn-primary" (click)="productModal.show()">Tạo sản phẩm</button>
+  <div class="input-group" style="width: 300px;float: right">
+    <input type="text" class="form-control" placeholder="Search ..." name="query" [(ngModel)]="query">
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="onSearch()">Go</button>
+      </span>
+  </div>
+</div>
+
+<div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
+  {{message.content}}
+</div>
+
+
+<table class="table table-striped" [mfData]="listProduct.toArray()" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+  <tr>
+    <th>
+      STT
+    </th>
+    <th>
+      <mfDefaultSorter by="id" style="width: 10%">Mã mã sản phẩm</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="name" style="width: 20%">Tên sản phẩm</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="imagePath" style="width: 20%">Hình ảnh</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="amount" style="width: 10%">Số lượng</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="price" style="width: 10%">Giá (VND)</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="discount" style="width: 10%">Giảm giá (%)</mfDefaultSorter>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let item of mf.data;let idex = index" (click)="openDetail(item,productModalDetail)">
+    <td>{{idex+1}}</td>
+    <td>SP000{{item.id}}</td>
+    <td>{{item.name}}</td>
+    <td><img [src]="item.imagePath" style="width: 80px; height: 80px" alt="hinh anh san pham"></td>
+    <td>{{item.amount}}</td>
+    <td>{{item.price}}</td>
+    <td>{{item.discount}}</td>
+    <td class="">
+      <span class="action action-edit" (click)="editItem(formData,userModal,item)"><i class="fa fa-edit"></i></span>
+      <span class="action action-remove" (click)="removeItem(item)"><i class="fa fa-remove"></i></span>
+    </td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="4">
+      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15,20,25,50,100]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+  </tfoot>
+</table>
+
+
+<!--modal form-->
+<div class="modal fade" bsModal #productModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{titleProduct}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal(productModal)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form #formData="ngForm" class="mgb-20">
+          <div>
+            <label for="name">Tên sản phẩm : </label>
+            <input id="name" name="name" type="text" required class="form-control" ngModel #name="ngModel">
+            <!--<div class="star" *ngIf="name.touched && name.value.trim() == 0">-->
+            <!--Chưa nhập sản phẩm-->
+            <!--</div>-->
+          </div>
+
+          <div>
+            <label for="catalog">Loại sản phẩm : </label>
+            <select id="catalog" name="catalog" type="text" class="form-control" ngModel #catalog="ngModel">
+              <option [value]="inx" *ngFor="let item of listCatalog.toArray();let inx = index">
+                {{item.name}}
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label for="price">Giá sản phẩm : </label>
+            <input id="price" name="price" type="number" required class="form-control" ngModel #price="ngModel">
+            <div class="star" *ngIf="price.touched && price.value == 0">
+              Chưa nhập giá sản phẩm
+            </div>
+          </div>
+
+          <div>
+            <label for="amount">Số lượng : </label>
+            <input id="amount" name="amount" type="number" required class="form-control" ngModel #amount="ngModel">
+            <div class="star" *ngIf="amount.touched && amount.value == 0">
+              Chưa nhập số lượng
+            </div>
+          </div>
+
+          <div>
+            <label for="discount">Giảm giá (%) : </label>
+            <input id="discount" name="discount" type="number" class="form-control" ngModel #discount="ngModel">
+          </div>
+
+          <div>
+            <label for="image">Upload ảnh </label>
+            URL: <input id="imagePath" name="imagePath" type="text" class="form-control" ngModel #image="ngModel" (change)="onImageInputChange(image.value)">
+            OR <input id="image" name="image" type="file" title="Chọn ảnh " accept="image/x-png,image/gif,image/jpeg"
+                      class="form-control" (change)="uploadImage($event)">
+          </div>
+          <div class="text-center mgt-15 mgb-15">
+            <img style="max-width: 300px; margin-right: auto;margin-left: auto" [src]="imagePath" alt=""/>
+          </div>
+
+          <div>
+            <label for="description">Mô tả : </label>
+            <textarea id="description" class="form-control" name="description" rows="5" ngModel style="width: 100%"
+                      #description="ngModel"></textarea>
+          </div>
+        </form>
+
+        <div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
+          {{message.content}}
+        </div>
+
+
+        <div class=" text-right">
+          <button class="btn btn-success"
+                  [disabled]="formData.invalid || !valid"
+                  (click)="onSave(formData,productModal)">Lưu
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--deail-->
+<div class="modal fade" bsModal #productModalDetail="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Thông tin sản phẩm </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal(productModalDetail)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" *ngIf="tempDetail!=null">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <span class="detail-title">Tên sản phẩm: </span>
+            <span>{{tempDetail.name}}</span>
+          </li>
+          <li class="list-group-item">
+            <span class="detail-title">Loại  sản phẩm: </span>
+            <span>{{tempDetail.catalog.name}}</span>
+          </li>
+          <li class="list-group-item">
+            <span class="detail-title">Giá  sản phẩm: </span>
+            <span>{{tempDetail.price}}</span>
+          </li>
+          <li class="list-group-item">
+            <span class="detail-title">Giảm giá(%): </span>
+            <span>{{tempDetail.discount}}</span>
+          </li>
+          <li class="list-group-item">
+            <span class="detail-title">Số lượng: </span>
+            <span>{{tempDetail.amount}}</span>
+          </li>
+          <li class="list-group-item">
+            <span class="detail-title">Hình ảnh : </span>
+            <span><img [src]="tempDetail.imagePath" style="width: 200px;" alt=""></span></li>
+          <li class="list-group-item">
+            <span class="detail-title">Mô tả : </span>
+            <span>{{tempDetail.description}}</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>

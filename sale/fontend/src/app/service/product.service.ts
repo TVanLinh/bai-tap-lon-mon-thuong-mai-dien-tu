@@ -7,12 +7,12 @@ export class ProductService {
   private list: Product[] = [];
   subjectList = new Subject<Product[]>();
   subjectItem = new Subject<Product>();
-  subject =  new Subject();
+  subject = new Subject();
 
   private publishProduct = new Subject<Product>();
   productListener = this.publishProduct.asObservable();
 
-  searchListener =  new Subject<string>();
+  searchListener = new Subject<string>();
 
 
   publicProduct(product: Product) {
@@ -31,17 +31,17 @@ export class ProductService {
     return this.list[index];
   }
 
-  getProductById(id: number): Product{
+  getProductById(id: number): Product {
     for (let item of this.list) {
-        if (item.id == id){
-          return item;
-        }
+      if (item.id == id) {
+        return item;
+      }
     }
     return null;
   }
 
-  getMoney(product: Product):number{
-    return product.price - product.price*product.discount;
+  getMoney(product: Product): number {
+    return product.price - (product.price * product.discount) / 100;
   }
 
 

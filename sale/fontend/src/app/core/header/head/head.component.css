@@ -68,4 +68,12 @@
     margin-top: 20px;
   }
 
+  .form-search input[type='text']::placeholder {
+    font-style: italic;
+  }
 }
+
+a:hover{
+  text-decoration: none;
+}
+

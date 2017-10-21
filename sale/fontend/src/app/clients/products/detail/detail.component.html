@@ -11,7 +11,7 @@
       Tình trạng: <span class="color-pink">{{product.amount>0?'Còn hàng':'Hết hàng'}}</span>
     </p>
     <p><span class="price-old">{{product.price}} đ</span></p>
-    <p><span class="price-new">{{product.price-product.price*product.discount}} đ</span></p>
+    <p><span class="price-new">{{product.price-(product.price*product.discount)/1000}} VND</span></p>
     <p class="mgb-20"><span class="price "></span></p>
     <a class="add-cart" (click)="addCart(product)">Thêm vào giỏ hàng</a>
   </div>
@@ -36,9 +36,10 @@
     <div class="app-title">
       sản phẩm khác
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-3 mgt-30" *ngFor="let item of list">
-        <app-product-item [itemProduct]="item">
-        </app-product-item>
+    <div class="col-xs-6 col-sm-6 col-md-3 mgt-30" *ngFor="let item of list;let i = index"
+         [style.clear]="i == 4 ?'both':''">
+      <app-product-item [itemProduct]="item">
+      </app-product-item>
     </div>
   </div>
 </div>

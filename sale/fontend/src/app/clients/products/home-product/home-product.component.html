@@ -19,7 +19,8 @@
     </div>
   </div>
 
-  <div class="col-xs-6 col-sm-6 col-md-3 mgt-30" *ngFor="let item of productSaleHight">
+  <div class="col-xs-6 col-sm-6 col-md-3 mgt-30" *ngFor="let item of productSaleHight;let i = index"
+       [style.clear]="i == 4 ?'both':''">
     <app-product-item [itemProduct]="item">
     </app-product-item>
   </div>

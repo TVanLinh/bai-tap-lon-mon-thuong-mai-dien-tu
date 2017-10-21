@@ -2,20 +2,61 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7adc634e-9fe4-42a1-b4d1-2bdddca4aa1d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/.angular-cli.json" afterPath="$PROJECT_DIR$/sale/fontend/.angular-cli.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/admin.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/admin.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/admin.module.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/admin.module.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/catalog-entity/catalog-entity.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/catalog-entity/catalog-entity.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/catalog-entity/catalog-entity.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/catalog-entity/catalog-entity.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/order-entity/order-entity.component.css" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/order-entity/order-entity.component.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/order-entity/order-entity.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/order-entity/order-entity.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/order-entity/order-entity.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/order-entity/order-entity.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/product-entity/product-entity.component.css" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/product-entity/product-entity.component.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/product-entity/product-entity.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/product-entity/product-entity.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/product-entity/product-entity.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/product-entity/product-entity.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/user-entity/user-entity.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/user-entity/user-entity.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/user-entity/user-entity.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/user-entity/user-entity.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/user-entity/user-entity.service.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/entities/user-entity/user-entity.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/admin/menu/menu.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/admin/menu/menu.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/app.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/app.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/app.module.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/app.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/customer/customer.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/customer/customer.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/app.routing.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/app.routing.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/orders/orders.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/orders/orders.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/orders/orders.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/orders/orders.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/detail/detail.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/detail/detail.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/home-product/home-product.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/home-product/home-product.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/product-list/product-item/product-item.component.css" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/product-list/product-item/product-item.component.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/product-list/product-item/product-item.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/product-list/product-item/product-item.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/product-list/product-list.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/product-list/product-list.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/search/search.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/search/search.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/search/search.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/products/search/search.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/cart/cart.component.css" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/cart/cart.component.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/cart/cart.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/cart/cart.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/customer/customer.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/customer/customer.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/customer/customer.service.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/clients/shopping/customer/customer.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/config.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/config.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/core/footer/footer-below/footer-below.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/core/footer/footer-below/footer-below.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/core/header/head/head.component.css" afterPath="$PROJECT_DIR$/sale/fontend/src/app/core/header/head/head.component.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/core/header/head/head.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/core/header/head/head.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/core/header/head/head.component.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/core/header/head/head.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/core/header/nav/nav.component.html" afterPath="$PROJECT_DIR$/sale/fontend/src/app/core/header/nav/nav.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/service/product.service.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/service/product.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/service/shopping.service.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/service/shopping.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/CustomerController.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/CustomerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Customer.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Customer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Employee.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Employee.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Order.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Order.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/OrderDetail.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/OrderDetail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/util/Message.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/util/Message.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/app/share/message.model.ts" afterPath="$PROJECT_DIR$/sale/fontend/src/app/share/message.model.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/assets/css/print.css" afterPath="$PROJECT_DIR$/sale/fontend/src/assets/css/print.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/index.html" afterPath="$PROJECT_DIR$/sale/fontend/src/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/fontend/src/styles.css" afterPath="$PROJECT_DIR$/sale/fontend/src/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/ProductController.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/ProductController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/ShopController.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/ShopController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/UserController.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/UserController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Product.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/entities/Product.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/form/UserFormUtil.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/form/UserFormUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/repository/CatalogRepository.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/repository/CatalogRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/repository/ProductRepository.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/repository/ProductRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/repository/UserRepository.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/repository/UserRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/response/ProductResponse.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/response/ProductResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/service/OrderService.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/service/OrderService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/service/ProductService.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/service/ProductService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/service/UserService.java" afterPath="$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/service/UserService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sale/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/sale/src/main/resources/application.properties" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,7 +81,7 @@
       <file leaf-file-name="CustomerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/CustomerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="102">
               <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
               <folding />
             </state>
@@ -52,7 +93,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,7 +113,7 @@
       <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-204">
+            <state relative-caret-position="204">
               <caret line="12" column="49" lean-forward="false" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
               <folding />
             </state>
@@ -134,6 +177,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bai-tap-lon-mon-thuong-mai-dien-tu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bai-tap-lon-mon-thuong-mai-dien-tu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -572,11 +633,12 @@
       <updated>1506864317054</updated>
       <workItem from="1506864340983" duration="650000" />
       <workItem from="1507472932339" duration="115000" />
+      <workItem from="1508221376535" duration="62000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="765000" />
+    <option name="totallyTimeSpent" value="827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -595,7 +657,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.4490818" sideWeight="0.4969651" order="9" side_tool="false" content_ui="tabs" x="11" y="472" width="1186" height="272" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280303" sideWeight="0.48080134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.48080134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -716,6 +778,40 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/CustomerController.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/ProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="49" lean-forward="false" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/ShopController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/CustomerController.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
           <folding />
@@ -726,7 +822,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -740,7 +838,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
+        <state relative-caret-position="204">
           <caret line="12" column="49" lean-forward="false" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
           <folding />
         </state>
@@ -748,7 +846,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sale/src/main/java/linhtran/it/vnua/sale/controller/CustomerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="102">
           <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
           <folding />
         </state>
@@ -758,7 +856,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

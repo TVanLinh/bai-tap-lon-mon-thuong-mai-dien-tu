@@ -1,0 +1,42 @@
+.color-main1 {
+    color: #8d9c00;
+}
+.color-main2 {
+    color: #39319c;
+}
+
+.color-light-f{
+    color: #fff;
+}
+
+.color-main3 {
+    color: #60389c;
+}
+.color-pink{
+  color: #c91d67;
+}
+
+a{
+    color: #0f0f0f;
+    transition: 0.3s ease-in-out;
+}
+a:hover,a:focus,a:active,a:visited{
+    text-decoration: none;
+    outline: none;
+}
+
+.separator:after {
+    display: inline-block;
+    content: "";
+    height: 20px;
+    border: 1px solid  #2d2c76;;
+}
+.opacity-0-3{
+  opacity: 0.3;
+}
+.opacity-0{
+  opacity: 0;
+}
+.opacity-1{
+  opacity: 1;
+}

@@ -3,13 +3,12 @@ package linhtran.it.vnua.sale.controller;
 import linhtran.it.vnua.sale.entities.Customer;
 import linhtran.it.vnua.sale.entities.Order;
 import linhtran.it.vnua.sale.entities.OrderDetail;
+import linhtran.it.vnua.sale.entities.User;
 import linhtran.it.vnua.sale.form.CustomerLoginForm;
 import linhtran.it.vnua.sale.form.EngredientForm;
+import linhtran.it.vnua.sale.form.OrderChangeInfoForm;
 import linhtran.it.vnua.sale.form.OrderForm;
-import linhtran.it.vnua.sale.service.CustomerService;
-import linhtran.it.vnua.sale.service.EmployeeService;
-import linhtran.it.vnua.sale.service.OrderDetailService;
-import linhtran.it.vnua.sale.service.OrderService;
+import linhtran.it.vnua.sale.service.*;
 import linhtran.it.vnua.sale.util.Message;
 import linhtran.it.vnua.sale.util.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,9 @@ import java.util.Set;
 public class ShopController {
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -51,9 +53,10 @@ public class ShopController {
 
         Order order = new Order();
         order.setStatus(OrderStatus.CREATE);
-        order.setEmployeeId(0);
-        order.setCustomerId(customer.getId());
 
+        order.setCustomer(customer);
+        User user = this.userService.findByEmail("admin@gmail.com");
+        order.setUser(user);
         Set<OrderDetail> detailSet = new HashSet<>();
         OrderDetail detail;
 
@@ -72,7 +75,7 @@ public class ShopController {
 
     @CrossOrigin("*")
     @PostMapping(value = "order/find-all")
-    public ResponseEntity<Set<Order>> createOrder(@RequestBody CustomerLoginForm customerLoginForm) {
+    public ResponseEntity<Set<Order>> getOrderByCustomer(@RequestBody CustomerLoginForm customerLoginForm) {
         Customer customer = this.customerService.getCustomerByEmailAndPassWord(
                 customerLoginForm.getEmail(), customerLoginForm.getPassWord());
 
@@ -83,6 +86,36 @@ public class ShopController {
         Set<Order> orders = this.orderService.findOrderByCustomerId(customer.getId());
 
         return new ResponseEntity<Set<Order>>(orders, HttpStatus.OK);
+    }
+
+
+    @CrossOrigin("*")
+    @GetMapping(value = "/admin/order/find-all")
+    public ResponseEntity<Set<Order>> getOrder() {
+        Set<Order> orders = this.orderService.finAll();
+        return new ResponseEntity<Set<Order>>(orders, HttpStatus.OK);
+    }
+
+
+    @CrossOrigin("*")
+    @PutMapping(value = "/admin/order/update")
+    public ResponseEntity<String> update(@RequestBody OrderChangeInfoForm infoForm) {
+        Set<Order> orders = this.orderService.finAll();
+
+        Order order = this.orderService.findOne(infoForm.getId());
+
+        User user = this.userService.findOne(infoForm.getIdUser());
+
+        if (order == null || user == null) {
+            return new ResponseEntity<String>(Message.NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+        }
+
+        order.setStatus(infoForm.getStatus());
+        order.setUser(user);
+
+        this.orderService.save(order);
+
+        return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
     }
 
 }

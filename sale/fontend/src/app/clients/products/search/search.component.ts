@@ -22,14 +22,19 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((param) => {
-      console.log(param['query']);
-      this.query = param['query'];
-      let urlTarget = HOST_NAME + "/product/search?param = " + this.query;
+      this.query = param['param'];
+      console.log("before" + this.query);
+      console.log("complete");
+      let urlTarget = HOST_NAME + "/product/search?param=" + this.query;
+      console.log(urlTarget);
       this.taskService.getTask(urlTarget).subscribe((data: any) => {
         this.listProduct = data.productList;
         this.page = data.page;
         this.page.url = HOST_NAME + "/product/search";
       });
+    }, err => {
+    }, () => {
+
     });
   }
 
@@ -43,7 +48,6 @@ export class SearchComponent implements OnInit {
       this.page.url = HOST_NAME + "/product/search";
     });
   }
-
 
 
 }

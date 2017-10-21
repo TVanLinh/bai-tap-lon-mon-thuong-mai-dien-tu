@@ -1,14 +1,15 @@
 <ul class="menu-wrapper">
   <li><a routerLink="/"><span class="fa fa-bar-chart"></span> <span>Dashboard</span></a></li>
   <li>
-    <a href="javascript:void(0)" (click)="showListEntity('#submenu')"><span class="fa fa-table"></span> <span>Entity</span></a>
+    <a href="javascript:void(0)" (click)="showListEntity('#submenu')"><span class="fa fa-table"></span>
+      <span>Entity</span></a>
     <ul class="menu-child" id="submenu">
-      <li><a routerLink="/manager/entity/user">User</a></li>
-      <li><a routerLink="/manager/entity/catalog">Danh muc san pham</a></li>
-      <li><a routerLink="/manager/entity/product">San pham</a></li>
-      <li><a routerLink="/manager/entity/customer">Khach Hang</a></li>
-      <li><a routerLink="/manager/entity/order">Don hang</a></li>
-      <li><a routerLink="/manager/entity/comment">Comment</a></li>
+      <li><a routerLinkActive="active" routerLink="/manager/entity/user">User</a></li>
+      <li><a routerLinkActive="active" routerLink="/manager/entity/catalog">Catalog</a></li>
+      <li><a routerLinkActive="active" routerLink="/manager/entity/product">Sản phẩm </a></li>
+      <li><a routerLinkActive="active" routerLink="/manager/entity/customer">Khách hàng </a></li>
+      <li><a routerLinkActive="active" routerLink="/manager/entity/order">Đơn hàng </a></li>
+      <li><a routerLinkActive="active" routerLink="/manager/entity/comment">Bình luận </a></li>
     </ul>
   </li>
 </ul>

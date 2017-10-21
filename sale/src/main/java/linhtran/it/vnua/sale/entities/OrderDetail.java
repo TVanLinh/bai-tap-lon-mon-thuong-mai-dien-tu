@@ -21,6 +21,10 @@ public class OrderDetail extends AbstractEntity {
     private Product product;
 
 
+    @Basic()
+    @Column(name = "price")
+    private double price;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_order")
@@ -40,6 +44,7 @@ public class OrderDetail extends AbstractEntity {
 
     public void setProduct(Product product) {
         this.product = product;
+        this.price = this.product.getPrice()-( this.product.getPrice()*this.product.getDiscount()/100);
     }
 
     public Order getOrder() {
@@ -48,5 +53,13 @@ public class OrderDetail extends AbstractEntity {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

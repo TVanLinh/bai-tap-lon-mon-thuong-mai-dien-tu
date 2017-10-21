@@ -1,37 +1,34 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import * as Collection from "typescript-collections";
 import {UserEntityModel} from "./user.model";
 import {BsModalComponent} from "ng2-bs3-modal";
 import {UserEntityService} from "./user-entity.service";
 import {ToastrService} from "toastr-ng2";
 import {MessageAlert} from "../../../share/message.model";
-import {Subject} from "rxjs/Subject";
+import {BaseComponent} from "../../BaseComponent";
 @Component({
   selector: 'app-user-entity',
   templateUrl: './user-entity.component.html',
   styleUrls: ['./user-entity.component.css'],
   providers: [UserEntityService]
 })
-export class UserEntityComponent implements OnInit {
+export class UserEntityComponent extends BaseComponent implements OnInit {
   @ViewChild('userModal') userModalForm: BsModalComponent;
   formData: FormGroup;
   data: any[] = [];
   listUser = new Collection.LinkedList<UserEntityModel>();
-  positionUpdate = -1;
-  alert: Subject<MessageAlert> = new Subject<MessageAlert>();
-  message = new MessageAlert();
+  tempUpdate = null;
+  query = "";
 
   constructor(private formBuilder: FormBuilder,
               private  userEntityService: UserEntityService, private toastService: ToastrService) {
+    super();
     this.userEntityService.getAll().subscribe((data: UserEntityModel[]) => {
       this.listUser.clear();
       for (let i of data) {
         this.listUser.add(i);
       }
-    });
-    this.alert.subscribe((data: MessageAlert) => {
-      this.message = data;
     });
   }
 
@@ -40,55 +37,50 @@ export class UserEntityComponent implements OnInit {
     this.initForm();
   }
 
-  onSave(target: any) {
-    let valueForm: UserEntityModel = this.formData.value;
-    console.log("onSave: " + this.positionUpdate);
+  onSave(formData: NgForm, target: any) {
+    let valueForm: UserEntityModel = formData.value;
+    console.log(valueForm);
+    if (valueForm.passWord !== formData.value.rePassWord) {
+      this.updateMessge('Không thành công kiểm tra lại thông tin ', 'warning');
+      return;
+    }
     let msg = new MessageAlert();
-    if (this.positionUpdate === -1) {
+    if (this.tempUpdate === null) {
       this.userEntityService.createUser(valueForm).subscribe((data: Response) => {
         if (data.status === 200) {
-          msg.type = 'success';
-          msg.content = "Thêm thành công ";
+          this.updateMessge('Thêm thành công ', 'success');
           valueForm.id = +data['_body'];
           this.listUser.add(valueForm);
         } else {
-          msg.type = 'warning';
-          msg.content = data['_body'];
+          this.updateMessge(data['_body'], 'warning');
         }
       }, (error: Error) => {
-        msg.type = 'warning';
-        msg.content = error.message;
-        this.alert.next(msg);
+        this.updateMessge(error.message, 'warning');
       }, () => {
-        this.alert.next(msg);
         target.hide();
-        this.formData.reset();
+        formData.reset();
       });
     } else {
-      valueForm.id = this.listUser.elementAtIndex(this.positionUpdate).id;
+      let index = this.listUser.indexOf(this.tempUpdate);
+      valueForm.id = this.listUser.elementAtIndex(index).id;
       this.userEntityService.updateUser(valueForm).subscribe((data: Response) => {
         if (data.status === 200) {
-          msg.type = 'success';
-          msg.content = "Cập nhật thành công ";
-          this.listUser.removeElementAtIndex(this.positionUpdate);
-          this.listUser.add(valueForm, this.positionUpdate);
+          this.updateMessge('Cập nhật thành công ', 'success');
+          this.listUser.removeElementAtIndex(index);
+          this.listUser.add(valueForm, index);
           target.hide();
-          this.alert.next(msg);
-          this.formData.reset();
+          formData.reset();
           console.log(valueForm);
         } else {
-          msg.type = 'warning';
-          msg.content = data['_body'];
+          this.updateMessge(data['_body'], 'warning');
         }
       }, (error: Error) => {
-        msg.type = 'warning';
-        msg.content = error.message;
-        this.alert.next(msg);
+        this.updateMessge(error.message, 'warning');
       }, () => {
 
       });
     }
-    this.positionUpdate = -1;
+    this.tempUpdate = null;
   }
 
   getMessage(status: number, content: string) {
@@ -108,13 +100,13 @@ export class UserEntityComponent implements OnInit {
   };
 
 
-  editItem(target: any, index: number) {
-    this.positionUpdate = index;
-    let item = this.listUser.elementAtIndex(index);
-    this.formData.patchValue({
+  editItem(formData: NgForm, target: any, item) {
+    this.tempUpdate = item;
+    formData.setValue({
       name: item.name,
       userName: item.userName,
       passWord: item.passWord,
+      rePassWord: item.passWord,
       enable: item.enable,
       email: item.email,
       phone: item.phone,
@@ -124,18 +116,14 @@ export class UserEntityComponent implements OnInit {
   }
 
 
-  removeItem(index: number) {
+  removeItem(item) {
     let msg = new MessageAlert();
-    this.userEntityService.deleteUser(this.listUser.elementAtIndex(index).id).subscribe((data: Response) => {
-      msg.type = 'success';
-      msg.content = "Xoa thành công ";
+    this.userEntityService.deleteUser(item.id).subscribe((data: Response) => {
+      this.updateMessge('Xóa thành công ', 'success');
     }, (error: Error) => {
-      msg.type = 'warning';
-      msg.content = error.message;
-      this.alert.next(msg);
+      this.updateMessge(error.message, 'warning');
     }, () => {
-      this.listUser.removeElementAtIndex(index);
-      this.alert.next(msg);
+      this.listUser.remove(item);
     })
   }
 
@@ -149,6 +137,15 @@ export class UserEntityComponent implements OnInit {
       phone: '',
       roles: ['user'],
     })
+  }
+
+  onSearch() {
+    this.userEntityService.find(this.query).subscribe((data: UserEntityModel[]) => {
+      this.listUser.clear();
+      for (let item of data) {
+        this.listUser.add(item);
+      }
+    });
   }
 
 }

@@ -3,6 +3,7 @@ package linhtran.it.vnua.sale.response;
 import linhtran.it.vnua.sale.entities.Product;
 import linhtran.it.vnua.sale.util.Page;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -10,9 +11,9 @@ import java.util.Set;
  */
 public class ProductResponse {
     private Page page;
-    private Set<Product> productList;
+    private Collection<Product> productList;
 
-    public ProductResponse(Page page, Set<Product> productList) {
+    public ProductResponse(Page page, Collection<Product> productList) {
         this.page = page;
         this.productList = productList;
     }
@@ -25,7 +26,7 @@ public class ProductResponse {
         this.page = page;
     }
 
-    public Set<Product> getProductList() {
+    public Collection<Product> getProductList() {
         return productList;
     }
 

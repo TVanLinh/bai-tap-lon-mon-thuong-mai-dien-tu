@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by linhtran on 27/09/17.
@@ -43,5 +44,13 @@ public class UserService {
 
     public void delete(Long id) {
         this.userRepository.delete(id);
+    }
+
+    public Set<User> find(String query) {
+        return this.userRepository.find(query);
+    }
+
+  public   User findByEmail(String email) {
+        return  this.userRepository.findByEmail(email);
     }
 }

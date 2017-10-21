@@ -1,3 +1,4 @@
+
 <div class="head-above">
   <div class="container">
     <div class="row">
@@ -5,12 +6,15 @@
         Chào mừng bạn đến với shop.com<i class="pdl-5 fa fa-clock-o"></i> {{dateNow | date: 'dd/MM/yyyy' }}
       </div>
       <div class="right">
+        <a style="font-size: 16px;padding: 16px;color: #000;" *ngIf="!isLogin" (click)="loginModal.show()">
+          <i class="fa fa-user-circle" aria-hidden="true"></i> Tài khoản
+        </a>
         <div class="dropdown" style="display: inline-block" *ngIf="isLogin">
-          <a data-toggle="dropdown">{{email}}
+          <a data-toggle="dropdown">{{emailTemp}}
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a [routerLink]="['/order']" routerLinkActive="active">Danh sách đơn hàng </a></li>
-            <li><a [routerLink]="['/order']" (click)="changPassModal.show()">Thay đổi mật khẩu </a></li>
+            <li><a (click)="changPassModal.show()">Thay đổi mật khẩu </a></li>
             <li><a (click)="onLogout()">Đăng xuất </a></li>
           </ul>
         </div>
@@ -57,7 +61,7 @@
           <form action="" class="form-search">
             <div class="col-xs-8  col-sm-10  col-md-9">
               <!--<form action="" #forms="ngForm">-->
-              <input name="search" type="text" class="form-control" [(ngModel)]="search"
+              <input name="search" type="text" placeholder="Tìm kiếm sản phẩm " class="form-control" [(ngModel)]="search"
                      [ngModelOptions]="{standalone: true}">
               <!--</form>-->
             </div>
@@ -79,7 +83,7 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left"> Thay đổi  mật khẩu </h4>
+        <h4 class="modal-title pull-left"> Thay đổi mật khẩu </h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="changPassModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -88,7 +92,7 @@
       <div class="modal-body">
         <form #changPassForm="ngForm">
           <div class="mgb-10">
-            <label for="passWord">Mật khẩu cũ  <span class="star">*</span>: </label>
+            <label for="passWord">Mật khẩu cũ <span class="star">*</span>: </label>
             <input id="passWord" name="passWord" minlength="8" type="password" required class="form-control"
                    #passWord="ngModel" ngModel>
             <div class="star" *ngIf="passWord.touched && passWord.value.trim().length == 0">
@@ -118,3 +122,157 @@
   </div>
 </div>
 
+
+<!-- modal form register -->
+<div class="modal fade" bsModal #registerModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Đăng kí một tài khoản khách hàng </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="registerModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <form #registerForm="ngForm" class="pdb-20">
+          <div class="mgb-10">
+            <label for="name">Họ tên <span class="star">*</span>: </label>
+            <input id="name" name="fullName" type="text" required class="form-control" #fullName="ngModel" ngModel>
+            <div class="star" *ngIf="fullName.touched && fullName.value.trim()  ==''">
+              Tên không được trống
+            </div>
+          </div>
+
+          <div class="mgb-10">
+            <label for="email">Email <span class="star">*</span> : (Sử dụng để làm username khi đăng nhập) </label>
+            <input id="email" name="email" type="email" required class="form-control" #email="ngModel" ngModel>
+            <div class="star" *ngIf="(email.dirty || email.touched)&& email.invalid">
+              Email không được trống
+            </div>
+          </div>
+          <div class="mgb-10">
+            <label for="passWord">Mật khẩu <span class="star">*</span>: </label>
+            <input id="passWord" name="passWord" minlength="8" type="password" required class="form-control"
+                   #passWord="ngModel" ngModel>
+          </div>
+
+          <div class="star" *ngIf="passWord.touched && passWord.value.trim().length < 8">
+            Mật khẩu tối thiểu 8 kí tự
+          </div>
+
+          <div class="mgb-10">
+            <label for="rePassWord">Nhập lại mật khẩu <span class="star">*</span>: </label>
+            <input id="rePassWord" name="rePassWord" type="password" required class="form-control" #rePassWord="ngModel"
+                   ngModel>
+            <div class="star" *ngIf="rePassWord.touched && rePassWord.value!=passWord.value">
+              Mật khẩu không trùng nhau
+            </div>
+
+          </div>
+
+          <div style="padding-bottom: 20px;">
+            <label for="phone">Số điện thoại <span class="star">*</span>: </label>
+            <input id="phone" name="phone" type="text" required class="form-control" #phone="ngModel" ngModel>
+
+            <div class="star" *ngIf="(phone.dirty || phone.touched)&& phone.invalid">
+              Số điện thoại không được trống
+            </div>
+          </div>
+
+          <div class="mgb-10">
+            <label for="address">Địa chỉ <span class="star">*</span>: </label>
+            <input id="address" name="address" type="text" required class="form-control" #address="ngModel" ngModel>
+            <div class="star" *ngIf="(address.dirty || address.touched)&& address.invalid">
+              Địa chỉ không được trống
+            </div>
+          </div>
+
+
+          <div class=" text-right">
+            <button [disabled]="registerForm.invalid" class="btn btn-success"
+                    (click)="onRegister(registerForm,registerModal,loginModal)">Đăng kí
+            </button>
+          </div>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal form login  -->
+
+<div class="modal fade" bsModal #loginModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"> Khách hàng đăng nhập </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="loginModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="formDataLogin" class="pdb-20">
+
+          <div class="mgb-10">
+            <label for="emails">Email: </label>
+            <input id="emails" type="email" required class="form-control" formControlName="email">
+          </div>
+          <div>
+            <label for="passWords">Mật khẩu : </label>
+            <input id="passWords" type="password" required class="form-control" formControlName="passWord">
+          </div>
+        </form>
+
+        <div class=" text-right">
+          <button class="btn btn-success" (click)="onLogin(loginModal)">Đăng nhập</button>
+        </div>
+
+        <a (click)="registerModal.show();loginModal.hide()">Chưa có tài khoản ? </a>
+        <a (click)="forgetPass.show();loginModal.hide()">Quên mật khẩu ? </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" bsModal #forgetPass="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"> Quên mật khẩu </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="forgetPass.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+
+          <div class="mgb-10">
+            <label for="emailss">Nhập email của bạn : </label>
+            <input id="emailss" type="email" name="emails" required class="form-control" #emails="ngModel"
+                   [(ngModel)]="emailChange">
+          </div>
+
+          <div class=" text-right">
+            <button class="btn btn-success" id="btn-forget-pass-clients" [disabled]="!emails.valid"
+                    (click)="onForgetPassWord(forgetPass)">Gửi
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

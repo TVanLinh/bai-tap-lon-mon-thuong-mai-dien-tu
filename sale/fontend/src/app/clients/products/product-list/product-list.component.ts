@@ -55,7 +55,7 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   getCatalog() {
     this.route.queryParams.subscribe(params => {
       this.catalog = params['catalog'] || "all";
-      this.getUrl(this.page.url);
+      // this.getUrl(this.page.url);
       this.page.currentPage = 1;
 
       let urlTarget=HOST_NAME + "/product?page=1&param="+(params['catalog'] || "all");

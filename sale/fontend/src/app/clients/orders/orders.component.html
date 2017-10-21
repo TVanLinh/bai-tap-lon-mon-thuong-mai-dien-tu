@@ -3,18 +3,18 @@
   <table class="table table-bordered" *ngIf="orders.length>0">
     <thead>
     <tr>
-      <th>STT</th>
-      <th>Thời gian đặt hàng</th>
-      <th>Trạng thái</th>
-      <th>Chi phí (Đồng)</th>
+      <th >STT</th>
+      <th (click)="orderBy='createTime'">Thời gian đặt hàng</th>
+      <th (click)="orderBy='status'">Trạng thái</th>
+      <th >Chi phí (VND)</th>
     </tr>
     </thead>
     <tbody>
-    <tr (click)="viewOrder(orderModal,inx)" *ngFor="let item of orders;let inx = index">
+    <tr (click)="viewOrder(orderModal,inx)" *ngFor="let item of orders | sort: orderBy;let inx = index">
       <td>{{inx+1}}</td>
       <td>{{item.createTime | date: 'HH:mm dd-MM-yyyy'}}</td>
       <td>{{getStatus(item.status)}}</td>
-      <td>{{getTotalMoney(item.orderDetails)}} VND</td>
+      <td>{{getTotalMoney(item.orderDetails) | currency: 'VND': false}}</td>
     </tr>
     </tbody>
   </table>
@@ -27,7 +27,7 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Thông tin đơn hàng DH0000{{indexOrder+1}}</h4>
+        <h4 class="modal-title pull-left">Thông tin đơn hàng {{indexOrder+1}}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="orderModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -50,12 +50,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of orderDetail;let inx = index;">
+            <tr *ngFor="let item of orderDetail ;let inx = index;">
               <td>{{inx+1}}</td>
               <td>{{item.product.name}}</td>
- 	      <td style="width: 50px;height: 50px"><img [src]="item.product.imagePath"></td>
+ 	             <td style="width: 50px;height: 50px" class="image"><img [src]="item.product.imagePath"></td>
               <td class="amount">{{item.amount}}</td>
-              <td>{{getPrice(item.product)}} VND</td>
+              <td>{{item.price*item.amount | currency: 'VND':false}} </td>
             </tr>
             </tbody>
           </table>
@@ -63,4 +63,49 @@
       </div>
     </div>
   </div>
+</div>
+
+
+
+<div id="print1" style="display: none">
+  <main>
+    <h1  class="clearfix">Hóa đơn </h1>
+    <div *ngIf="orderTemp" style="margin-top: -40px;">
+      <p>Tên khách hàng : {{orderTemp.customer.fullName}}</p>
+      <p>Số điện thoại  : {{orderTemp.customer.phone}}</p>
+      <p>Email : {{orderTemp.customer.email}}</p>
+      <p>Địa chỉ : {{orderTemp.customer.address}}</p>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên sản phẩm</th>
+        <th>Ảnh</th>
+        <th>Số lượng</th>
+        <th>Đơn giá/SP (Đồng)</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let item of orderDetail ;let inx = index;">
+        <td>{{inx+1}}</td>
+        <td>{{item.product.name}}</td>
+        <td style="width: 50px;height: 50px" class="image"><img [src]="item.product.imagePath"></td>
+        <td class="amount">{{item.amount}}</td>
+        <td>{{item.price*item.amount | currency: 'VND':false}} </td>
+      </tr>
+      <tr>
+        <td colspan="4" class="grand total" style="text-align: right !important;">Tổng tiền </td>
+        <td class="grand total">{{ingredientGetPrice.getPrice(orderDetail) | currency: 'VND':false}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div  style="float: right;text-align: center;padding-right: 20px">
+      <div>
+        <p class="">Ngày {{dateNow | date:'dd'}} tháng  {{dateNow | date:'MM'}} năm   {{dateNow | date:"yyyy"}} </p>
+        <p *ngIf="orderTemp"> {{orderTemp.user.name}}</p>
+      </div>
+    </div>
+  </main>
 </div>

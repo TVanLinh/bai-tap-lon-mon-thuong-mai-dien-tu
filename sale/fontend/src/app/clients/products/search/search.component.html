@@ -4,10 +4,6 @@
     <hr>
   </div>
 
-  <div class="col-xs-12" *ngIf="list.length == 0">
-    {{getCatalogTitle()}}
-  </div>
-
   <div class="col-xs-6 col-sm-6 col-md-3 " *ngFor="let item of listProduct">
     <app-product-item [itemProduct]="item">
     </app-product-item>

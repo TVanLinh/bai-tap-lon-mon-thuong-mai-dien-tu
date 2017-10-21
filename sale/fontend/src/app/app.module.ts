@@ -37,13 +37,19 @@ import {MyCookieService} from "./service/my-cookie.service";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {HomeProductComponent} from "./clients/products/home-product/home-product.component";
 import {SlideBarDirective} from "./directive/slidebar.directive";
-import { HomeSliderComponent } from './clients/products/home-product/home-slider/home-slider.component';
+import {HomeSliderComponent} from "./clients/products/home-product/home-slider/home-slider.component";
 import {MystoreService} from "./service/my-storage.service";
-import { ClientsComponent } from './clients/clients.component';
+import {ClientsComponent} from "./clients/clients.component";
 import {AdminModule} from "./admin/admin.module";
 import {ModalModule} from "ngx-bootstrap";
-import { SearchComponent } from './clients/products/search/search.component';
-import { OrdersComponent } from './clients/orders/orders.component';
+import {SearchComponent} from "./clients/products/search/search.component";
+import {OrdersComponent} from "./clients/orders/orders.component";
+import {CustomerCanActivateService} from "./service/CustomerCanActivate.service";
+import {CustomerService} from "./clients/shopping/customer/customer.service";
+import {ArraySortPipe} from "./service/sort.pipe";
+import {IntroComponent} from "./clients/intro/intro.component";
+import {PolicyComponent} from "./clients/policy/policy.component";
+import {TopComponent} from "app/core/top/top.component";
 
 @NgModule({
   declarations: [
@@ -73,7 +79,10 @@ import { OrdersComponent } from './clients/orders/orders.component';
     HomeSliderComponent,
     ClientsComponent,
     SearchComponent,
-    OrdersComponent
+    OrdersComponent,
+    ArraySortPipe,
+    IntroComponent,
+    PolicyComponent, TopComponent
   ],
   imports: [
     BrowserModule,
@@ -84,8 +93,8 @@ import { OrdersComponent } from './clients/orders/orders.component';
     HttpModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
+    AdminModule
   ],
   providers: [Product,
     ProductService,
@@ -95,7 +104,9 @@ import { OrdersComponent } from './clients/orders/orders.component';
     Page,
     CookieService,
     MyCookieService,
-    MystoreService
+    MystoreService,
+    CustomerCanActivateService,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })

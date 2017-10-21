@@ -1,3 +1,220 @@
-<p>
-  order-entity works!
-</p>
+<div class="title-entity">
+  Danh sách đơn hàng
+</div>
+<div>
+  <button class="btn btn-primary" (click)="productModal.show()">Tạo đơn hàng</button>
+  <div class="input-group" style="width: 300px;float: right">
+    <input type="text" class="form-control" placeholder="Search ..." name="query" [(ngModel)]="query">
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="onSearch()">Go</button>
+      </span>
+  </div>
+</div>
+
+<div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
+{{message.content}}
+</div>
+
+
+<table class="table table-striped" [mfData]="listOrder.toArray()" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+  <tr>
+    <th>
+      STT
+    </th>
+    <th>
+      <mfDefaultSorter by="id" style="width: 10%">Mã mã đơn hàng</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="customer.fullName" style="width: 20%">Tên khách hàng</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="user.name" style="width: 20%">Tên nhân viên</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="createTime" style="width: 10%">Thời gian tạo</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="status" style="width: 10%">Trạng thái</mfDefaultSorter>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let item of mf.data;let idex = index">
+    <td>{{idex+1}}</td>
+    <td>{{item.id}}</td>
+    <td>{{item.customer.fullName}}</td>
+    <td>{{item.user.name}}</td>
+    <td>{{item.createTime | date: 'HH:mm:ss dd:MM:yyyy'}}</td>
+    <td>{{getStatus(item.status)}}</td>
+    <td class="">
+      <span class="action action-edit" (click)="openDetail(item,orderModalDetail)">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </span>
+      <span class="action action-edit" (click)="editItem(formData,orderModalForm,idex)">
+        <i class="fa fa-edit"></i>
+      </span>
+      <span class="action action-remove" (click)="removeItem(item)">
+        <i class="fa fa-remove"></i>
+      </span>
+    </td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="4">
+      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15,20,25,50,100]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+  </tfoot>
+</table>
+
+
+<!--modal form-->
+<div class="modal fade" bsModal #orderModalForm="bs-modal" [config]="{backdrop: 'static'}"
+tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Thay đổi thông tin đơn hàng </h4>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="orderModalForm.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" *ngIf="orderTemp">
+    <form #formData="ngForm" class="mgb-20">
+
+      <div>
+        <label for="name">Chọn nhân viên: </label>
+        <select id="name" name="iduser" type="text" class="form-control" ngModel #iduser="ngModel">
+          <option [value]="item.id" *ngFor="let item of users" [selected]="item.id == orderTemp.user.id" >
+            {{item.name}}
+          </option>
+
+        </select>
+      </div>
+
+      <div>
+        <label for="status">Chọn trạng thái của đơn hàng : </label>
+        <select id="status" name="status" type="text" class="form-control" ngModel #status="ngModel">
+          <option [value]="item" *ngFor="let item of statusList" [selected]="item == orderTemp.status">
+            {{getStatus(item)}}
+          </option>
+
+        </select>
+      </div>
+
+    </form>
+
+    <div class=" text-right">
+      <button class="btn btn-success"
+              (click)="onSave(formData,orderModalForm)">Lưu
+      </button>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!--deail-->
+<div class="modal fade" bsModal #orderModalDetail="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Thông tin đơn hàng {{indexOrder}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="orderModalDetail.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <button class="btn btn-successs" (click)="print()">In</button>
+        <button class="btn btn-successs" (click)="exportExcel()">Xuất ra excel</button>
+        <!---->
+        <div id="table-order-detail-client">
+          <table class="table table-borderModaled mgt-30">
+            <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên sản phẩm</th>
+              <th>Ảnh</th>
+              <th>Số lượng</th>
+              <th>Đơn giá/ 1 SP (Đồng)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of orderDetails ;let inx = index;">
+              <td>{{inx+1}}</td>
+              <td>{{item.product.name}}</td>
+              <td style="width: 50px;height: 50px" class="image"><img [src]="item.product.imagePath"></td>
+              <td class="amount">{{item.amount}}</td>
+              <td>{{item.price*item.amount | currency: 'VND':false}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--print-->
+<div id="print1" style="display: none">
+  <main>
+    <h1 class="clearfix">Hóa đơn </h1>
+    <div *ngIf="orderTemp" style="margin-top: -40px;">
+      <p>Tên khách hàng : {{orderTemp.customer.fullName}}</p>
+      <p>Số điện thoại : {{orderTemp.customer.phone}}</p>
+      <p>Email : {{orderTemp.customer.email}}</p>
+      <p>Địa chỉ : {{orderTemp.customer.address}}</p>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên sản phẩm</th>
+        <th>Ảnh</th>
+        <th>Số lượng</th>
+        <th>Đơn giá/SP (Đồng)</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let item of orderDetails ;let inx = index;">
+        <td>{{inx+1}}</td>
+        <td>{{item.product.name}}</td>
+        <td style="width: 50px;height: 50px" class="image"><img [src]="item.product.imagePath"></td>
+        <td class="amount">{{item.amount}}</td>
+        <td>{{item.price*item.amount | currency: 'VND':false}}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="grand total" style="text-align: right !important;">Tổng tiền</td>
+        <td class="grand total">{{ingredientGetPrice.getPrice(orderDetails) | currency: 'VND':false}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div style="float: right;text-align: center;padding-right: 20px">
+      <div>
+        <p class="">Ngày {{dateNow | date:'dd'}} tháng {{dateNow | date:'MM'}} năm {{dateNow | date:"yyyy"}} </p>
+        <p *ngIf="orderTemp"> {{orderTemp.user.name}}</p>
+      </div>
+    </div>
+  </main>
+</div>

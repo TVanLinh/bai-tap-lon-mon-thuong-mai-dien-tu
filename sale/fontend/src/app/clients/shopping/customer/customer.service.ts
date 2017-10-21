@@ -8,23 +8,24 @@ export class CustomerService {
   private ACOUNT = "ACOUNT";
   private acountListener = new Subject<boolean>();
   $publishAcount = this.acountListener.asObservable();
+
+  private acountListener1 = new Subject<boolean>();
+  $publishAcount1 = this.acountListener1.asObservable();
+
+  publishAcount(acount: any) {
+    this.acountListener1.next(acount);
+    console.log(acount);
+  }
+
+
   $logout = new Subject<boolean>();
 
   constructor(private  taskService: TaskService) {
 
   }
 
-
-  publishAcount(acount: boolean) {
-    this.acountListener.next(acount);
-  }
-
-
   getAcount(): { email: string, passWord: string } {
     let str = localStorage.getItem(this.ACOUNT);
-    if (str == null || str === 'undefined') {
-      return null;
-    }
     return JSON.parse(str);
   }
 

@@ -18,6 +18,7 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(public productService: ProductService,
               public  shopService: ShoppingService,
               private mystorageService: MystoreService) {
+
   }
 
   ngOnInit() {

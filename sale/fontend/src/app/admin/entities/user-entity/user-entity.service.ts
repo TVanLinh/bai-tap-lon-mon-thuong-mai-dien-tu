@@ -28,5 +28,9 @@ export class UserEntityService {
     return this.taskService.deleteTask(this.url + "/" + id);
   }
 
+  find(query) {
+    return this.taskService.getTask(HOST_NAME+"/users/search?query="+query);
+  }
+
 
 }

@@ -1,18 +1,24 @@
 <div class="title-entity">
-  Danh sach user
+  Danh sách tài khoản
 </div>
 <div>
-  <button class="btn btn-primary" (click)="userModal.show()">Tao mot user</button>
-  <input type="text" class="form-control search">
+  <button class="btn btn-primary" (click)="userModal.show()">Tạo một tài khoản </button>
+  <div class="input-group" style="width: 300px;float: right">
+    <input type="text" class="form-control" placeholder="Search ..." name="query"  [(ngModel)]="query" >
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="onSearch()">Go</button>
+      </span>
+  </div>
 </div>
 
-<div *ngIf="message.type">
-  <alert [type]="message.type" dismissible="true" [dismissOnTimeout]="message.timeout">{{message.content}}</alert>
+<div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
+  {{message.content}}
 </div>
 
 <table class="table table-striped" [mfData]="listUser.toArray()" #mf="mfDataTable" [mfRowsOnPage]="5">
   <thead>
   <tr>
+    <th>STT</th>
     <th>
       <mfDefaultSorter by="name" style="width: 10%">Họ tên</mfDefaultSorter>
     </th>
@@ -40,6 +46,7 @@
   <tbody>
 
   <tr *ngFor="let item of mf.data;let idex = index">
+    <td>{{idex+1}}</td>
     <td>{{item.name}}</td>
     <td>{{item.userName}}</td>
     <td>{{item.enable}}</td>
@@ -48,8 +55,8 @@
     <td class="">{{item.roles}}</td>
     <td class="">
       <!--<span class="action action-edit" (click)="editItem(idex)"><i class="fa fa-shower"></i></span>-->
-      <span class="action action-edit" (click)="editItem(userModal,idex)"><i class="fa fa-edit"></i></span>
-      <span class="action action-remove" (click)="removeItem(idex)"><i class="fa fa-remove"></i></span>
+      <span class="action action-edit" (click)="editItem(formData,userModal,item)"><i class="fa fa-edit"></i></span>
+      <span class="action action-remove" (click)="removeItem(item)"><i class="fa fa-remove"></i></span>
     </td>
   </tr>
   </tbody>
@@ -71,7 +78,7 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Thông tin user</h4>
+        <h4 class="modal-title pull-left">Thông tin tài khoản </h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="userModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -80,39 +87,66 @@
       <div class="modal-body">
 
         <div *ngIf="message.type">
-          <alert [type]="message.type" dismissible="true" [dismissOnTimeout]="message.timeout">{{message.content}}
-          </alert>
+          <div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
+            {{message.content}}
+          </div>
         </div>
 
-        <form [formGroup]="formData">
+        <form #formData="ngForm" (onSumit)="onSave(formData,userModal)">
           <div>
             <label for="name">Họ tên : </label>
-            <input id="name" type="text" class="form-control" formControlName="name">
+            <input id="name" type="text" name="name" required class="form-control" #name="ngModel" ngModel>
+            <div class="star" *ngIf="name.touched && name.value.trim() == 0">
+              Chưa nhập họ tên
+            </div>
           </div>
 
           <div>
             <label for="userName">Tên đăng nhập : </label>
-            <input id="userName" type="text" class="form-control" formControlName="userName">
+            <input id="userName" type="text" name="userName" required class="form-control" #userName="ngModel" ngModel>
+            <div class="star" *ngIf="userName.touched && userName.value.trim() == 0">
+              Chưa nhập tên đăng nhập
+            </div>
           </div>
 
           <div>
             <label for="passWord">Mật khẩu : </label>
-            <input id="passWord" type="text" class="form-control" formControlName="passWord">
+            <input id="passWord" type="password" name="passWord" required class="form-control" #passWord="ngModel"
+                   ngModel>
+            <div class="star" *ngIf="passWord.touched && passWord.value.trim() == 0 ">
+              Chưa nhập mật khẩu
+            </div>
+          </div>
+
+
+          <div>
+            <label for="rePassWord">Mật khẩu : </label>
+            <input id="rePassWord" type="password" name="rePassWord" required class="form-control" #rePassWord="ngModel"
+                   ngModel>
+            <div class="star" *ngIf="rePassWord.touched && rePassWord.value !== passWord.value">
+              Mật khẩu không trùng nhau
+            </div>
           </div>
 
           <div>
             <label for="email">Email : </label>
-            <input id="email" type="email" class="form-control" formControlName="email">
+            <input id="email" type="email" name="email" required class="form-control" #email="ngModel" ngModel>
+            <div class="star" *ngIf="email.touched && passWord.value.trim() == 0 ">
+              Chưa nhập email
+            </div>
           </div>
 
           <div style="padding-bottom: 20px;">
             <label for="phone">Số điện thoại : </label>
-            <input id="phone" type="email" class="form-control" formControlName="phone">
+            <input id="phone"  type="text" name="phone" required class="form-control" #phone="ngModel" ngModel>
+            <div class="star" *ngIf="phone.touched && passWord.value.trim() == 0 ">
+              Chưa nhập số điện thoại
+            </div>
           </div>
 
           <div>
             <label for="enable">Kích hoạt : </label>
-            <select name="" id="enable" class="form-control" formControlName="enable">
+            <select  id="enable"  name="enable" class="form-control" #enable="ngModel" ngModel>
               <option value="true">Có</option>
               <option value="false">Không</option>
             </select>
@@ -121,7 +155,7 @@
 
           <div>
             <label for="Role">Quyền : </label>
-            <select name="" id="Role" class="form-control" formControlName="roles" multiple>
+            <select   id="Role"  name="roles"class="form-control" #roles="ngModel" ngModel multiple>
               <option value="user">USER</option>
               <option value="admin">ADMIN</option>
             </select>
@@ -131,7 +165,7 @@
         </form>
 
         <div class=" text-right">
-          <button class="btn btn-success" (click)="onSave(userModal)">Lưu</button>
+          <button class="btn btn-success"  [disabled]="formData.invalid || passWord.value !== rePassWord.value" (click)="onSave(formData,userModal)">Lưu</button>
         </div>
 
       </div>

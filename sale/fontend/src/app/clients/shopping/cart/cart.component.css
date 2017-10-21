@@ -5,6 +5,7 @@ thead{
 tr td{
   vertical-align: middle;
   text-align: center;
+  max-width: 200px;
 }
 img{
   max-width: 60px;

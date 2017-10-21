@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by linhtran on 27/09/17.
@@ -89,6 +90,14 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable(value = "id") long id) {
         this.userService.delete(id);
         return new ResponseEntity<String>("OK", HttpStatus.OK);
+    }
+
+
+    @CrossOrigin("*")
+    @GetMapping("/users/search")
+    public ResponseEntity<Set<UserForm>> deleteUser(@RequestParam(value = "query") String query) {
+
+        return new ResponseEntity<Set<UserForm>>(UserFormUtil.getUserFormsFromUsers(this.userService.find(query)), HttpStatus.OK);
     }
 
 }

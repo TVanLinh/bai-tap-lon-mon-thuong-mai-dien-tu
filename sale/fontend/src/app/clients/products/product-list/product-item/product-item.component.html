@@ -1,16 +1,17 @@
-
-<div class="item mgb-20" >
-    <div class="item-above">
-      <a  style="cursor: pointer" (click)="onClick(itemProduct)"><img [src]="itemProduct.imagePath" alt="" class="img-responsive">  </a>
-       <div class="per-discount" style="background-image: url('../../../../assets/images/logo/thumb.png');">
-         <span>{{itemProduct.discount * 100}} %</span>
-       </div>
+<div class="item mgb-20">
+  <div class="item-above">
+    <a style="cursor: pointer" (click)="onClick(itemProduct)"><img [src]="itemProduct.imagePath" alt=""
+                                                                   class="img-responsive"> </a>
+    <div class="per-discount" style="background-image: url('../../../../assets/images/logo/thumb.png');">
+      <span>{{itemProduct.discount}} %</span>
     </div>
-    <div class="item-below">
-      <a href="" class="pdb-20">{{itemProduct.name}}</a>
-      <p><span class="price-old">{{itemProduct.price-itemProduct.discount*itemProduct.price}} đ</span><span class="price-new">{{itemProduct.price}} đ</span></p>
+  </div>
+  <div class="item-below">
+    <a href="" class="pdb-20">{{itemProduct.name}}</a>
+    <p><span class="price-old">{{itemProduct.price}} VND</span><span class="price-new">{{itemProduct.price-(itemProduct.discount*itemProduct.price)/100}} VND</span>
+    </p>
 
-    </div>
+  </div>
 </div>
 
 <!--<img src="../../../../assets">-->

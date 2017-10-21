@@ -1,3 +1,108 @@
-<p>
-  catalog-entity works!
-</p>
+<div class="title-entity">
+  Danh sách catalog
+</div>
+<div>
+  <button class="btn btn-primary" (click)="catalogModal.show()">Tạo Catalog</button>
+  <div class="input-group" style="width: 300px;float: right">
+    <input type="text" class="form-control" placeholder="Search ..." name="query"  [(ngModel)]="query" >
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="onSearch()">Go</button>
+      </span>
+  </div>
+</div>
+
+<div class="alert alert-success" *ngIf="message!=''">{{message}}</div>
+
+<table class="table table-striped" [mfData]="listCatalog.toArray()" #mf="mfDataTable" [mfRowsOnPage]="10">
+  <thead>
+  <tr>
+    <th>
+      STT
+    </th>
+    <th>
+      <mfDefaultSorter by="name" style="width: 30%">Tên catalog</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="userName" style="width: 30%">Mã Catalog</mfDefaultSorter>
+    </th>
+    <!--<th style="width: 10%">-->
+    <!--Action-->
+    <!--</th>-->
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let item of mf.data;let idex = index">
+    <td>{{idex+1}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.code}}</td>
+    <!--<td class="">-->
+    <!--&lt;!&ndash;<span class="action action-edit" (click)="editItem(idex)"><i class="fa fa-shower"></i></span>&ndash;&gt;-->
+    <!--<span class="action action-edit" (click)="editItem(userModal,idex)"><i class="fa fa-edit"></i></span>-->
+    <!--</td>-->
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="4">
+      <mfBootstrapPaginator [rowsOnPageSet]="[10,20,30]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+  </tfoot>
+</table>
+
+
+<!--modal form -->
+<div class="modal fade" bsModal #catalogModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{titleCatalog}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal(catalogModal)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body pd-10">
+        <form #formData="ngForm" class="mgb-20">
+          <div>
+            <label for="name">Tên catalog : </label>
+            <input id="name" name="name" type="text" required class="form-control" ngModel #name="ngModel">
+            <div class="star" *ngIf="name.touched && name.value.trim() == 0">
+              Chưa nhập tên calalog
+            </div>
+          </div>
+
+          <div>
+            <label for="code">Mã catalog : </label>
+            <input id="code" name="code" type="text" required class="form-control" ngModel #code="ngModel">
+            <div class="star" *ngIf="code.touched && code.value.trim() == 0">
+              Chưa nhập mã calalog
+            </div>
+          </div>
+
+          <div class="star" *ngIf="code.touched && code.value.trim().name == 0">
+            Chưa nhập mã calalog
+          </div>
+
+          <div class="star" *ngIf="!success">
+            Catalog đã tồn tại.
+          </div>
+        </form>
+
+        <div class=" text-right">
+          <button class="btn btn-success"
+                  [disabled]="formData.invalid || !valid"
+                  (click)="onSave(formData,catalogModal)">Lưu
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

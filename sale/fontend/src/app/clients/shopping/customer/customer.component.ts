@@ -29,7 +29,11 @@ export class CustomerComponent implements OnInit {
               private mystorageService: MystoreService,
               private  customerService: CustomerService) {
     this.isLogin = this.customerService.isAcount();
-    this.acountLogin.subscribe((data: boolean) => this.isLogin = data);
+    //this.acountLogin.subscribe((data: boolean) => this.isLogin = data);
+    this.customerService.$publishAcount1.subscribe((data: boolean) => {
+      this.isLogin = true;
+      console.log(this.isLogin);
+    })
   }
 
 
@@ -96,21 +100,16 @@ export class CustomerComponent implements OnInit {
     this.customerService.login(customer).subscribe((data: Response) => {
       if (data.status == 200) {
         alert("Đăng nhập thành công");
-
         let dataCompare = JSON.parse(data["_body"]);
-
         this.customerService.setCount({email: dataCompare.email, passWord: dataCompare.passWord});
-
         this.acountLogin.next(true);
-
         loginModal.hide();
         this.customerService.publishAcount(true);
+        window.location.reload(true);
       }
     }, (error) => {
       alert("Đăng nhập không thành công, vui lòng kiểm tra lại email và  mật khẩu ");
     }, () => {
-      // this.customerService.publishAcount(true);
-      this.customerService.publishAcount(true);
     });
   }
 
