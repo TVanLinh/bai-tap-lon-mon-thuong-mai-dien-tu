@@ -13,7 +13,6 @@ import {EntitiesComponent} from "./entities/entities.component";
 import {CommentEntityComponent} from "./entities/comment-entity/comment-entity.component";
 import {DataTableModule} from "angular2-datatable";
 import {BrowserModule} from "@angular/platform-browser";
-import {AlertModule, ModalModule} from "ngx-bootstrap";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TaskService} from "../service/task.service";
 import {HttpModule} from "@angular/http";
@@ -23,10 +22,13 @@ import {CatalogEntityService} from "./entities/catalog-entity/catalog-entity.ser
 import {ProductEntityService} from "./entities/product-entity/product-entity.service";
 import {OrderEntityService} from "./entities/order-entity/order-entity.service";
 import {UserEntityService} from "./entities/user-entity/user-entity.service";
+import {AdminGuardService} from "../guard/admin.guard";
+import {ModalModule} from "ngx-bootstrap";
 
 
 const routes: Routes = [{
   component: AdminComponent,
+  canActivate: [AdminGuardService],
   path: "manager", children: [
     {
       path: '',

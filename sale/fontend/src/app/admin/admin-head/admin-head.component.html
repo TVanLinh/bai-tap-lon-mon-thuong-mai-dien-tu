@@ -2,4 +2,15 @@
   <div class="left">
     <img src="../../../assets/images/my_image.jpg" alt="">
   </div>
+
+  <div class="right">
+    <div class="dropdown" style="display: inline-block" >
+      <a data-toggle="dropdown">{{acount.userName}}
+        <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a (click)="onLogout()">Đăng xuất </a></li>
+        <li><a (click)="changPassModal.show()">Thay đổi mật khẩu </a></li>
+      </ul>
+    </div>
+  </div>
 </div>

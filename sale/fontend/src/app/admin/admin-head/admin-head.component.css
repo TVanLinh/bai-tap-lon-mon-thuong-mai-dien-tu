@@ -17,3 +17,8 @@ img {
   border-radius: 50%;
 }
 
+.right{
+  right: 100px;
+  text-align: right;
+  position: relative;
+}

@@ -28,22 +28,11 @@ public class Order extends AbstractEntity implements Serializable {
     @Column(name = "status")
     private int status;
 
-//
-//    @Basic
-//    @Column(name = "customer_id")
-//    private long customerId;
-
 
     @Basic
     @ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
-
-//    @Basic
-//    @Column(name = "employee_id")
-//    private long employeeId;
-//
 
     @Basic
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoginService} from "../../login/login.service";
+import {Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
+import {UserEntityModel} from "../entities/user-entity/user.model";
 
 @Component({
   selector: 'app-admin-head',
@@ -6,10 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-head.component.css']
 })
 export class AdminHeadComponent implements OnInit {
+  private acount;
 
-  constructor() { }
+  constructor(private loginService: LoginService, private cookieService: CookieService, private  router: Router) {
 
-  ngOnInit() {
   }
 
+  ngOnInit() {
+
+    this.acount = JSON.parse(this.loginService.getUserInfo());
+    console.log("acount:" + this.acount['userName']);
+
+  }
+
+  onLogout() {
+    this.cookieService.removeAll();
+    this.router.navigate(['/login']);
+  }
 }

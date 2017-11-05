@@ -13,6 +13,7 @@ import {OrdersComponent} from "./clients/orders/orders.component";
 import {CustomerCanActivateService} from "./service/CustomerCanActivate.service";
 import {IntroComponent} from "./clients/intro/intro.component";
 import {PolicyComponent} from "./clients/policy/policy.component";
+import {LoginComponent} from "./login/login.component";
 
 const routing: Routes = [
   {
@@ -35,6 +36,7 @@ const routing: Routes = [
     {path: "404", component: PageNotFoundComponent},
   ]
   },
+  {path: 'login', component:LoginComponent},
   {path: '**', redirectTo: '/404'}
 ];
 

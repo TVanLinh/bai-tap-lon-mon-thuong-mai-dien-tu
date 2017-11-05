@@ -7,27 +7,29 @@ import {OrderExport} from "../../../clients/orders/orders.component";
 declare const jQuery: any;
 import * as Collections from "typescript-collections";
 import {Ingredient} from "../../../model/ingrendient.model";
+import {LoginService} from "../../../login/login.service";
 @Injectable()
 export class OrderEntityService {
-  constructor(private tastService: TaskService) {
-
+  private access_token: string;
+  constructor(private tastService: TaskService,private  loginService: LoginService) {
+    this.access_token = this.loginService.getToken();
   }
 
   public  createProduct(body: OrderEntity) {
-    return this.tastService.postTask(HOST_NAME + "/order/create", body);
+    return this.tastService.postTask(HOST_NAME + "/order/create?access_token="+this.access_token, body);
   }
 
   public  updateOrder(body: {id: number,idUser: number,status: number}) {
-    return this.tastService.putTask(HOST_NAME + "/admin/order/update", body);
+    return this.tastService.putTask(HOST_NAME + "/admin/order/update?access_token="+this.access_token, body);
   }
 
 
   public  findAll() {
-    return this.tastService.getTask(HOST_NAME + "/admin/order/find-all");
+    return this.tastService.getTask(HOST_NAME + "/admin/order/find-all?access_token="+this.access_token);
   }
 
   public  findBy(query) {
-    return this.tastService.getTask(HOST_NAME + "admin/search?param=" + query);
+    return this.tastService.getTask(HOST_NAME + "admin/search?param=" + query+"&access_token="+this.access_token);
   }
 
 

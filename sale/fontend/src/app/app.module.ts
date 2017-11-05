@@ -50,6 +50,9 @@ import {ArraySortPipe} from "./service/sort.pipe";
 import {IntroComponent} from "./clients/intro/intro.component";
 import {PolicyComponent} from "./clients/policy/policy.component";
 import {TopComponent} from "app/core/top/top.component";
+import {LoginComponent} from "./login/login.component";
+import {LoginService} from "./login/login.service";
+import {AdminGuardService} from "./guard/admin.guard";
 
 @NgModule({
   declarations: [
@@ -82,7 +85,7 @@ import {TopComponent} from "app/core/top/top.component";
     OrdersComponent,
     ArraySortPipe,
     IntroComponent,
-    PolicyComponent, TopComponent
+    PolicyComponent, TopComponent,LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,9 @@ import {TopComponent} from "app/core/top/top.component";
     MyCookieService,
     MystoreService,
     CustomerCanActivateService,
-    CustomerService
+    CustomerService,
+    LoginService,
+    AdminGuardService
   ],
   bootstrap: [AppComponent]
 })

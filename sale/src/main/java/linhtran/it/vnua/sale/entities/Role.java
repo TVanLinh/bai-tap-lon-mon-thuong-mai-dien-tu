@@ -1,6 +1,7 @@
 package linhtran.it.vnua.sale.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "role")
-public class Role extends AbstractEntity implements Serializable {
+public class Role extends AbstractEntity implements GrantedAuthority, Serializable {
 
     @Basic
     @Column(name = "name")
@@ -54,5 +55,10 @@ public class Role extends AbstractEntity implements Serializable {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.getName();
     }
 }
