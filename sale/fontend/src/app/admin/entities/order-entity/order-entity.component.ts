@@ -11,6 +11,7 @@ import {UserEntityModel} from "../user-entity/user.model";
 import {UserEntityService} from "../user-entity/user-entity.service";
 import {NgForm} from "@angular/forms";
 ;import {templateJitUrl} from "@angular/compiler";
+import {LoginService} from "../../../login/login.service";
 @Component({
   selector: 'app-order-entity',
   templateUrl: './order-entity.component.html',
@@ -27,7 +28,10 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
   users: UserEntityModel[] = [];
   statusList = [0, 1, 100];
 
-  constructor(private orderService: OrderEntityService, private eleRef: ElementRef, private  userEntityService: UserEntityService) {
+  constructor(private orderService: OrderEntityService,
+              private eleRef: ElementRef,
+              private  loginService: LoginService,
+              private  userEntityService: UserEntityService) {
     super();
     this.userEntityService.getAll().subscribe((data: UserEntityModel[]) => {
       this.users = data;
@@ -66,6 +70,8 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
   }
 
   openDetail(item: OrderEntity, orderModalDetail) {
+    // let user: UserEntityModel = JSON.parse(this.loginService.getUserInfo());
+
     this.indexOrder = item.id;
     this.orderTemp = item;
     this.orderDetails = item.orderDetails;
@@ -81,6 +87,11 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
   }
 
   editItem(formData, orderModalForm, item) {
+    let admin = this.loginService.isAdmin();
+    if (!admin) {
+      this.updateMessge('Bạn không có quyền thực hiện chức năng này  ', 'warning');
+      return;
+    }
     orderModalForm.show();
     this.indexOrder = item;
     this.orderTemp = this.listOrder.elementAtIndex(this.indexOrder);
@@ -107,6 +118,7 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
         this.listOrder.removeElementAtIndex(this.indexOrder);
         itemUpdate.status = obj.status;
         itemUpdate.user = this.getUser(this.users, Number.parseInt(obj.idUser));
+        itemUpdate.lastUpdateTime = (new Date).getTime();
         console.log("Json " + JSON.stringify(itemUpdate.user));
         this.listOrder.add(itemUpdate, this.indexOrder);
         formData.reset();

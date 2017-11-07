@@ -20,6 +20,7 @@ import javax.validation.Valid;
  */
 
 @RestController
+@CrossOrigin(value = "*")
 public class CustomerController {
 
     @Autowired

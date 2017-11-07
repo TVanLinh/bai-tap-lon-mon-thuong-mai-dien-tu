@@ -14,9 +14,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.loginService.getToken()) {
-      this.router.navigate(["/manager/entity"]);
-    }
+    // if(this.loginService.getToken()) {
+    //   this.router.navigate(["/manager/entity"]);
+    // }
   }
 
   onSubmit(formData: NgForm) {

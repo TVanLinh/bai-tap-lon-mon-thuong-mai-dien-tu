@@ -4,6 +4,7 @@ import {CustomerEntity} from "app/admin/entities/customer-entity/customer-entity
 export class OrderEntity {
   id: number;
   createTime: number;
+  lastUpdateTime: number;
   customer: CustomerEntity;
   status: number;
   user: UserEntityModel;

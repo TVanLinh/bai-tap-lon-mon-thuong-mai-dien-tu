@@ -17,6 +17,7 @@ import java.util.Set;
  */
 
 @RestController
+@CrossOrigin(value = "*")
 @RequestMapping(value = "/catalog")
 public class CatalogController {
 

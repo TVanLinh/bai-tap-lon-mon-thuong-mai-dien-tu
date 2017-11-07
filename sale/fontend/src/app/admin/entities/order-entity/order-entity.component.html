@@ -12,7 +12,7 @@
 </div>
 
 <div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
-{{message.content}}
+  {{message.content}}
 </div>
 
 
@@ -35,7 +35,10 @@
       <mfDefaultSorter by="createTime" style="width: 10%">Thời gian tạo</mfDefaultSorter>
     </th>
     <th>
-      <mfDefaultSorter by="status" style="width: 10%">Trạng thái</mfDefaultSorter>
+      <mfDefaultSorter by="lastUpdateTime" style="width: 10%">TG cập nhật lần cuối</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="status" style="width: 200px" >Trạng thái</mfDefaultSorter>
     </th>
     <th>
       Action
@@ -51,7 +54,8 @@
     <td>{{item.customer.fullName}}</td>
     <td>{{item.user.name}}</td>
     <td>{{item.createTime | date: 'HH:mm:ss dd:MM:yyyy'}}</td>
-    <td>{{getStatus(item.status)}}</td>
+    <td>{{item.lastUpdateTime | date: 'HH:mm:ss dd:MM:yyyy'}}</td>
+    <td style="width: 200px">{{getStatus(item.status)}}</td>
     <td class="">
       <span class="action action-edit" (click)="openDetail(item,orderModalDetail)">
         <i class="fa fa-eye" aria-hidden="true"></i>
@@ -78,55 +82,54 @@
 
 <!--modal form-->
 <div class="modal fade" bsModal #orderModalForm="bs-modal" [config]="{backdrop: 'static'}"
-tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
 
-<div class="modal-content">
+    <div class="modal-content">
 
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Thay đổi thông tin đơn hàng </h4>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Thay đổi thông tin đơn hàng </h4>
 
-    <button type="button" class="close pull-right" aria-label="Close" (click)="orderModalForm.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="modal-body" *ngIf="orderTemp">
-    <form #formData="ngForm" class="mgb-20">
-
-      <div>
-        <label for="name">Chọn nhân viên: </label>
-        <select id="name" name="iduser" type="text" class="form-control" ngModel #iduser="ngModel">
-          <option [value]="item.id" *ngFor="let item of users" [selected]="item.id == orderTemp.user.id" >
-            {{item.name}}
-          </option>
-
-        </select>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="orderModalForm.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
 
-      <div>
-        <label for="status">Chọn trạng thái của đơn hàng : </label>
-        <select id="status" name="status" type="text" class="form-control" ngModel #status="ngModel">
-          <option [value]="item" *ngFor="let item of statusList" [selected]="item == orderTemp.status">
-            {{getStatus(item)}}
-          </option>
+      <div class="modal-body" *ngIf="orderTemp">
+        <form #formData="ngForm" class="mgb-20">
 
-        </select>
+          <div>
+            <label for="name">Chọn nhân viên: </label>
+            <select id="name" name="iduser" type="text" class="form-control" ngModel #iduser="ngModel">
+              <option [value]="item.id" *ngFor="let item of users" [selected]="item.id == orderTemp.user.id">
+                {{item.name}}
+              </option>
+
+            </select>
+          </div>
+
+          <div>
+            <label for="status">Chọn trạng thái của đơn hàng : </label>
+            <select id="status" name="status" type="text" class="form-control" ngModel #status="ngModel">
+              <option [value]="item" *ngFor="let item of statusList" [selected]="item == orderTemp.status">
+                {{getStatus(item)}}
+              </option>
+
+            </select>
+          </div>
+
+        </form>
+
+        <div class=" text-right">
+          <button class="btn btn-success"
+                  (click)="onSave(formData,orderModalForm)">Lưu
+          </button>
+        </div>
+
       </div>
-
-    </form>
-
-    <div class=" text-right">
-      <button class="btn btn-success"
-              (click)="onSave(formData,orderModalForm)">Lưu
-      </button>
     </div>
-
   </div>
 </div>
-</div>
-</div>
-
 
 
 <!--deail-->

@@ -1,0 +1,57 @@
+<div class="title-entity">
+  <label> Chọn kiểu báo cáo </label>
+  <select #type (change)="selectType(type.value,time.value)"
+          class="form-control" style="max-width: 150px; display: inline-block">
+    <option value="0">Ngày</option>
+    <option value="1">Tháng</option>
+    <option value="2">Năm</option>
+  </select>
+
+  <input type="date" [value]="now | date:'dd-MM-yyyy' " class="form-control" style="max-width: 200px;display: inline-block" #time
+         (change)="timeChange(time.value)">
+
+</div>
+
+<ul class="list-group" >
+  <li class="list-group-item">Tổng số sản phẩm  <span class="badge">{{detail.total}}</span></li>
+  <li class="list-group-item">Tổng tiền <span class="badge">{{detail.price}}</span></li>
+</ul>
+
+<table class="table table-striped" [mfData]="list" #mf="mfDataTable" [mfRowsOnPage]="10">
+  <thead>
+  <tr>
+    <th>
+      STT
+    </th>
+    <th>
+      <mfDefaultSorter by="nameProduct" style="width: 30%">Tên sản phẩm</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="amount" style="width: 30%">Số lượng</mfDefaultSorter>
+    </th>
+
+    <th>
+      <mfDefaultSorter by="totalMoney" style="width: 30%">Tổng tiền</mfDefaultSorter>
+    </th>
+
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let item of mf.data;let idex = index">
+    <td>{{idex+1}}</td>
+    <td>{{item.nameProduct}}</td>
+    <td>{{item.amount}}</td>
+    <td>{{item.totalMoney}}</td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="4">
+      <mfBootstrapPaginator [rowsOnPageSet]="[10,20,30]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+  </tfoot>
+</table>

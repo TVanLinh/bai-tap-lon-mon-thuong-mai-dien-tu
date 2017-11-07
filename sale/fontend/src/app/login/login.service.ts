@@ -26,20 +26,23 @@ export class LoginService {
       .map(res => res.json())
       .subscribe(data => {
 
-          this.saveInfo(data['userInfo']);
+          this.saveUser(data['userInfo']);
           this.saveToken(data['access_token']);
+          this.cookieService.put("admin", data['access_admin']);
+          this.cookieService.put("user", data['access_user']);
+
         },
         err => alert('Invalid Credentials'));
   }
 
 
-  saveInfo(info) {
-    var expireDate = new Date().getTime() + (1000 * info.expires_in);
+  private saveUser(info) {
+    let expireDate = new Date().getTime() + (1000 * info.expires_in);
     this.cookieService.put("userInfo", JSON.stringify(info));
     this._router.navigate(['/manager/entity']);
   }
 
-  saveToken(token) {
+  private saveToken(token) {
     this.cookieService.put("token", token);
   }
 
@@ -47,8 +50,15 @@ export class LoginService {
     return this.cookieService.get("token");
   }
 
-  getUserInfo(){
+  getUserInfo() {
     return this.cookieService.get("userInfo");
   }
 
+  isAdmin(): boolean {
+    return this.cookieService.get("admin") === 'true';
+  }
+
+  isUser() {
+    return this.cookieService.get("user");
+  }
 }

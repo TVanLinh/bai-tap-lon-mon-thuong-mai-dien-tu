@@ -24,6 +24,8 @@ import {OrderEntityService} from "./entities/order-entity/order-entity.service";
 import {UserEntityService} from "./entities/user-entity/user-entity.service";
 import {AdminGuardService} from "../guard/admin.guard";
 import {ModalModule} from "ngx-bootstrap";
+import {StatisticComponent} from './statistic/statistic.component';
+import {StatisticService} from "./statistic/statistic.service";
 
 
 const routes: Routes = [{
@@ -33,10 +35,17 @@ const routes: Routes = [{
     {
       path: '',
       component: EntitiesComponent
+    }, {
+      path: 'statistic',
+      component: StatisticComponent
     },
     {
       path: 'entity',
       component: EntitiesComponent, children: [
+      {
+        path: '',
+        component: UserEntityComponent
+      },
       {
         path: 'user',
         component: UserEntityComponent
@@ -82,6 +91,7 @@ const routes: Routes = [{
     UserEntityComponent,
     EntitiesComponent,
     CommentEntityComponent,
+    StatisticComponent,
 
 
   ],
@@ -100,6 +110,7 @@ const routes: Routes = [{
     CatalogEntityService,
     OrderEntityService,
     UserEntityService,
+    StatisticService,
     ProductEntityService]
 })
 

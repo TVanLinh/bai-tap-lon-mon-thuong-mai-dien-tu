@@ -2,7 +2,7 @@
   Danh sách tài khoản
 </div>
 <div>
-  <button class="btn btn-primary" (click)="userModal.show()">Tạo một tài khoản </button>
+  <button class="btn btn-primary" (click)="openModal(userModal)">Tạo một tài khoản </button>
   <div class="input-group" style="width: 300px;float: right">
     <input type="text" class="form-control" placeholder="Search ..." name="query"  [(ngModel)]="query" >
     <span class="input-group-btn">

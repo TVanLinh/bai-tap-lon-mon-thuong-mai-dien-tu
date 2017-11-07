@@ -1,6 +1,7 @@
 package linhtran.it.vnua.sale.entities;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -23,6 +24,11 @@ public class Order extends AbstractEntity implements Serializable {
     @Column(name = "create_time")
     private Date createTime;
 
+    @Basic
+    @LastModifiedDate
+    @Column(name = "last_update_time")
+    private Date lastUpdateTime;
+
 
     @Basic
     @Column(name = "status")
@@ -35,13 +41,12 @@ public class Order extends AbstractEntity implements Serializable {
     private Customer customer;
 
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 
 
-
-    @OneToMany(mappedBy = "order",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
 
 
@@ -103,5 +108,13 @@ public class Order extends AbstractEntity implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 }

@@ -24,6 +24,7 @@ import java.util.Set;
  */
 
 @RestController
+@CrossOrigin(value = "*")
 public class ShopController {
     @Autowired
     private OrderService orderService;

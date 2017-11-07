@@ -7,6 +7,8 @@ import {UserEntityService} from "./user-entity.service";
 import {ToastrService} from "toastr-ng2";
 import {MessageAlert} from "../../../share/message.model";
 import {BaseComponent} from "../../BaseComponent";
+import {CookieService} from "angular2-cookie/core";
+import {LoginService} from "../../../login/login.service";
 @Component({
   selector: 'app-user-entity',
   templateUrl: './user-entity.component.html',
@@ -20,9 +22,13 @@ export class UserEntityComponent extends BaseComponent implements OnInit {
   listUser = new Collection.LinkedList<UserEntityModel>();
   tempUpdate = null;
   query = "";
+  isAdmin: boolean;
+
 
   constructor(private formBuilder: FormBuilder,
-              private  userEntityService: UserEntityService, private toastService: ToastrService) {
+              private cookieService: CookieService,
+              private  userEntityService: UserEntityService,
+              private  loginService: LoginService) {
     super();
     this.userEntityService.getAll().subscribe((data: UserEntityModel[]) => {
       this.listUser.clear();
@@ -30,11 +36,22 @@ export class UserEntityComponent extends BaseComponent implements OnInit {
         this.listUser.add(i);
       }
     });
+
+    this.isAdmin = loginService.isAdmin();
+    console.log(loginService.isAdmin());
   }
 
 
   ngOnInit() {
     this.initForm();
+  }
+
+  openModal(userModal: any) {
+    if (!this.isAdmin) {
+      this.updateMessge('Bạn không có quyền thực hiện chức năng này  ', 'warning');
+      return;
+    }
+    userModal.show();
   }
 
   onSave(formData: NgForm, target: any) {
@@ -44,7 +61,7 @@ export class UserEntityComponent extends BaseComponent implements OnInit {
       this.updateMessge('Không thành công kiểm tra lại thông tin ', 'warning');
       return;
     }
-    let msg = new MessageAlert();
+
     if (this.tempUpdate === null) {
       this.userEntityService.createUser(valueForm).subscribe((data: Response) => {
         if (data.status === 200) {
@@ -101,6 +118,20 @@ export class UserEntityComponent extends BaseComponent implements OnInit {
 
 
   editItem(formData: NgForm, target: any, item) {
+    if (!this.isAdmin) {
+      this.updateMessge('Bạn không có quyền thực hiện chức năng này  ', 'warning');
+      return;
+    }
+
+    let user: UserEntityModel = JSON.parse(this.loginService.getUserInfo());
+
+    if (user.id == item.id) {
+      if (!this.isAdmin) {
+        this.updateMessge('Bạn không thể cập nhật tài khoản này   ', 'warning');
+        return;
+      }
+    }
+
     this.tempUpdate = item;
     formData.setValue({
       name: item.name,
@@ -118,6 +149,19 @@ export class UserEntityComponent extends BaseComponent implements OnInit {
 
   removeItem(item) {
     let msg = new MessageAlert();
+    if (!this.isAdmin) {
+      this.updateMessge('Bạn không có quyền thực hiện chức năng này  ', 'warning');
+      return;
+    }
+
+    let user: UserEntityModel = JSON.parse(this.loginService.getUserInfo());
+    if (user.id == item.id) {
+      if (!this.isAdmin) {
+        this.updateMessge('Bạn không thể xóa chính mình  ', 'warning');
+        return;
+      }
+    }
+
     this.userEntityService.deleteUser(item.id).subscribe((data: Response) => {
       this.updateMessge('Xóa thành công ', 'success');
     }, (error: Error) => {

@@ -23,6 +23,7 @@ import java.util.Set;
  */
 
 @RestController
+@CrossOrigin(value = "*")
 public class ProductController {
 
     @Autowired
