@@ -1,5 +1,6 @@
 package linhtran.it.vnua.sale.controller;
 
+import linhtran.it.vnua.sale.entities.Catalog;
 import linhtran.it.vnua.sale.form.CatalogForm;
 import linhtran.it.vnua.sale.service.CatalogService;
 import linhtran.it.vnua.sale.util.Message;
@@ -54,6 +55,25 @@ public class CatalogController {
     public ResponseEntity<Set<CatalogForm>> find(@RequestParam(value = "query") String query) {
         CatalogForm catalogForm = new CatalogForm();
         return new ResponseEntity<Set<CatalogForm>>(catalogForm.getCatalogsFromCatalogs(this.catalogService.find(query)), HttpStatus.OK);
+    }
+
+
+    @CrossOrigin("*")
+    @PutMapping(value = "/update")
+    public ResponseEntity<String> update(@Valid @RequestBody CatalogForm catalogForm,
+                                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<String>(Message.NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+        }
+
+        Catalog catalog = this.catalogService.findOne(catalogForm.getId());
+
+        if (catalog == null) {
+            return new ResponseEntity<String>(Message.NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+        }
+
+        this.catalogService.save(catalogForm.toCatalog());
+        return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
     }
 
 

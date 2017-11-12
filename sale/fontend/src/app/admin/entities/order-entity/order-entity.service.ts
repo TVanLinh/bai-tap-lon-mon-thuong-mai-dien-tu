@@ -29,7 +29,7 @@ export class OrderEntityService {
   }
 
   public  findBy(query) {
-    return this.tastService.getTask(HOST_NAME + "admin/search?param=" + query+"&access_token="+this.access_token);
+    return this.tastService.getTask(HOST_NAME + "admin/order?param=" + query+"&access_token="+this.access_token);
   }
 
 

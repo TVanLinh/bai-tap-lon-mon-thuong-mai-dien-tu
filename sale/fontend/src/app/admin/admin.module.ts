@@ -26,6 +26,7 @@ import {AdminGuardService} from "../guard/admin.guard";
 import {ModalModule} from "ngx-bootstrap";
 import {StatisticComponent} from './statistic/statistic.component';
 import {StatisticService} from "./statistic/statistic.service";
+import {Ng2FilterPipeModule} from "ng2-filter-pipe";
 
 
 const routes: Routes = [{
@@ -103,7 +104,8 @@ const routes: Routes = [{
     HttpModule,
     FormsModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    Ng2FilterPipeModule
   ],
   exports: [RouterModule],
   providers: [TaskService,

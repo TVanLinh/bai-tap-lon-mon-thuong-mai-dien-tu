@@ -4,6 +4,7 @@ package linhtran.it.vnua.sale.controller;
 import linhtran.it.vnua.sale.entities.User;
 import linhtran.it.vnua.sale.form.UserForm;
 import linhtran.it.vnua.sale.form.UserFormUtil;
+import linhtran.it.vnua.sale.service.OrderService;
 import linhtran.it.vnua.sale.service.RoleService;
 import linhtran.it.vnua.sale.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -28,6 +30,9 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private OrderService orderService;
 
     @CrossOrigin("*")
     @PostMapping("/users")
@@ -87,7 +92,16 @@ public class UserController {
 
     @CrossOrigin("*")
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable(value = "id") long id) {
+    public ResponseEntity<String> deleteUser(Principal principal, @PathVariable(value = "id") long id) {
+        User user = this.userService.findOne(id);
+        if (user.getUserName().equals(principal.getName())) {
+            return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
+        }
+
+        if (this.orderService.findByUser(user).size() > 0) {
+            return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
+        }
+
         this.userService.delete(id);
         return new ResponseEntity<String>("OK", HttpStatus.OK);
     }

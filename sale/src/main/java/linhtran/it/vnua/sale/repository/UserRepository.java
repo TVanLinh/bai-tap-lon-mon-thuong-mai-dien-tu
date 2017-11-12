@@ -20,8 +20,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User getUserByUserName(String userName);
 
-    @Query(value = "select * from user,role where " +
-            "user.username like  %:query% or" +
+    @Query(value = "select * from user INNER  JOIN role ON  user.id = role.user_id where " +
+            "user.username like  %:query% or user.name like  %:query%  or " +
             " user.phone like %:query% or user.email like %:query% or role.name like %:query%", nativeQuery = true)
     Set<User> find(@Param(value = "query") String query);
 

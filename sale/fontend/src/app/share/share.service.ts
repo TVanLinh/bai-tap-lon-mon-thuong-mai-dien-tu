@@ -9,3 +9,5 @@ export class ShareService {
     this.publishProduct.next(product);
   }
 }
+
+// http://plnkr.co/edit/FZW7SVnWmrQWtVDmBvCZ?p=preview

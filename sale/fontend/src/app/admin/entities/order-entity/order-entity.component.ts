@@ -28,6 +28,10 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
   users: UserEntityModel[] = [];
   statusList = [0, 1, 100];
 
+
+  id = {"id": ""};
+  customerName: { customer: { fullName: '' } };
+
   constructor(private orderService: OrderEntityService,
               private eleRef: ElementRef,
               private  loginService: LoginService,
@@ -48,6 +52,7 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
 
 
   private getOrders() {
+    this.listOrder.clear();
     this.orderService.findAll().subscribe((data: OrderEntity[]) => {
       for (let item of data) {
         this.listOrder.add(item);
@@ -61,12 +66,32 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
   }
 
   onSearch() {
-    this.orderService.findBy(this.query).subscribe((data: OrderEntity[]) => {
-      this.listOrder.clear();
+
+    let list = new Collections.Set<OrderEntity>();
+
+    if (this.query.trim() === '') {
+      this.getOrders();
+      return;
+    }
+
+    this.listOrder.clear();
+    this.orderService.findAll().subscribe((data: OrderEntity[]) => {
+      console.log("query " + this.query);
       for (let item of data) {
+        console.log(item['customer']['fullName'].toLowerCase().indexOf(this.query.toLowerCase()));
+        if ((item['id'].toString() + "") === this.query
+          || item['user']['name'].toLowerCase().trim().indexOf(this.query.toLowerCase().trim()) > -1
+          || item['user']['name'].toLowerCase().trim().indexOf(this.query.toLowerCase().trim()) > -1) {
+          list.add(item);
+        }
+      }
+
+      for (let item of list.toArray()) {
         this.listOrder.add(item);
       }
+
     });
+
   }
 
   openDetail(item: OrderEntity, orderModalDetail) {

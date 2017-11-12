@@ -165,7 +165,7 @@ export class UserEntityComponent extends BaseComponent implements OnInit {
     this.userEntityService.deleteUser(item.id).subscribe((data: Response) => {
       this.updateMessge('Xóa thành công ', 'success');
     }, (error: Error) => {
-      this.updateMessge(error.message, 'warning');
+      this.updateMessge("Bạn không thể xóa tài khoản này ", 'warning');
     }, () => {
       this.listUser.remove(item);
     })

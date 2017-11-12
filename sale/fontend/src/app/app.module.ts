@@ -53,6 +53,7 @@ import {TopComponent} from "app/core/top/top.component";
 import {LoginComponent} from "./login/login.component";
 import {LoginService} from "./login/login.service";
 import {AdminGuardService} from "./guard/admin.guard";
+import {Ng2FilterPipeModule} from "ng2-filter-pipe";
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import {AdminGuardService} from "./guard/admin.guard";
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    AdminModule
+    AdminModule,
+    Ng2FilterPipeModule
   ],
   providers: [Product,
     ProductService,

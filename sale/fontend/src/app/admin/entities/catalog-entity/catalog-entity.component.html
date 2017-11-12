@@ -4,14 +4,17 @@
 <div>
   <button class="btn btn-primary" (click)="catalogModal.show()">Tạo Catalog</button>
   <div class="input-group" style="width: 300px;float: right">
-    <input type="text" class="form-control" placeholder="Search ..." name="query"  [(ngModel)]="query" >
+    <input type="text" class="form-control" placeholder="Search ..." name="query" [(ngModel)]="query">
     <span class="input-group-btn">
         <button class="btn btn-secondary" type="button" (click)="onSearch()">Go</button>
       </span>
   </div>
 </div>
 
-<div class="alert alert-success" *ngIf="message!=''">{{message}}</div>
+<div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
+  {{message.content}}
+</div>
+
 
 <table class="table table-striped" [mfData]="listCatalog.toArray()" #mf="mfDataTable" [mfRowsOnPage]="10">
   <thead>
@@ -25,9 +28,9 @@
     <th>
       <mfDefaultSorter by="userName" style="width: 30%">Mã Catalog</mfDefaultSorter>
     </th>
-    <!--<th style="width: 10%">-->
-    <!--Action-->
-    <!--</th>-->
+    <th style="width: 10%">
+      Action
+    </th>
   </tr>
   </thead>
 
@@ -37,10 +40,10 @@
     <td>{{idex+1}}</td>
     <td>{{item.name}}</td>
     <td>{{item.code}}</td>
-    <!--<td class="">-->
-    <!--&lt;!&ndash;<span class="action action-edit" (click)="editItem(idex)"><i class="fa fa-shower"></i></span>&ndash;&gt;-->
-    <!--<span class="action action-edit" (click)="editItem(userModal,idex)"><i class="fa fa-edit"></i></span>-->
-    <!--</td>-->
+    <td class="">
+      <span title="Cập nhật" class="action action-edit" (click)="editItem(formData,item,catalogModal)"><i
+        class="fa fa-edit"></i></span>
+    </td>
   </tr>
   </tbody>
 
@@ -79,7 +82,8 @@
 
           <div>
             <label for="code">Mã catalog : </label>
-            <input id="code" name="code" type="text" required class="form-control" ngModel #code="ngModel">
+            <input id="code" name="code" type="text" required class="form-control" ngModel #code="ngModel"
+                   [disabled]="temp != null">
             <div class="star" *ngIf="code.touched && code.value.trim() == 0">
               Chưa nhập mã calalog
             </div>

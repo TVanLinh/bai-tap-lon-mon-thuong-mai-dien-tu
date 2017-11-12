@@ -1,6 +1,7 @@
 package linhtran.it.vnua.sale.service;
 
 import linhtran.it.vnua.sale.entities.Order;
+import linhtran.it.vnua.sale.entities.User;
 import linhtran.it.vnua.sale.repository.OrderRepository;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,12 @@ public class OrderService {
         return orders;
     }
 
+    public Set<Order> findByUser(User user) {
+        return this.orderRepository.findByUser(user);
+    }
+
     public Order findOne(long id) {
-        return  this.orderRepository.findOne(id);
+        return this.orderRepository.findOne(id);
     }
 
 }
