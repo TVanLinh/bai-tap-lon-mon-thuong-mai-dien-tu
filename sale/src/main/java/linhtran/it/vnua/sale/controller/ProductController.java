@@ -1,10 +1,12 @@
 package linhtran.it.vnua.sale.controller;
 
 
+import linhtran.it.vnua.sale.entities.Catalog;
 import linhtran.it.vnua.sale.entities.Product;
 import linhtran.it.vnua.sale.form.ProductForm;
 import linhtran.it.vnua.sale.form.ProductFormUtil;
 import linhtran.it.vnua.sale.response.ProductResponse;
+import linhtran.it.vnua.sale.service.CatalogService;
 import linhtran.it.vnua.sale.service.ProductService;
 import linhtran.it.vnua.sale.util.Message;
 import linhtran.it.vnua.sale.util.Page;
@@ -28,6 +30,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CatalogService catalogService;
 
     @CrossOrigin("*")
     @GetMapping(value = "product")
@@ -132,7 +137,24 @@ public class ProductController {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<String>(Message.NOT_SUCCESS, HttpStatus.BAD_REQUEST);
         }
-        this.productService.save(productForm.toProduct());
+        this.saveProduct(productForm);
+        return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
+    }
+
+    private void saveProduct(ProductForm productForm) {
+        Catalog catalog = this.catalogService.findCatalogByCatalogCode(productForm.getCatalog().getCode());
+        Product product = productForm.toProduct();
+        product.setCatalog(catalog);
+        this.productService.save(product);
+    }
+
+    @CrossOrigin("*")
+    @PutMapping(value = "/admin/product/update")
+    public ResponseEntity<String> updateProduct(@Valid @RequestBody ProductForm productForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<String>(Message.NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+        }
+        this.saveProduct(productForm);
         return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
     }
 

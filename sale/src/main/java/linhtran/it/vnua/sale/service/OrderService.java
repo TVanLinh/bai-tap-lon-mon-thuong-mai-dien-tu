@@ -45,4 +45,8 @@ public class OrderService {
         return this.orderRepository.findOne(id);
     }
 
+    public void deleteById(long id) {
+        this.orderRepository.deleteById(id);
+    }
+
 }

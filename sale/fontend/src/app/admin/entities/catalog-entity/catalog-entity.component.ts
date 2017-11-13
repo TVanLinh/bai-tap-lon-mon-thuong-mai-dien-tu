@@ -4,8 +4,7 @@ import {Response} from "@angular/http";
 import {CatalogEntityService} from "./catalog-entity.service";
 import {CatalogEntity} from "./catalog-entity.model";
 import * as  Collections from "typescript-collections";
-import {TIME_OUT} from "../../../config";
-import {AdminUtil} from "../../admin.util";
+
 import {BaseComponent} from "../../BaseComponent";
 @Component({
   selector: 'app-catalog-entity',

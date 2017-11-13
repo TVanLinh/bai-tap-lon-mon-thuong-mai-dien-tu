@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by linhtran on 28/09/17.
@@ -103,5 +104,17 @@ public class CustomerController {
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 
+
+    @GetMapping(value = "admin/customer")
+    public ResponseEntity<Iterable<Customer>> findAll() {
+        Iterable<Customer> customers = this.customerService.findAll();
+        return new ResponseEntity<Iterable<Customer>>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "admin/customer/find")
+    public ResponseEntity<Iterable<Customer>> findBy(@RequestParam(value = "query", required = true) String query) {
+        Iterable<Customer> customers = this.customerService.findBy(query.trim());
+        return new ResponseEntity<Iterable<Customer>>(customers, HttpStatus.OK);
+    }
 
 }

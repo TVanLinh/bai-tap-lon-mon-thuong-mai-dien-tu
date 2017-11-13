@@ -17,4 +17,6 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
     Set<Order> findOrderByCustomerId(long customerId);
 
     Set<Order> findByUser(User user);
+
+    void deleteById(long id);
 }

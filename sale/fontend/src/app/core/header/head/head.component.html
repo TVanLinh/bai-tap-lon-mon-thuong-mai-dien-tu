@@ -93,24 +93,37 @@
         <form #changPassForm="ngForm">
           <div class="mgb-10">
             <label for="passWord">Mật khẩu cũ <span class="star">*</span>: </label>
-            <input id="passWord" name="passWord" minlength="8" type="password" required class="form-control"
-                   #passWord="ngModel" ngModel>
+            <input id="ppassWord" name="passWord" type="password" required class="form-control"
+                   #ppassWord="ngModel" ngModel>
             <div class="star" *ngIf="passWord.touched && passWord.value.trim().length == 0">
               Chưa điền mật khẩu
             </div>
           </div>
 
           <div class="mgb-10">
-            <label for="rePassWord">Mật khẩu mới <span class="star">*</span>: </label>
-            <input id="rePassWord" name="rePassWord" type="password" required class="form-control" #rePassWord="ngModel"
+            <label for="newPass">Mật khẩu mới <span class="star">*</span>: </label>
+            <input id="newPass" name="rePassWord" type="password" required class="form-control"
+                   #newPass="ngModel"
                    ngModel>
-            <div class="star" *ngIf="rePassWord.touched && rePassWord.value.trim().length < 8">
+            <div class="star" *ngIf="newPass.touched && newPass.value.trim().length < 8">
               Mật khẩu tối thiểu 8 kí tự
             </div>
           </div>
 
+
+          <div class="mgb-10">
+            <label for="reePassWord">Nhập lại khẩu mới <span class="star">*</span>: </label>
+            <input id="reePassWord" name="reePassWord" type="password" required class="form-control"
+                   #reePassWord="ngModel"
+                   ngModel>
+            <div class="star" *ngIf="reePassWord.touched && newPass.value != reePassWord.value">
+              Mật khẩu không trùng nhau
+            </div>
+          </div>
+
           <div class=" text-right">
-            <button [disabled]="changPassForm.invalid" class="btn btn-success"
+            <button [disabled]="changPassForm.invalid || newPass.value != reePassWord.value"
+                    class="btn btn-success"
                     (click)="onChangePass(changPassForm,changPassModal)">Gửi
             </button>
           </div>

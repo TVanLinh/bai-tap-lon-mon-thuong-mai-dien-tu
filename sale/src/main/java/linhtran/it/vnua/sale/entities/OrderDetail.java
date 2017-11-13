@@ -16,7 +16,7 @@ public class OrderDetail extends AbstractEntity {
     @Column(name = "amount")
     private int amount;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_product")
     private Product product;
 
@@ -26,7 +26,7 @@ public class OrderDetail extends AbstractEntity {
     private double price;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_order")
     private Order order;
 
@@ -44,7 +44,7 @@ public class OrderDetail extends AbstractEntity {
 
     public void setProduct(Product product) {
         this.product = product;
-        this.price = this.product.getPrice()-( this.product.getPrice()*this.product.getDiscount()/100);
+        this.price = this.product.getPrice() - (this.product.getPrice() * this.product.getDiscount() / 100);
     }
 
     public Order getOrder() {

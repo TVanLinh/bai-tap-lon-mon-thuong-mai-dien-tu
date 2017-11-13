@@ -2,11 +2,13 @@ package linhtran.it.vnua.sale.controller;
 
 
 import linhtran.it.vnua.sale.entities.User;
+import linhtran.it.vnua.sale.form.UserChangePassForm;
 import linhtran.it.vnua.sale.form.UserForm;
 import linhtran.it.vnua.sale.form.UserFormUtil;
 import linhtran.it.vnua.sale.service.OrderService;
 import linhtran.it.vnua.sale.service.RoleService;
 import linhtran.it.vnua.sale.service.UserService;
+import linhtran.it.vnua.sale.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -114,4 +116,16 @@ public class UserController {
         return new ResponseEntity<Set<UserForm>>(UserFormUtil.getUserFormsFromUsers(this.userService.find(query)), HttpStatus.OK);
     }
 
+
+    @CrossOrigin("*")
+    @PutMapping("/users/change-pass")
+    public ResponseEntity<String> changPass(Principal principal, @RequestBody UserChangePassForm userChangePassForm) {
+        User user = this.userService.getByUserName(principal.getName());
+        if (!user.getPassword().equals(userChangePassForm.getPassWord())) {
+            return new ResponseEntity<String>(Message.NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+        }
+        user.setPassword(userChangePassForm.getPassWord());
+        this.userService.save(user);
+        return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
+    }
 }

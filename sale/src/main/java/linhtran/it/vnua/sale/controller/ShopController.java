@@ -119,4 +119,10 @@ public class ShopController {
         return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/admin/order/delete/{id}")
+    public ResponseEntity<String> update(@PathVariable(value = "id") long id) {
+        this.orderService.deleteById(id);
+        return new ResponseEntity<String>(Message.OK, HttpStatus.OK);
+    }
+
 }

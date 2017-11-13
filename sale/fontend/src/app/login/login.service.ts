@@ -5,7 +5,7 @@ import {CookieService} from "angular2-cookie/core";
 import {UserEntityModel} from "../admin/entities/user-entity/user.model";
 
 @Injectable()
-export class LoginService {
+export class LoginService  {
   constructor(private _router: Router, private _http: Http, private  cookieService: CookieService) {
   }
 
@@ -32,7 +32,7 @@ export class LoginService {
           this.cookieService.put("user", data['access_user']);
 
         },
-        err => alert('Invalid Credentials'));
+        err => alert('Đăng nhập không thành công vui lòng kiểm tra lại thông tin '));
   }
 
 

@@ -24,7 +24,7 @@ public class ResourceConfigureSecurity extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/customer", "/customer/**").permitAll()
-                .antMatchers( "/admin/**").authenticated()
+                .antMatchers( "/admin/**","/users/change-pass","/users/**").authenticated()
                 .antMatchers("/admin/product").hasRole("ADMIN");
     }
 

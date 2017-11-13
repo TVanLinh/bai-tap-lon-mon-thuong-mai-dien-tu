@@ -107,7 +107,6 @@ public class ProductForm {
 
     public Product toProduct() {
         Product product = new Product();
-        ProductForm productForm = new ProductForm();
         product.setId(this.getId());
         product.setAmount(this.getAmount());
         product.setDateCreate(this.getDateCreate());

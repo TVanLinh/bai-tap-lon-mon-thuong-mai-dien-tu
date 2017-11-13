@@ -27,6 +27,7 @@ import {ModalModule} from "ngx-bootstrap";
 import {StatisticComponent} from './statistic/statistic.component';
 import {StatisticService} from "./statistic/statistic.service";
 import {Ng2FilterPipeModule} from "ng2-filter-pipe";
+import {CustomerEntityService} from "./entities/customer-entity/customer-entity.service";
 
 
 const routes: Routes = [{
@@ -113,7 +114,8 @@ const routes: Routes = [{
     OrderEntityService,
     UserEntityService,
     StatisticService,
-    ProductEntityService]
+    ProductEntityService,
+    CustomerEntityService]
 })
 
 export class AdminModule {

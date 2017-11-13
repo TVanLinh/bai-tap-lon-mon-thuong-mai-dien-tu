@@ -4,13 +4,71 @@
   </div>
 
   <div class="right">
-    <div class="dropdown" style="display: inline-block" >
+    <div class="dropdown" style="display: inline-block">
       <a data-toggle="dropdown">{{acount.userName}}
         <span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li><a (click)="onLogout()">Đăng xuất </a></li>
         <li><a (click)="changPassModal.show()">Thay đổi mật khẩu </a></li>
       </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" bsModal #changPassModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"> Thay đổi mật khẩu </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="changPassModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form #changPassForm="ngForm">
+          <div class="mgb-10">
+            <label for="passWord">Mật khẩu cũ <span class="star">*</span>: </label>
+            <input id="passWord" name="passWord" type="password" required class="form-control"
+                   #passWord="ngModel" ngModel>
+            <div class="star" *ngIf="passWord.touched && passWord.value.trim().length == 0">
+              Chưa điền mật khẩu
+            </div>
+          </div>
+
+          <div class="mgb-10">
+            <label for="rePassWord">Mật khẩu mới <span class="star">*</span>: </label>
+            <input id="rePassWord" name="rePassWord" type="password" required class="form-control" #rePassWord="ngModel"
+                   ngModel>
+            <div class="star" *ngIf="rePassWord.touched && rePassWord.value.trim().length < 8">
+              Mật khẩu tối thiểu 8 kí tự
+            </div>
+          </div>
+
+
+          <div class="mgb-10">
+            <label for="reePassWord">Nhập lại khẩu mới <span class="star">*</span>: </label>
+            <input id="reePassWord" name="reePassWord" type="password" required class="form-control"
+                   #reePassWord="ngModel"
+                   ngModel>
+            <div class="star" *ngIf="reePassWord.touched && rePassWord.value!=reePassWord.value">
+              Mật khẩu không trùng nhau
+            </div>
+          </div>
+
+          <div class=" text-right">
+            <button [disabled]="changPassForm.invalid || rePassWord.value!=reePassWord.value"
+                    class="btn btn-success"
+                    (click)="onChangePass(changPassForm,changPassModal)">Gửi
+            </button>
+          </div>
+
+        </form>
+      </div>
+
     </div>
   </div>
 </div>

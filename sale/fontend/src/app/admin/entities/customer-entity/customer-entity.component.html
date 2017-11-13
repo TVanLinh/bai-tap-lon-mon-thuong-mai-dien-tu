@@ -1,3 +1,55 @@
-<p>
-  customer-entity works!
-</p>
+<div class="title-entity">
+  Danh sách khách hàng
+</div>
+<div>
+  <!--<button class="btn btn-primary" (click)="openModal(userModal)">Tạo một tài khoản </button>-->
+  <div class="input-group" style="width: 300px;float: right">
+    <input type="text" class="form-control" placeholder="Search ..." name="query"  [(ngModel)]="query" >
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="onSearch()">Go</button>
+      </span>
+  </div>
+</div>
+
+<div *ngIf="message.condition" [ngClass]="'alert alert-'+ message.type">
+  {{message.content}}
+</div>
+
+<table class="table table-striped" [mfData]="customers.toArray()" #mf="mfDataTable" [mfRowsOnPage]="20">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>
+      <mfDefaultSorter by="fullName" style="width: 10%">Họ tên</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="email" style="width: 10%">Email</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="phone" style="width: 5%">Số điện thoại </mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="address" style="width: 10%">Địa chỉ </mfDefaultSorter>
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let item of mf.data;let idex = index">
+    <td>{{idex+1}}</td>
+    <td>{{item.fullName}}</td>
+    <td>{{item.email}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.address}}</td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="4">
+      <mfBootstrapPaginator [rowsOnPageSet]="[10,20,30]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+  </tfoot>
+</table>

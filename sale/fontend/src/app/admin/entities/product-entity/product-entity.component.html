@@ -16,7 +16,7 @@
 </div>
 
 
-<table class="table table-striped" [mfData]="listProduct.toArray()" #mf="mfDataTable" [mfRowsOnPage]="5">
+<table class="table table-striped" [mfData]="listProduct.toArray()" #mf="mfDataTable" [mfRowsOnPage]="20">
   <thead>
   <tr>
     <th>
@@ -48,7 +48,7 @@
 
   <tbody>
 
-  <tr *ngFor="let item of mf.data;let idex = index" (click)="openDetail(item,productModalDetail)">
+  <tr *ngFor="let item of mf.data;let idex = index">
     <td>{{idex+1}}</td>
     <td>SP000{{item.id}}</td>
     <td>{{item.name}}</td>
@@ -57,8 +57,8 @@
     <td>{{item.price}}</td>
     <td>{{item.discount}}</td>
     <td class="">
-      <span class="action action-edit" (click)="editItem(formData,userModal,item)"><i class="fa fa-edit"></i></span>
-      <span class="action action-remove" (click)="removeItem(item)"><i class="fa fa-remove"></i></span>
+      <span class="action action-edit" (click)="openDetail(item,productModalDetail)"><i class="fa fa-eye"></i></span>
+      <span class="action action-edit" (click)="editItem(formData,productModal,item)"><i class="fa fa-edit"></i></span>
     </td>
   </tr>
   </tbody>
@@ -92,15 +92,12 @@
           <div>
             <label for="name">Tên sản phẩm : </label>
             <input id="name" name="name" type="text" required class="form-control" ngModel #name="ngModel">
-            <!--<div class="star" *ngIf="name.touched && name.value.trim() == 0">-->
-            <!--Chưa nhập sản phẩm-->
-            <!--</div>-->
           </div>
 
           <div>
             <label for="catalog">Loại sản phẩm : </label>
             <select id="catalog" name="catalog" type="text" class="form-control" ngModel #catalog="ngModel">
-              <option [value]="inx" *ngFor="let item of listCatalog.toArray();let inx = index">
+              <option [value]="item.code" *ngFor="let item of listCatalog.toArray();let inx = index">
                 {{item.name}}
               </option>
             </select>
@@ -139,7 +136,7 @@
 
           <div>
             <label for="description">Mô tả : </label>
-            <textarea id="description" class="form-control" name="description" rows="5" ngModel style="width: 100%"
+            <textarea id="description" class="form-control" name="description" rows="20" ngModel style="width: 100%"
                       #description="ngModel"></textarea>
           </div>
         </form>
@@ -152,7 +149,7 @@
         <div class=" text-right">
           <button class="btn btn-success"
                   [disabled]="formData.invalid || !valid"
-                  (click)="onSave(formData,productModal)">Lưu
+                  (click)="onSave(formData,productModal)">{{tempUpdate == null ?'Lưu':'Cập nhật'}}
           </button>
         </div>
 

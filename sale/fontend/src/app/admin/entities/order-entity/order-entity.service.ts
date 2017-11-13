@@ -11,25 +11,30 @@ import {LoginService} from "../../../login/login.service";
 @Injectable()
 export class OrderEntityService {
   private access_token: string;
-  constructor(private tastService: TaskService,private  loginService: LoginService) {
+
+  constructor(private tastService: TaskService, private  loginService: LoginService) {
     this.access_token = this.loginService.getToken();
   }
 
   public  createProduct(body: OrderEntity) {
-    return this.tastService.postTask(HOST_NAME + "/order/create?access_token="+this.access_token, body);
+    return this.tastService.postTask(HOST_NAME + "/order/create?access_token=" + this.access_token, body);
   }
 
-  public  updateOrder(body: {id: number,idUser: number,status: number}) {
-    return this.tastService.putTask(HOST_NAME + "/admin/order/update?access_token="+this.access_token, body);
+  public  updateOrder(body: { id: number, idUser: number, status: number }) {
+    return this.tastService.putTask(HOST_NAME + "/admin/order/update?access_token=" + this.access_token, body);
   }
 
 
   public  findAll() {
-    return this.tastService.getTask(HOST_NAME + "/admin/order/find-all?access_token="+this.access_token);
+    return this.tastService.getTask(HOST_NAME + "/admin/order/find-all?access_token=" + this.access_token);
   }
 
   public  findBy(query) {
-    return this.tastService.getTask(HOST_NAME + "admin/order?param=" + query+"&access_token="+this.access_token);
+    return this.tastService.getTask(HOST_NAME + "/admin/order?param=" + query + "&access_token=" + this.access_token);
+  }
+
+  public delete(id: number) {
+    return this.tastService.deleteTask(HOST_NAME + "/admin/order/delete/" + id + "?access_token=" + this.access_token);
   }
 
 
@@ -49,7 +54,7 @@ export class OrderEntityService {
   }
 
 
-    print( eleRef: ElementRef) {
+  print(eleRef: ElementRef) {
 
     let mywindow = window.open('', 'Chi tiết đơn hàng ', 'height=100%,width=auto');
 
@@ -70,7 +75,7 @@ export class OrderEntityService {
 
   }
 
-  exportExcel(value:Ingredient[]) {
+  exportExcel(value: Ingredient[]) {
     let data = OrderExport.getListOrderExportFromIngredients(value);
     new Angular2Csv(data, 'order');
   }

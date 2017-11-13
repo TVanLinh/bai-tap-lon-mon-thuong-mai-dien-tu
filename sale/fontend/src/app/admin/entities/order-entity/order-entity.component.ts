@@ -122,6 +122,21 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
     this.orderTemp = this.listOrder.elementAtIndex(this.indexOrder);
   }
 
+
+  removeItem(item) {
+    let admin = this.loginService.isAdmin();
+    if (!admin) {
+      this.updateMessge('Bạn không có quyền thực hiện chức năng này  ', 'warning');
+      return;
+    }
+    this.orderService.delete(item.id).subscribe((data) => {
+      this.updateMessge('Xóa đơn hàng thành công   ', 'success');
+      this.listOrder.remove(item);
+    }, (err) => {
+      this.updateMessge('Xóa đơn hàng không thành công   ', 'warning');
+    });
+  }
+
   onSave(formData: NgForm, orderModalForm) {
     let value = formData.value;
     let obj = {

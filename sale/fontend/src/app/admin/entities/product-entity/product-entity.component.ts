@@ -22,7 +22,7 @@ export class ProductEntityComponent extends BaseComponent implements OnInit {
   query = '';
   imagePath = '';
   listCatalog = new Collections.LinkedList<CatalogEntity>();
-  tempUpdate: ProductEntity[] = null;
+  tempUpdate: ProductEntity = null;
 
   tempDetail: ProductEntity = null;
 
@@ -45,8 +45,8 @@ export class ProductEntityComponent extends BaseComponent implements OnInit {
       product.imagePath = value.imagePath;
     }
     product.amount = value.amount;
-    let catalog = this.listCatalog.elementAtIndex(value.catalog);
-    product.catalog = {id: catalog.id, name: catalog.name, code: catalog.code};
+    // let catalog = this.listCatalog.elementAtIndex();
+    product.catalog = {id: 0, name: "", code: value.catalog};
     product.name = value.name;
     product.description = value.description;
     product.discount = value.discount;
@@ -61,31 +61,27 @@ export class ProductEntityComponent extends BaseComponent implements OnInit {
           this.listProduct.add(product, 0);
           procductModal.hide();
           formData.reset();
-        } else {
-          this.updateMessge('Thêm không thành công vui lòng kiểm tra lại thông tin ', 'warning');
         }
+      }, (error) => {
+        this.updateMessge('Thêm không thành công vui lòng kiểm tra lại thông tin ', 'warning');
+      });
+    } else {
+      this.productEntityService.updateProduct(product).subscribe((data: Response) => {
+        if (data.status === 200) {
+          this.updateMessge('Cập nhật thành công ', 'success');
+          let inx = this.listProduct.indexOf(this.tempUpdate);
+          this.listProduct.remove(this.tempUpdate);
+          product.id = this.tempUpdate.id;
+          this.listProduct.add(product, inx);
+          procductModal.hide();
+          formData.reset();
+          this.tempUpdate = null;
+        }
+      }, (error) => {
+        this.updateMessge('Cập nhật không thành công vui lòng kiểm tra lại thông tin ', 'warning');
       });
     }
 
-    // if (value.name.trim() === "" || value.code.trim() === "") {
-    //   this.valid = false;
-    // }
-    // let procut: ProductEntity = {
-    //   id: 0,
-    //   name: value.name.trim(),
-    //   code: value.code.trim()
-    // };
-    // console.log(value);
-    // this.procutEntityService.createCatalog(procut).subscribe((data: Response) => {
-    //   if (data.status > 200) {
-    //     this.success = false;
-    //   } else {
-    //     this.success = true;
-    //     this.listCatalog.add(procut, 0);
-    //     procutModal.hide();
-    //     AdminUtil.alert(this.message, " Thêm thành công ", TIME_OUT);
-    //   }
-    // });
   }
 
   closeModal(procutModal: any) {
@@ -100,6 +96,22 @@ export class ProductEntityComponent extends BaseComponent implements OnInit {
         this.listProduct.add(item);
       }
     });
+  }
+
+
+  editItem(formData: NgForm, productModal, item: ProductEntity) {
+    this.imagePath = item.imagePath;
+    formData.setValue({
+      name: item.name,
+      catalog: item.catalog.code,
+      price: item.price,
+      amount: item.amount,
+      discount: item.discount,
+      description: item.description,
+      imagePath: ""
+    });
+    this.tempUpdate = item;
+    productModal.show();
   }
 
 
