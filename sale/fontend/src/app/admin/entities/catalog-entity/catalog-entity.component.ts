@@ -54,6 +54,14 @@ export class CatalogEntityComponent extends BaseComponent implements OnInit {
       this.catalogEntityService.updateCatalog(bodyUpdate).subscribe((data) => {
         let indx = this.listCatalog.indexOf(this.temp);
         console.log(indx);
+        let arrays = this.listCatalog.toArray();
+        for (let i = 0; i < arrays.length; i++) {
+          if (bodyUpdate.id == arrays[i].id) {
+            this.listCatalog.remove(arrays[i]);
+            this.listCatalog.add(bodyUpdate, i);
+          }
+        }
+
         this.listCatalog.remove(this.temp);
         this.listCatalog.add(bodyUpdate, indx);
         this.updateMessge('Cập nhật thành công  ', 'success');

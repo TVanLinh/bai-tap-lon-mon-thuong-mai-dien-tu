@@ -13,7 +13,7 @@ import {UserEntityService} from "../entities/user-entity/user-entity.service";
   styleUrls: ['./admin-head.component.css']
 })
 export class AdminHeadComponent implements OnInit {
-  private acount;
+   acount;
 
   constructor(private loginService: LoginService, private cookieService: CookieService,
               private userService: UserEntityService,

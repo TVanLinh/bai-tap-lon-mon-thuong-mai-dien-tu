@@ -155,6 +155,9 @@ export class OrderEntityComponent extends BaseComponent implements OnInit {
     this.orderService.updateOrder(obj).subscribe((response: Response) => {
       if (response.status === 200) {
         this.updateMessge('Cập nhật thành công  ', 'success');
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 500);
         this.listOrder.removeElementAtIndex(this.indexOrder);
         itemUpdate.status = obj.status;
         itemUpdate.user = this.getUser(this.users, Number.parseInt(obj.idUser));

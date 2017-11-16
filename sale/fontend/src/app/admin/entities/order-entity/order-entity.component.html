@@ -4,8 +4,7 @@
 <div>
   <!--<button class="btn btn-primary" (click)="productModal.show()">Tạo đơn hàng</button>-->
   <div class="input-group" style="width: 300px;float: right">
-    <input type="text" class="form-control" placeholder="Mã đơn hàng,khách hàng, nhân viên ..." name="query" [(ngModel)]="query"
-           (change)="onSearch(event)">
+    <input type="text" class="form-control" placeholder="Mã đơn hàng,khách hàng, nhân viên ..." name="query" [(ngModel)]="query">
     <span class="input-group-btn">
         <button class="btn btn-secondary" type="button" (click)="onSearch()">Go</button>
       </span>
@@ -17,7 +16,7 @@
 </div>
 
 
-<table class="table table-striped" [mfData]="listOrder.toArray()" #mf="mfDataTable" [mfRowsOnPage]="20">
+<table class="table table-striped" [mfData]="listOrder.toArray()" #mf="mfDataTable" [mfRowsOnPage]="30">
   <thead>
   <tr>
     <th>

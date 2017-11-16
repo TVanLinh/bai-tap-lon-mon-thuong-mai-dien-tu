@@ -16,7 +16,7 @@ public class OrderDetail extends AbstractEntity {
     @Column(name = "amount")
     private int amount;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn(name = "id_product")
     private Product product;
 

@@ -87,6 +87,7 @@ public class UserController {
         userTemp.setName(user.getName());
         userTemp.setPassword(user.getPassword());
         userTemp.setPhone(user.getPhone());
+        userTemp.setEnable(user.isEnable());
         this.userService.save(userTemp);
 
         return new ResponseEntity<String>("OK", HttpStatus.OK);

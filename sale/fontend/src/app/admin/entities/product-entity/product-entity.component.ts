@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {CatalogEntityService} from "../catalog-entity/catalog-entity.service";
 import {CatalogEntity} from "../catalog-entity/catalog-entity.model";
 import {BaseComponent} from "../../BaseComponent";
+import {window} from "rxjs/operator/window";
 
 @Component({
   selector: 'app-product-entity',
@@ -71,6 +72,8 @@ export class ProductEntityComponent extends BaseComponent implements OnInit {
           this.updateMessge('Cập nhật thành công ', 'success');
           let inx = this.listProduct.indexOf(this.tempUpdate);
           this.listProduct.remove(this.tempUpdate);
+          product.catalog.code = this.tempUpdate.catalog.code;
+          product.catalog.name = this.tempUpdate.catalog.name;
           product.id = this.tempUpdate.id;
           this.listProduct.add(product, inx);
           procductModal.hide();
@@ -79,9 +82,11 @@ export class ProductEntityComponent extends BaseComponent implements OnInit {
         }
       }, (error) => {
         this.updateMessge('Cập nhật không thành công vui lòng kiểm tra lại thông tin ', 'warning');
-      });
-    }
+      }, () => {
 
+      });
+
+    }
   }
 
   closeModal(procutModal: any) {

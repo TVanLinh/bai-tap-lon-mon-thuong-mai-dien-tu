@@ -53,6 +53,10 @@ export class OrderEntityService {
     }
   }
 
+  // case 1000:
+  //   return "Hủy đơn hàng";
+  // case 99:
+
 
   print(eleRef: ElementRef) {
 

@@ -133,9 +133,10 @@ export class HeadComponent implements OnInit, OnChanges {
 
         registerModal.hide();
       } else {
-        alert(data["_body"] + "/n Đăng kí không thành công ");
+
       }
     }, (errorr) => {
+      alert("/n Đăng kí không thành công ");
 
     }, () => this.customerService.publishAcount(true));
   }

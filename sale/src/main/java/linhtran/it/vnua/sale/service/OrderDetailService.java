@@ -89,7 +89,7 @@ public class OrderDetailService {
                 "FROM (order_detail  INNER JOIN product  ON order_detail.id_product = product.id) " +
                 " INNER JOIN orders ON order_detail.id_order = orders.id " +
                 "WHERE MONTH(orders.create_time ) = :month  and YEAR(orders.create_time) = :year " +
-                "GROUP BY order_detail.id_product";
+                "GROUP BY order_detail.id_product++666";
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

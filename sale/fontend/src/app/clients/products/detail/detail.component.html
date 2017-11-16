@@ -11,7 +11,7 @@
       Tình trạng: <span class="color-pink">{{product.amount>0?'Còn hàng':'Hết hàng'}}</span>
     </p>
     <p><span class="price-old">{{product.price}} đ</span></p>
-    <p><span class="price-new">{{product.price-(product.price*product.discount)/1000}} VND</span></p>
+    <p><span class="price-new">{{product.price-(product.price*product.discount)/100}} VND</span></p>
     <p class="mgb-20"><span class="price "></span></p>
     <a class="add-cart" (click)="addCart(product)">Thêm vào giỏ hàng</a>
   </div>
